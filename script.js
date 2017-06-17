@@ -11,6 +11,7 @@ window.onload = function (){
 
   // holds the state of the GSW
   var wizardState = {
+    studentName: undefined,
     interventionName: undefined,
     goalEndDate: undefined,
     startTest: {
@@ -31,6 +32,24 @@ window.onload = function (){
     message: undefined,
     options: undefined
   };
+
+  // initialize for demo
+  wizardState.studentName = 'Kathryn';
+
+  botBuddy.message = 'I see you\'re setting a goal for ' + wizardState.studentName + '. Can I explain what the goal setting terms SGP and PR are?';
+  botBuddy.options = [{
+    text: 'yes please',
+    callback: function() {
+      showBigassPopup()
+    }
+  }, {
+    text: 'maybe later',
+    callback: function() {
+      hideBotBuddy()
+    }
+  }];
+
+  updateBotBuddy(botBuddy);
 
 
   // intervention name
@@ -114,6 +133,8 @@ window.onload = function (){
     });
   });
 
+  return;
+
   //Testing bot buddy
   botBuddy.message = 'Try setting the SPG to be more accurated based on the student start date.';
   botBuddy.options = ['Button one', 'Button Two', 'Button Three'];
@@ -159,4 +180,12 @@ function updateBotBuddy(botBuddy) {
 		$('.buttonTwo').removeClass('twoButtons').addClass('threeButtons').prop('value', buttons[1]);
 		$('.buttonThree').show().prop('value', buttons[2]);
 	}
+}
+
+function showBigassPopup() {
+  log("BIGASS POPUP NOW SHOWING"); // TODO
+}
+
+function hideBotBuddy() {
+  log("HIDING BOT BUDDY"); // TODO
 }
