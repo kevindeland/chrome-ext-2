@@ -1,0 +1,23 @@
+.optionsTable {
+  border: 0px;
+  background-color: #cccccc;
+  border-spacing: 1px;
+}
+
+.optionsTable th {
+  padding: 4px;
+  background-color: #ffff99;
+  vertical-align: bottom;
+  text-align: left;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.labelColumnWithDesc {
+    background-color: #eeeeee;
+    font-weight: bold;
+}
+.dataColumn {
+  background-color: #ffffff;
+  vertical-align: top;
+}
