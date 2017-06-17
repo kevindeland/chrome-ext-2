@@ -51,7 +51,6 @@ window.onload = function (){
   });
 
   interventionNameTxt.on('blur', function() {
-
     if(isValidName(interventionNameTxt.val())) {
       wizardState.interventionName = interventionNameTxt.val();
       log('done editing intervention name to ' + wizardState.interventionName);
@@ -85,8 +84,12 @@ window.onload = function (){
 
   startDtDropdown.on('change', function() {
     log('chose start date');
-    log($("#startDtDropdown option:selected").text());
 
+    // extracts date and score from dropdown
+    var scoreText = $("#startDtDropdown option:selected").text();
+    wizardState.goalEndDate = parseDropdownTestScore(scoreText);
+
+    log(wizardState.goalEndDate);
 
   });
 
@@ -118,7 +121,7 @@ window.onload = function (){
       console.log("clicked " + id);
     });
   });
-  
+
   //Testing bot buddy
   botBuddy.message = 'Try setting the SPG to be more accurated based on the student start date.';
   botBuddy.buttonOne.text = 'Button One';
@@ -132,17 +135,31 @@ window.onload = function (){
 };
 
 function log(string) {
-  if(LOG_LEVEL == 'debug') console.log(string);
+  if(LOG_LEVEL == 'debug') {console.log(string)}
 }
+
+// for parsing the score date
+function parseDropdownTestScore(text) {
+  regex = /^(\d{1,2}\/\d{1,2}\/\d{4}) \- (\d{1,3}) SS \/ (\d{1,3}) PR/
+  parsedScoreText = text.match(regex);
+
+  return {
+    date: Date.parse(parsedScoreText[1]),
+    ss: parsedScoreText[2],
+    pr: parsedScoreText[3]
+  }
+}
+
 
 // for validating intervention name
 function isValidName(interventionName) {
    return interventionName.length > 0;
 }
 
+
 function updateBotBuddy(botBuddy) {
 	$('.messageText').html(botBuddy.message);
-	
+
 	if(botBuddy.buttonThree) {
 		$('.buttonOne').removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonOne.text);
 	  $('.buttonTwo').removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonTwo.text);
