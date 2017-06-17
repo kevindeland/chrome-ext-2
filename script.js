@@ -43,7 +43,6 @@ window.onload = function (){
   });
 
   interventionNameTxt.on('blur', function() {
-
     if(isValidName(interventionNameTxt.val())) {
       wizardState.interventionName = interventionNameTxt.val();
       log('done editing intervention name to ' + wizardState.interventionName);
@@ -77,11 +76,15 @@ window.onload = function (){
 
   startDtDropdown.on('change', function() {
     log('chose start date');
-    log($("#startDtDropdown option:selected").text());
+
+    // extracts date and score from dropdown
+    var scoreText = $("#startDtDropdown option:selected").text();
+    wizardState.goalEndDate = parseDropdownTestScore(scoreText);
+
+    log(wizardState.goalEndDate);
 
 
   });
-
 
 
 
@@ -120,12 +123,24 @@ window.onload = function (){
 
 };
 
+// for parsing the score date
+function parseDropdownTestScore(text) {
+  regex = /^(\d{1,2}\/\d{1,2}\/\d{4}) \- (\d{1,3}) SS \/ (\d{1,3}) PR/
+  parsedScoreText = text.match(regex);
 
-function log(string) {
-  if(LOG_LEVEL == 'debug') console.log(string);
+  return {
+    date: Date.parse(parsedScoreText[1]),
+    ss: parsedScoreText[2],
+    pr: parsedScoreText[3]
+  }
+
 }
 
 // for validating intervention name
 function isValidName(interventionName) {
    return interventionName.length > 0;
+}
+
+function log(string) {
+  if(LOG_LEVEL == 'debug') console.log(string);
 }
