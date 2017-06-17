@@ -30,24 +30,34 @@ window.onload = function (){
   // holds the state of the bot buddy
   var botBuddy = {
     message: undefined,
-    options: undefined
+		buttonOne: {
+			text: undefined,
+			callback: undefined
+		},
+		buttonTwo: {
+			text: undefined,
+			callback: undefined
+		},
+		buttonThree: {}
   };
 
   // initialize for demo
   wizardState.studentName = 'Kathryn';
 
   botBuddy.message = 'I see you\'re setting a goal for ' + wizardState.studentName + '. Can I explain what the goal setting terms SGP and PR are?';
-  botBuddy.options = [{
+  botBuddy.buttonOne = {
     text: 'yes please',
     callback: function() {
       showBigassPopup()
     }
-  }, {
+  };
+  botBuddy.buttonTwo = {
     text: 'maybe later',
     callback: function() {
       hideBotBuddy()
     }
-  }];
+  };
+  delete(botBuddy.buttonThree);
 
   updateBotBuddy(botBuddy);
 
@@ -134,10 +144,14 @@ window.onload = function (){
   });
 
   return;
-
   //Testing bot buddy
   botBuddy.message = 'Try setting the SPG to be more accurated based on the student start date.';
-  botBuddy.options = ['Button one', 'Button Two', 'Button Three'];
+  botBuddy.buttonOne.text = 'Button One';
+  botBuddy.buttonOne.callback = testOne;
+  botBuddy.buttonTwo.text = 'Button Two';
+  botBuddy.buttonTwo.callback = testTwo;
+	botBuddy.buttonThree.text = 'Button Three';
+  botBuddy.buttonThree.callback = testThree;
   updateBotBuddy(botBuddy);
 
 };
@@ -166,19 +180,22 @@ function isValidName(interventionName) {
 
 
 function updateBotBuddy(botBuddy) {
-	var buttons = botBuddy.options;
-
 	$('.messageText').html(botBuddy.message);
 
-	if(buttons.length == 2) {
-		$('.buttonOne').removeClass('threeButtons').addClass('twoButtons').prop('value', buttons[0]);
-		$('.buttonTwo').removeClass('threeButtons').addClass('twoButtons').prop('value', buttons[1]);
-		$('.buttonThree').hide();
+	if(botBuddy.buttonThree) {
+		$('.buttonOne').removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonOne.text);
+	  $('.buttonTwo').removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonTwo.text);
+	  $('.buttonThree').show().prop('value', botBuddy.buttonThree.text);
+		$('.buttonOne').on('click', botBuddy.buttonOne.callback);
+		$('.buttonTwo').on('click', botBuddy.buttonTwo.callback);
+	  $('.buttonThree').on('click', botBuddy.buttonThree.callback);
 	}
-	else if(buttons.length == 3) {
-		$('.buttonOne').removeClass('twoButtons').addClass('threeButtons').prop('value', buttons[0]);
-		$('.buttonTwo').removeClass('twoButtons').addClass('threeButtons').prop('value', buttons[1]);
-		$('.buttonThree').show().prop('value', buttons[2]);
+	else {
+	  $('.buttonOne').removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
+	  $('.buttonTwo').removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonTwo.text);
+	  $('.buttonOne').on('click', botBuddy.buttonOne.callback);
+		$('.buttonTwo').on('click', botBuddy.buttonTwo.callback);
+		$('.buttonThree').hide();
 	}
 }
 
@@ -188,4 +205,16 @@ function showBigassPopup() {
 
 function hideBotBuddy() {
   log("HIDING BOT BUDDY"); // TODO
+}
+
+function testOne() {
+	alert('you clicked button one');
+}
+
+function testTwo() {
+	alert('you clicked button two');
+}
+
+function testThree() {
+	alert('you clicked button three');
 }
