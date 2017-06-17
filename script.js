@@ -88,7 +88,7 @@ window.onload = function (){
 
   endDtTxt.on('blur', function() {
     log('done editing end date');
-
+    // TODO check to see if end date - start date < 8 weeks, and add appropriate bot buddy
 
   });
 
@@ -200,11 +200,14 @@ function updateBotBuddy(botBuddy) {
 }
 
 function showBigassPopup() {
-  log("BIGASS POPUP NOW SHOWING"); // TODO
+  log("BIGASS POPUP NOW SHOWING");
+  // TODO make a div for bigass popup, and populate it
 }
 
 function hideBotBuddy() {
-  log("HIDING BOT BUDDY"); // TODO
+  $(".jarvis").hide();
+  log("HIDING BOT BUDDY");
+  // TODO remember what they clicked?
 }
 
 function testOne() {
