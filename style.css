@@ -33,7 +33,7 @@
 }
 
 .messageWrapper {
-	border: 1px solid red;
+	border: 1px solid blue;
 	padding: 3%;
 }
 
@@ -43,21 +43,21 @@
 
 .messageButtons {
 	margin-top: 5%;
-	margin-left: 5%;
 }
 
-.buttonOne {
-	width: 30%;
+.twoButtons {
+	width: 49%;
 	white-space: normal;
 }
-.buttonTwo {
-	width: 30%;
+
+.threeButtons {
+	width: 31%;
 	white-space: normal;
 }
-.buttonThree {
-	width: 30%;
-	white-space: normal;
-}
+
+.buttonOne {}
+.buttonTwo {}
+.buttonThree {}
 
 .robotContainer {
 	width: 30%;

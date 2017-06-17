@@ -83,10 +83,7 @@ window.onload = function (){
 
     log(wizardState.goalEndDate);
 
-
   });
-
-
 
   // rb = radio button
   var rbModerate = $("#rbModerate");
@@ -110,10 +107,6 @@ window.onload = function (){
 
   var btnSave = $("#btnSave");
 
-
-
-
-
   ids.forEach(function(id) {
     var elem = document.getElementById(id);
     elem.addEventListener('click', function() {
@@ -121,7 +114,16 @@ window.onload = function (){
     });
   });
 
+  //Testing bot buddy
+  botBuddy.message = 'Try setting the SPG to be more accurated based on the student start date.';
+  botBuddy.options = ['Button one', 'Button Two', 'Button Three'];
+  updateBotBuddy(botBuddy);
+
 };
+
+function log(string) {
+  if(LOG_LEVEL == 'debug') {console.log(string)}
+}
 
 // for parsing the score date
 function parseDropdownTestScore(text) {
@@ -133,14 +135,28 @@ function parseDropdownTestScore(text) {
     ss: parsedScoreText[2],
     pr: parsedScoreText[3]
   }
-
 }
+
 
 // for validating intervention name
 function isValidName(interventionName) {
    return interventionName.length > 0;
 }
 
-function log(string) {
-  if(LOG_LEVEL == 'debug') console.log(string);
+
+function updateBotBuddy(botBuddy) {
+	var buttons = botBuddy.options;
+
+	$('.messageText').html(botBuddy.message);
+
+	if(buttons.length == 2) {
+		$('.buttonOne').removeClass('threeButtons').addClass('twoButtons').prop('value', buttons[0]);
+		$('.buttonTwo').removeClass('threeButtons').addClass('twoButtons').prop('value', buttons[1]);
+		$('.buttonThree').hide();
+	}
+	else if(buttons.length == 3) {
+		$('.buttonOne').removeClass('twoButtons').addClass('threeButtons').prop('value', buttons[0]);
+		$('.buttonTwo').removeClass('twoButtons').addClass('threeButtons').prop('value', buttons[1]);
+		$('.buttonThree').show().prop('value', buttons[2]);
+	}
 }
