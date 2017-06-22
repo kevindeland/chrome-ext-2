@@ -56,7 +56,7 @@ window.onload = function (){
     buttonOne : {
       text: 'yes please',
       callback: function() {
-        showBigassPopup()
+        showBigassPopup("sgp1")
       }
     },
     buttonTwo : {
@@ -90,30 +90,34 @@ window.onload = function (){
   endDtTxt.on('click', function() {
     log('begin editing end date');
 
-
   });
 
   endDtTxt.on('blur', function() {
     var endDt = endDtTxt.val();
     log('done editing end date ' + endDt);
     wizardState.goalEndDate = Date.parse(endDt);
-    // TODO check to see if end date - start date < 8 weeks, and add appropriate bot buddy
     var diff = compareTestDates(wizardState.startTest.date, wizardState.goalEndDate);
 
-    if(valid) {
+    showInterventionLengthBuddy(diff);
+  });
+
+  /**
+   * a buddy that helps adjust the intervention length
+   */
+  function showInterventionLengthBuddy(diff) {
+    if(diff.valid) {
       botBuddy = {
-        message : 'You set a Goal End Date of ' + diff.weeks + ' from now. This should be enough time to measure growth',
+        message : 'You set a Goal End Date of ' + intToText(diff.weeks) + ' weeks from now. This should be enough time to measure growth',
         buttonOne : {
           text: 'great!',
           callback: function() {
-            hideBotBuddy();
+            understandSgpBuddy();
           }
         },
         buttonTwo : {
           text: 'learn more',
           callback: function() {
-            // TODO what to do here
-            log("TODO");
+            showBigassPopup("weeks");
           }
         },
         buttonThree: {
@@ -126,34 +130,95 @@ window.onload = function (){
       updateBotBuddy(botBuddy);
     } else {
       botBuddy = {
-        message : 'You set a Goal End Date ' + diff.weeks + ' week' + (diff.weeks == 1 ? '': 's') + ' after the benchmark. Experts recommend a minimum of eight weeks for effective interventions. Are you sure that\'s enough time?',
+        message : 'You set a Goal End Date ' + intToText(diff.weeks) + ' week' + (diff.weeks == 1 ? '': 's') + ' after the benchmark. Experts recommend a minimum of eight weeks for effective interventions. Are you sure that\'s enough time?',
         buttonOne : {
           text: 'yes',
           callback: function() {
-            log("TODO");
-            hideBotBuddy();
+            understandSgpBuddy();
           }
         },
         buttonTwo : {
           text: 'learn more',
           callback: function() {
-            // TODO what to do here
-            log("TODO");
+            showBigassPopup("weeks");
           }
         },
         buttonThree: {
           text: 'change date',
           callback: function() {
-            // TODO what to do here
-            log("TODO");
+            hideBotBuddy();
           }
         }
       };
       updateBotBuddy(botBuddy);
     }
+  };
+
+  /**
+   * a buddy that asks to help understand SGP
+   */
+  function understandSgpBuddy() {
+    botBuddy = {
+      message : 'Understanding SGP can help you set ambitious yet attainable goals. Would you like me to help you understand?',
+      buttonOne : {
+        text: 'yes',
+        callback: function() {
+          showBigassPopup("sgp2");
+        }
+      },
+      buttonTwo : {
+        text: 'maybe later',
+        callback: function() {
+          understandNumbersBuddy();
+        }
+      }
+    };
+    updateBotBuddy(botBuddy);
+  };
+
+  /**
+   * a buddy that asks to help understand SS and PR
+   */
+  function understandNumbersBuddy() {
+
+    // TODO highlight Starting Test
+    $("#startDtDropdown").addClass("highlight");
+
+    var dateString = 'Dec, 12'; // TODO make it actual date
+    var studentName = wizardState.studentName;
+    var percentile = wizardState.startTest.pr;
+    var percentileSuffix = getRankSuffix(percentile);
+    var scaledScore = wizardState.startTest.ss;
+
+    botBuddy = {
+      message : 'As of the test on ' + dateString +  ', ' + studentName + ' was in the ' + percentile + percentileSuffix + ' percentile (PR)'
+                  + ' with a scaled score (SS) of ' + scaledScore + '. Would you like me to help you understand what this means?',
+      buttonOne : {
+        text: 'please help me with PR',
+        callback: function() {
+          showBigassPopup("pr");
+        }
+      },
+      buttonTwo : {
+        text: 'please help me with SS',
+        callback: function() {
+          showBigassPopup("ss");
+        }
+      },
+      buttonThree: {
+        text: 'maybe later',
+        callback: function() {
+          hideBotBuddy();
+          // TODO highlight calculate goal
+        }
+      }
+    };
+    updateBotBuddy(botBuddy);
+  }
+
+  // TODO figure out highlights
 
 
-  });
 
   // Goal End Date calendar... function not available in this mockup
   var endDtCal = $("#endDtCal");
@@ -211,44 +276,12 @@ window.onload = function (){
     return wizardState;
   }
 
-  return;
-  //Testing bot buddy
-  botBuddy.message = 'Try setting the SPG to be more accurated based on the student start date.';
-  botBuddy.buttonOne.text = 'Button One';
-  botBuddy.buttonOne.callback = testOne;
-  botBuddy.buttonTwo.text = 'Button Two';
-  botBuddy.buttonTwo.callback = testTwo;
-	botBuddy.buttonThree.text = 'Button Three';
-  botBuddy.buttonThree.callback = testThree;
-  updateBotBuddy(botBuddy);
-
-
 
 };
 
-function log(string) {
-  if(LOG_LEVEL == 'debug') {console.log(string)}
-}
-
-// for parsing the score date
-function parseDropdownTestScore(text) {
-  regex = /^(\d{1,2}\/\d{1,2}\/\d{4}) \- (\d{1,3}) SS \/ (\d{1,3}) PR/
-  parsedScoreText = text.match(regex);
-
-  return {
-    date: Date.parse(parsedScoreText[1]),
-    ss: parsedScoreText[2],
-    pr: parsedScoreText[3]
-  }
-}
-
-
-// for validating intervention name
-function isValidName(interventionName) {
-   return interventionName.length > 0;
-}
-
-
+//==============================
+// UI Helpers
+//==============================
 function updateBotBuddy(botBuddy) {
   showBotBuddy();
 
@@ -276,6 +309,73 @@ function updateBotBuddy(botBuddy) {
 	}
 }
 
+function showBigassPopup(topic) {
+  log("BIGASS POPUP FOR $" +  topic + " NOW SHOWING");
+  // TODO make a div for bigass popup, and populate it
+}
+
+function hideBotBuddy() {
+  $(".jarvis").hide();
+  log("HIDING BOT BUDDY");
+}
+
+function showBotBuddy() {
+  $(".jarvis").show();
+  log("SHOWING BOT BUDDY");
+}
+
+//==============================
+// Assorted Helpers
+//==============================
+function log(string) {
+  if(LOG_LEVEL == 'debug') {console.log(string)}
+}
+
+// for parsing the score date
+function parseDropdownTestScore(text) {
+  regex = /^(\d{1,2}\/\d{1,2}\/\d{4}) \- (\d{1,3}) SS \/ (\d{1,3}) PR/
+  parsedScoreText = text.match(regex);
+
+  return {
+    date: Date.parse(parsedScoreText[1]),
+    ss: parsedScoreText[2],
+    pr: parsedScoreText[3]
+  }
+}
+
+
+// for validating intervention name
+function isValidName(interventionName) {
+   return interventionName.length > 0;
+}
+
+
+function intToText(int) {
+  if(int > 24) return "" + int;
+
+  return ["zero", "one", "two", "three", "four", "five", "six",
+          "seven", "eight", "nine", "ten", "eleven", "twelve",
+          "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
+          "nineteen", "twenty", "twenty-one", "twenty-two", "twenty-three", "twenty-four"][int];
+}
+
+function getRankSuffix(int) {
+  switch (int % 10) {
+    case 1:
+      return "st";
+      break;
+    case 2:
+      return "nd";
+      break;
+    case 3:
+      return "rd";
+      break;
+    default:
+      return "th";
+      break;
+  }
+}
+
 function compareTestDates(startDt, endDt) {
   log("comparing test dates " + startDt + " " + endDt);
 
@@ -289,36 +389,4 @@ function compareTestDates(startDt, endDt) {
     valid: valid
   };
 }
-
-function showBigassPopup() {
-  log("BIGASS POPUP NOW SHOWING");
-  // TODO make a div for bigass popup, and populate it
-}
-
-function hideBotBuddy() {
-  $(".jarvis").hide();
-  log("SHOWING BOT BUDDY");
-  // TODO remember what they clicked?
-}
-
-function showBotBuddy() {
-  $(".jarvis").show();
-  log("HIDING BOT BUDDY");
-  // TODO remember what they clicked?
-}
-
-function testOne() {
-	alert('you clicked button one');
-}
-
-function testTwo() {
-	alert('you clicked button two');
-}
-
-function testThree() {
-	alert('you clicked button three');
-}
-
-function getWizardState() {
-  return wizardState;
-}
+/********* End Assorted Helpers *********/
