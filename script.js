@@ -41,24 +41,31 @@ window.onload = function (){
 		buttonThree: {}
   };
 
-  // initialize for demo
+  /**
+   * initial state
+   */
   wizardState.studentName = 'Kathryn';
+  var scoreText = $("#startDtDropdown option:selected").text();
+  wizardState.startTest = parseDropdownTestScore(scoreText);
 
-  botBuddy.message = 'I see you\'re setting a goal for ' + wizardState.studentName + '. Can I explain what the goal setting terms SGP and PR are?';
-  botBuddy.buttonOne = {
-    text: 'yes please',
-    callback: function() {
-      showBigassPopup()
+  /**
+   * setting the initial buddy state
+   */
+  botBuddy = {
+    message : 'I see you\'re setting a goal for ' + wizardState.studentName + '. Can I explain what the goal setting terms SGP and PR are?',
+    buttonOne : {
+      text: 'yes please',
+      callback: function() {
+        showBigassPopup()
+      }
+    },
+    buttonTwo : {
+      text: 'maybe later',
+      callback: function() {
+        hideBotBuddy()
+      }
     }
   };
-  botBuddy.buttonTwo = {
-    text: 'maybe later',
-    callback: function() {
-      hideBotBuddy()
-    }
-  };
-  delete(botBuddy.buttonThree);
-
   updateBotBuddy(botBuddy);
 
 
@@ -87,12 +94,68 @@ window.onload = function (){
   });
 
   endDtTxt.on('blur', function() {
-    log('done editing end date');
+    var endDt = endDtTxt.val();
+    log('done editing end date ' + endDt);
+    wizardState.goalEndDate = Date.parse(endDt);
     // TODO check to see if end date - start date < 8 weeks, and add appropriate bot buddy
+    var diff = compareTestDates(wizardState.startTest.date, wizardState.goalEndDate);
+
+    if(valid) {
+      botBuddy = {
+        message : 'You set a Goal End Date of ' + diff.weeks + ' from now. This should be enough time to measure growth',
+        buttonOne : {
+          text: 'great!',
+          callback: function() {
+            hideBotBuddy();
+          }
+        },
+        buttonTwo : {
+          text: 'learn more',
+          callback: function() {
+            // TODO what to do here
+            log("TODO");
+          }
+        },
+        buttonThree: {
+          text: 'change date',
+          callback: function() {
+            hideBotBuddy();
+          }
+        }
+      };
+      updateBotBuddy(botBuddy);
+    } else {
+      botBuddy = {
+        message : 'You set a Goal End Date ' + diff.weeks + ' week' + (diff.weeks == 1 ? '': 's') + ' after the benchmark. Experts recommend a minimum of eight weeks for effective interventions. Are you sure that\'s enough time?',
+        buttonOne : {
+          text: 'yes',
+          callback: function() {
+            log("TODO");
+            hideBotBuddy();
+          }
+        },
+        buttonTwo : {
+          text: 'learn more',
+          callback: function() {
+            // TODO what to do here
+            log("TODO");
+          }
+        },
+        buttonThree: {
+          text: 'change date',
+          callback: function() {
+            // TODO what to do here
+            log("TODO");
+          }
+        }
+      };
+      updateBotBuddy(botBuddy);
+    }
+
 
   });
 
-  // Goal End Date calender... function not available in this mockup
+  // Goal End Date calendar... function not available in this mockup
   var endDtCal = $("#endDtCal");
 
 
@@ -108,9 +171,9 @@ window.onload = function (){
 
     // extracts date and score from dropdown
     var scoreText = $("#startDtDropdown option:selected").text();
-    wizardState.goalEndDate = parseDropdownTestScore(scoreText);
+    wizardState.startTest.date = parseDropdownTestScore(scoreText);
+    log(wizardState.startTest.date);
 
-    log(wizardState.goalEndDate);
 
   });
 
@@ -143,6 +206,11 @@ window.onload = function (){
     });
   });
 
+
+  window.getWizardState = function() {
+    return wizardState;
+  }
+
   return;
   //Testing bot buddy
   botBuddy.message = 'Try setting the SPG to be more accurated based on the student start date.';
@@ -153,6 +221,8 @@ window.onload = function (){
 	botBuddy.buttonThree.text = 'Button Three';
   botBuddy.buttonThree.callback = testThree;
   updateBotBuddy(botBuddy);
+
+
 
 };
 
@@ -180,23 +250,44 @@ function isValidName(interventionName) {
 
 
 function updateBotBuddy(botBuddy) {
+  showBotBuddy();
+
 	$('.messageText').html(botBuddy.message);
 
 	if(botBuddy.buttonThree) {
 		$('.buttonOne').removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonOne.text);
 	  $('.buttonTwo').removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonTwo.text);
 	  $('.buttonThree').show().prop('value', botBuddy.buttonThree.text);
+    $('.buttonOne').prop('onclick',null).off('click');
 		$('.buttonOne').on('click', botBuddy.buttonOne.callback);
+    $('.buttonTwo').prop('onclick',null).off('click');
 		$('.buttonTwo').on('click', botBuddy.buttonTwo.callback);
+    $('.buttonThree').prop('onclick',null).off('click');
 	  $('.buttonThree').on('click', botBuddy.buttonThree.callback);
 	}
 	else {
 	  $('.buttonOne').removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
 	  $('.buttonTwo').removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonTwo.text);
+    $('.buttonOne').prop('onclick',null).off('click');
 	  $('.buttonOne').on('click', botBuddy.buttonOne.callback);
+    $('.buttonTwo').prop('onclick',null).off('click');
 		$('.buttonTwo').on('click', botBuddy.buttonTwo.callback);
 		$('.buttonThree').hide();
 	}
+}
+
+function compareTestDates(startDt, endDt) {
+  log("comparing test dates " + startDt + " " + endDt);
+
+  days = Math.floor((endDt - startDt) / (1000 * 60 * 60 * 24));
+  weeks = Math.floor((endDt - startDt) / (1000 * 60 * 60 * 24 * 7));
+  valid = weeks >= 8;
+
+  return {
+    days: days,
+    weeks: weeks,
+    valid: valid
+  };
 }
 
 function showBigassPopup() {
@@ -206,6 +297,12 @@ function showBigassPopup() {
 
 function hideBotBuddy() {
   $(".jarvis").hide();
+  log("SHOWING BOT BUDDY");
+  // TODO remember what they clicked?
+}
+
+function showBotBuddy() {
+  $(".jarvis").show();
   log("HIDING BOT BUDDY");
   // TODO remember what they clicked?
 }
@@ -220,4 +317,8 @@ function testTwo() {
 
 function testThree() {
 	alert('you clicked button three');
+}
+
+function getWizardState() {
+  return wizardState;
 }
