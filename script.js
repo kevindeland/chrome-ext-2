@@ -8,6 +8,10 @@ window.onload = function (){
               "ddCustom", "txtCustom",
               "btnCancel", "btnCalcGoal", "btnSave"];
 
+  // TODO how to access teacher preferences?
+
+  // TODO make more abstraction...
+  // i.e. switch/case which accepts the event and the element
 
   // holds the state of the GSW
   var wizardState = {
@@ -52,15 +56,15 @@ window.onload = function (){
    * setting the initial buddy state
    */
   botBuddy = {
-    message : 'I see you\'re setting a goal for ' + wizardState.studentName + '. Can I explain what the goal setting terms SGP and PR are?',
+    message :  MESSAGES.intro.formatUnicorn({name: wizardState.studentName}),
     buttonOne : {
-      text: 'yes please',
+      text: MESSAGES.introButton1,
       callback: function() {
         showBigassPopup("sgp1")
       }
     },
     buttonTwo : {
-      text: 'maybe later',
+      text: MESSAGES.introButton2,
       callback: function() {
         hideBotBuddy()
       }
@@ -107,15 +111,15 @@ window.onload = function (){
   function showInterventionLengthBuddy(diff) {
     if(diff.valid) {
       botBuddy = {
-        message : 'You set a Goal End Date of ' + intToText(diff.weeks) + ' weeks from now. This should be enough time to measure growth',
+        message : MESSAGES.interventionLengthLong.formatUnicorn({weeks: intToText(diff.weeks)}),
         buttonOne : {
-          text: 'great!',
+          text: MESSAGES.greatButton,
           callback: function() {
             understandSgpBuddy();
           }
         },
         buttonTwo : {
-          text: 'learn more',
+          text: MESSAGES.learnMoreButton,
           callback: function() {
             showBigassPopup("weeks");
           }
@@ -130,7 +134,7 @@ window.onload = function (){
       updateBotBuddy(botBuddy);
     } else {
       botBuddy = {
-        message : 'You set a Goal End Date ' + intToText(diff.weeks) + ' week' + (diff.weeks == 1 ? '': 's') + ' after the benchmark. Experts recommend a minimum of eight weeks for effective interventions. Are you sure that\'s enough time?',
+        message : MESSAGES.interventionLenghtShort.formatUnicorn({weeks: intToText(diff.weeks), weekPlural: (diff.weeks == 1 ? '': 's')}),
         buttonOne : {
           text: 'yes',
           callback: function() {
@@ -159,15 +163,15 @@ window.onload = function (){
    */
   function understandSgpBuddy() {
     botBuddy = {
-      message : 'Understanding SGP can help you set ambitious yet attainable goals. Would you like me to help you understand?',
+      message : MESSAGES.understandSgp,
       buttonOne : {
-        text: 'yes',
+        text: MESSAGES.understandSgpYes,
         callback: function() {
           showBigassPopup("sgp2");
         }
       },
       buttonTwo : {
-        text: 'maybe later',
+        text: MESSAGES.understandSgpNo,
         callback: function() {
           understandNumbersBuddy();
         }
@@ -191,22 +195,21 @@ window.onload = function (){
     var scaledScore = wizardState.startTest.ss;
 
     botBuddy = {
-      message : 'As of the test on ' + dateString +  ', ' + studentName + ' was in the ' + percentile + percentileSuffix + ' percentile (PR)'
-                  + ' with a scaled score (SS) of ' + scaledScore + '. Would you like me to help you understand what this means?',
+      message : MESSAGES.understandScoreNumbers.formatUnicorn({testDate: dateString, name: studentName, percentile: percentile, percentileSuffix: percentileSuffix, scaledScore: scaledScore}),
       buttonOne : {
-        text: 'please help me with PR',
+        text: MESSAGES.helpWithPRButton,
         callback: function() {
           showBigassPopup("pr");
         }
       },
       buttonTwo : {
-        text: 'please help me with SS',
+        text: MESSAGES.helpWithSSButton,
         callback: function() {
           showBigassPopup("ss");
         }
       },
       buttonThree: {
-        text: 'maybe later',
+        text: MESSAGES.maybeLater,
         callback: function() {
           hideBotBuddy();
           // TODO highlight calculate goal
@@ -311,7 +314,7 @@ function updateBotBuddy(botBuddy) {
 
 function showBigassPopup(topic) {
   log("BIGASS POPUP FOR $" +  topic + " NOW SHOWING");
-  // TODO make a div for bigass popup, and populate it
+  // TODO NEXT make a div for bigass popup, and populate it
 }
 
 function hideBotBuddy() {
@@ -323,70 +326,3 @@ function showBotBuddy() {
   $(".jarvis").show();
   log("SHOWING BOT BUDDY");
 }
-
-//==============================
-// Assorted Helpers
-//==============================
-function log(string) {
-  if(LOG_LEVEL == 'debug') {console.log(string)}
-}
-
-// for parsing the score date
-function parseDropdownTestScore(text) {
-  regex = /^(\d{1,2}\/\d{1,2}\/\d{4}) \- (\d{1,3}) SS \/ (\d{1,3}) PR/
-  parsedScoreText = text.match(regex);
-
-  return {
-    date: Date.parse(parsedScoreText[1]),
-    ss: parsedScoreText[2],
-    pr: parsedScoreText[3]
-  }
-}
-
-
-// for validating intervention name
-function isValidName(interventionName) {
-   return interventionName.length > 0;
-}
-
-
-function intToText(int) {
-  if(int > 24) return "" + int;
-
-  return ["zero", "one", "two", "three", "four", "five", "six",
-          "seven", "eight", "nine", "ten", "eleven", "twelve",
-          "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
-          "nineteen", "twenty", "twenty-one", "twenty-two", "twenty-three", "twenty-four"][int];
-}
-
-function getRankSuffix(int) {
-  switch (int % 10) {
-    case 1:
-      return "st";
-      break;
-    case 2:
-      return "nd";
-      break;
-    case 3:
-      return "rd";
-      break;
-    default:
-      return "th";
-      break;
-  }
-}
-
-function compareTestDates(startDt, endDt) {
-  log("comparing test dates " + startDt + " " + endDt);
-
-  days = Math.floor((endDt - startDt) / (1000 * 60 * 60 * 24));
-  weeks = Math.floor((endDt - startDt) / (1000 * 60 * 60 * 24 * 7));
-  valid = weeks >= 8;
-
-  return {
-    days: days,
-    weeks: weeks,
-    valid: valid
-  };
-}
-/********* End Assorted Helpers *********/
