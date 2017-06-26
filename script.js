@@ -60,7 +60,7 @@ window.onload = function (){
     buttonOne : {
       text: MESSAGES.introButton1,
       callback: function() {
-        showBigassPopup("sgp1")
+        showBigPopup("sgp1")
       }
     },
     buttonTwo : {
@@ -121,7 +121,7 @@ window.onload = function (){
         buttonTwo : {
           text: MESSAGES.learnMoreButton,
           callback: function() {
-            showBigassPopup("weeks");
+            showBigPopup("weeks");
           }
         },
         buttonThree: {
@@ -144,7 +144,7 @@ window.onload = function (){
         buttonTwo : {
           text: 'learn more',
           callback: function() {
-            showBigassPopup("weeks");
+            showBigPopup("weeks");
           }
         },
         buttonThree: {
@@ -167,7 +167,7 @@ window.onload = function (){
       buttonOne : {
         text: MESSAGES.understandSgpYes,
         callback: function() {
-          showBigassPopup("sgp2");
+          showBigPopup("sgp2");
         }
       },
       buttonTwo : {
@@ -199,13 +199,13 @@ window.onload = function (){
       buttonOne : {
         text: MESSAGES.helpWithPRButton,
         callback: function() {
-          showBigassPopup("pr");
+          showBigPopup("pr");
         }
       },
       buttonTwo : {
         text: MESSAGES.helpWithSSButton,
         callback: function() {
-          showBigassPopup("ss");
+          showBigPopup("ss");
         }
       },
       buttonThree: {
@@ -274,6 +274,18 @@ window.onload = function (){
     });
   });
 
+  var modal = document.getElementById('myModal');
+  var span = document.getElementsByClassName("close")[0];
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+      if (event.target == modal) {
+          modal.style.display = "none";
+      }
+  }
 
   window.getWizardState = function() {
     return wizardState;
@@ -312,9 +324,22 @@ function updateBotBuddy(botBuddy) {
 	}
 }
 
-function showBigassPopup(topic) {
-  log("BIGASS POPUP FOR $" +  topic + " NOW SHOWING");
-  // TODO NEXT make a div for bigass popup, and populate it
+function showBigPopup(topic) {
+  log("BIG POPUP FOR $" +  topic + " NOW SHOWING");
+  // TODO NEXT make a div for big popup, and populate it
+  var modal = document.getElementById('myModal');
+   modal.style.display = "block";
+}
+
+function hideBigPopup() {
+  // When the user clicks on <span> (x), close the modal
+  // Get the <span> element that closes the modal
+
+}
+
+function showPopup() {
+  var popup = document.getElementById("bigPopup");
+  popup.classList.toggle("show");
 }
 
 function hideBotBuddy() {
