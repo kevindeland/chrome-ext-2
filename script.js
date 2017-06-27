@@ -274,17 +274,33 @@ window.onload = function (){
     });
   });
 
-  var modal = document.getElementById('myModal');
-  var span = document.getElementsByClassName("close")[0];
+  var modal = document.getElementById("myModal");
+  var span = $(".close")[0];
+  var modalInner = $('#myModal p');
   span.onclick = function() {
-    modal.style.display = "none";
+    hideBigPopup();
   }
 
   // When the user clicks anywhere outside of the modal, close it
   window.onclick = function(event) {
       if (event.target == modal) {
-          modal.style.display = "none";
+          hideBigPopup();
       }
+  }
+
+  function showBigPopup(topic) {
+    log("BIG POPUP FOR $" +  topic + " NOW SHOWING");
+    // TODO NEXT make a div for big popup, and populate it
+    var modal = document.getElementById('myModal');
+     modal.style.display = "block";
+     modalInner.innerHTML = topic;
+  }
+
+  function hideBigPopup() {
+    // When the user clicks on <span> (x), close the modal
+    // Get the <span> element that closes the modal
+    modalInner.innerHTML = "";
+    modal.style.display = "none";
   }
 
   window.getWizardState = function() {
@@ -324,18 +340,7 @@ function updateBotBuddy(botBuddy) {
 	}
 }
 
-function showBigPopup(topic) {
-  log("BIG POPUP FOR $" +  topic + " NOW SHOWING");
-  // TODO NEXT make a div for big popup, and populate it
-  var modal = document.getElementById('myModal');
-   modal.style.display = "block";
-}
 
-function hideBigPopup() {
-  // When the user clicks on <span> (x), close the modal
-  // Get the <span> element that closes the modal
-
-}
 
 function showPopup() {
   var popup = document.getElementById("bigPopup");
