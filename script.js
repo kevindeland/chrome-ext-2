@@ -117,7 +117,7 @@ window.onload = function (){
         buttonTwo : {
           text: MESSAGES.learnMoreButton,
           callback: function() {
-            showBigPopup("weeks");
+            showBigPopup("interventionLength");
           }
         },
         buttonThree: {
@@ -289,7 +289,10 @@ window.onload = function (){
     // TODO NEXT make a div for big popup, and populate it
     var modal = document.getElementById('myModal');
      modal.style.display = "block";
-     modalInner.innerHTML = topic;
+    // modalInner.innerHTML = topic;
+
+    var filename = "popups/" + topic + ".html";
+     $('.modalContent').html('<object type="text/html" data="'+ filename + '" > </object>');
   }
 
   function hideBigPopup() {
