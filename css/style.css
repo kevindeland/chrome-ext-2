@@ -1,0 +1,68 @@
+/*********** Robot Styles **********/
+
+.jarvis {
+	width: 20%;
+    height: 20%;
+	position: fixed;
+	bottom: 50%;
+	right: 20%;
+}
+
+.messageWrapper {
+	border: 3px solid #4e92df;
+  border-radius: 25px;
+	padding: 10%;
+  box-shadow: 5px 5px 5px #888888;
+}
+
+.buttonWrapper {
+  border: 1px solid #4e92df;
+  border-radius: 10px;
+  padding: 5%;
+  background-color: white;
+}
+
+.messageText {
+	background-color: white;
+}
+
+.messageButtons {
+	margin-top: 5%;
+}
+
+.twoButtons {
+	width: 49%;
+	white-space: normal;
+}
+
+.threeButtons {
+	width: 31%;
+	white-space: normal;
+}
+
+.buttonOne {}
+.buttonTwo {}
+.buttonThree {}
+
+.robotContainer {
+	width: 30%;
+    height: 45%;
+	text-align: center;
+	margin-left: 35%;
+  box-shadow: 5px 5px 5px #888888;
+}
+
+.robotContainer img {
+	width: 100%;
+	height: 100%;
+}
+
+.modalRobotContainer {
+	text-align: center;
+}
+
+.modalRobotContainer img {
+	width: 10%;
+	height: 10%;
+}
+/*********** End Robot Styles **********/
