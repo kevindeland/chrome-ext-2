@@ -3,10 +3,10 @@ LOG_LEVEL = 'debug';
 window.onload = function (){
   //console.log("Hello World");
 
-  var ids = [ "interventionNameTxt", "endDtTxt", "endDtCal", "startDtDropdown",
-              "rbModerate", "rbModAmbitious", "rbCatchUp", "rbStayUp", "rbCustom",
-              "ddCustom", "txtCustom",
-              "btnCancel", "btnCalcGoal", "btnSave"];
+  var ids = [ DIVS.interventionNameTxt, DIVS.endDtTxt, DIVS.endDtCal, DIVS.startDtDropdown,
+              DIVS.rbModerate, DIVS.rbModAmbitious, DIVS.rbCatchUp, DIVS.rbStayUp, DIVS.rbCustom,
+              DIVS.ddCustom, DIVS.txtCustom,
+              DIVS.btnCancel, DIVS.btnCalcGoal, DIVS.btnSave];
 
   // TODO how to access teacher preferences?
 
@@ -49,7 +49,7 @@ window.onload = function (){
    * initial state
    */
   wizardState.studentName = 'Kathryn';
-  var scoreText = $("#startDtDropdown option:selected").text();
+  var scoreText = $("#" + DIVS.startDtDropdown + " option:selected").text();
   wizardState.startTest = parseDropdownTestScore(scoreText);
 
   /**
@@ -74,7 +74,7 @@ window.onload = function (){
 
 
   // intervention name
-  var interventionNameTxt = $("#interventionNameTxt");
+  var interventionNameTxt = $("#" + DIVS.interventionNameTxt);
 
   interventionNameTxt.on('click', function() {
     log('begin editing intervention name');
@@ -90,11 +90,7 @@ window.onload = function (){
   });
 
   // Goal End Date
-  var endDtTxt = $("#endDtTxt");
-  endDtTxt.on('click', function() {
-    log('begin editing end date');
-
-  });
+  var endDtTxt = $("#" + DIVS.endDtTxt);
 
   endDtTxt.on('blur', function() {
     var endDt = endDtTxt.val();
@@ -186,7 +182,7 @@ window.onload = function (){
   function understandNumbersBuddy() {
 
     // TODO highlight Starting Test
-    $("#startDtDropdown").addClass("highlight");
+    $("#" + DIVS.startDtDropdown).addClass("highlight");
 
     var dateString = 'Dec, 12'; // TODO make it actual date
     var studentName = wizardState.studentName;
@@ -228,7 +224,7 @@ window.onload = function (){
 
 
   // Start Date Dropdown
-  var startDtDropdown = $("#startDtDropdown");
+  var startDtDropdown = $("#" + DIVS.startDtDropdown);
   startDtDropdown.on('click', function() {
     log('choosing start date');
 
@@ -238,7 +234,7 @@ window.onload = function (){
     log('chose start date');
 
     // extracts date and score from dropdown
-    var scoreText = $("#startDtDropdown option:selected").text();
+    var scoreText = $("#" + DIVS.startDtDropdown + " option:selected").text();
     wizardState.startTest.date = parseDropdownTestScore(scoreText);
     log(wizardState.startTest.date);
 

@@ -23,6 +23,23 @@ MESSAGES =  {
 
 }
 
+DIVS = {
+    interventionNameTxt: "interventionNameTxt",
+    endDtTxt:"endDtTxt",
+    endDtCal:"endDtCal",
+    startDtDropdown:"startDtDropdown",
+    rbModerate:"rbModerate",
+    rbModAmbitious:"rbModAmbitious",
+    rbCatchUp:"rbCatchUp",
+    rbStayUp:"rbStayUp",
+    rbCustom:"rbCustom",
+    ddCustom:"ddCustom",
+    txtCustom:"txtCustom",
+    btnCancel:"btnCancel",
+    btnCalcGoal:"btnCalcGoal",
+    btnSave:"btnSave"
+}
+
 
 String.prototype.formatUnicorn = String.prototype.formatUnicorn ||
 function () {

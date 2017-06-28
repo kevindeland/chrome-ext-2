@@ -4,7 +4,7 @@
   <head>
     Midfi with Angular
     <link rel="stylesheet" href="style.css">
-    <script src="messages.js"></script>
+    <script src="config.js"></script>
     <script src="util.js"></script>
     <script src="script.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -16,15 +16,30 @@
     	<div class="messageWrapper">
     	  <div class="messageText"></div>
     	  <div class="messageButtons">
-    	    <input type="button" class="buttonOne" value="" />
-      		<input type="button" class="buttonTwo" value="" />
-      		<input type="button" class="buttonThree threeButtons"value="" />
+    	    <input type="button" class="buttonOne buttonWrapper" value="" />
+      		<input type="button" class="buttonTwo buttonWrapper" value="" />
+      		<input type="button" class="buttonThree buttonWrapper"value="" />
     	  </div>
     	</div>
     	<div class="robotContainer">
-    	  <img src="images/Robot_head.png" />
+    	  <img src="images/bot.png" />
     	</div>
     </div>
+
+    <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <div class="modalRobotContainer">
+      <img src="images/bot.png" />
+    </div>
+    <!-- Modal content -->
+    <div class="modalContent">
+      <span class="close">&times;</span>
+      <p>Some text in the Modal..</p>
+    </div>
+
+
+  </div>
 
 
     <table cellspacing="1" class="optionsTable">
@@ -121,14 +136,4 @@
   </body>
 
 
-    <!-- The Modal -->
-  <div id="myModal" class="modal">
-
-    <!-- Modal content -->
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <p>Some text in the Modal..</p>
-    </div>
-
-  </div>
 </html>
