@@ -1,0 +1,139 @@
+
+<!doctype html>
+<html>
+  <head>
+    Midfi with Angular
+    <link rel="stylesheet" href="style.css">
+    <script src="config.js"></script>
+    <script src="util.js"></script>
+    <script src="script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  </head>
+  <body>
+
+    <div class="jarvis">
+    	<div class="messageWrapper">
+    	  <div class="messageText"></div>
+    	  <div class="messageButtons">
+    	    <input type="button" class="buttonOne buttonWrapper" value="" />
+      		<input type="button" class="buttonTwo buttonWrapper" value="" />
+      		<input type="button" class="buttonThree buttonWrapper"value="" />
+    	  </div>
+    	</div>
+    	<div class="robotContainer">
+    	  <img src="images/bot.png" />
+    	</div>
+    </div>
+
+    <!-- The Modal -->
+  <div id="myModal" class="modal">
+
+    <div class="modalRobotContainer">
+      <img src="images/bot.png" />
+    </div>
+    <!-- Modal content -->
+    <div class="modalContainer">
+      <span class="close">&times;</span>
+      <div class="modalContent">Some text in the Modal..</div>
+    </div>
+
+
+  </div>
+
+
+    <table cellspacing="1" class="optionsTable">
+    	<tbody><tr>
+    		<th colspan="2">
+    			<span style="float:left;">Intervention Details</span>
+    			<a href="javascript:void(LaunchPopUpWindow('https://z10resources.renlearnrp.com/US/STAR/InterpretationsAndRecommendations.aspx','','0','0','False','False','False'))" id="ctl00_cp_Content_pw_Interpretation" popupimageurl="" style="float:right;" popupimagealttext="" url="https://z10resources.renlearnrp.com/US/STAR/InterpretationsAndRecommendations.aspx" popupuniquename="">Interpretation &amp; Guidance</a>
+    		</th>
+    	</tr>
+    	<tr>
+    		<td class="labelColumnWithDesc">
+    			<span style="white-space:nowrap;">Intervention Name</span>
+    			<div class="labelColumnDesc">Appears in report details</div>
+    		</td>
+    		<td class="dataColumn">
+    			<input id="interventionNameTxt" name="ctl00$cp_Content$tb_Title" type="text" maxlength="100" style="width: 200px; background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAmJJREFUWAntV7uKIkEUvbYGM4KID3wEIgjKRLLpKGLgFwiCfslGhkb7IbLgAzE1GhMxWxRRBEEwmEgDERWfW6fXuttq60a2wU6B1qlzb9U5fatsKROJVigUArvd7oeAyePx6Af3qGYymT7F2h8Wi+V7Pp+fmE7iv4Sw81GieusKIzNh4puCJzdaHIagCW1F4KSeQ4O4pPLoPb/3INBGBZ7avgz8fxWIxWIUCoX43Blegbe3NwoGg88zwMoncFUB8Yokj8dDdrv9MpfHVquV/H4/iVcpc1qgKAp5vV6y2WxaWhefreB0OimXy6kGkD0YDKhSqdB2u+XJqVSK4vE4QWS5XKrx0WjEcZ/PR9lslhwOh8p1Oh2q1Wp0OBw4RwvOKpBOp1kcSdivZPLvmxrjRCKhiiOOSmQyGXp5ecFQbRhLcRDRaJTe39//BHW+2cDr6ysFAoGrlEgkwpwWS1I7z+VykdvtliHuw+Ew40vABvb7Pf6hLuMk/rGY02ImBZC8dqv04lpOYjaw2WzUPZcB2WMPZet2u1cmZ7MZTSYTNWU+n9N4PJbp3GvXYPIE2ADG9Xqder2e+kTr9ZqazSa1222eA6FqtUoQwqHCuFgscgWQWC6XaTgcEiqKQ9poNOiegbNfwWq1olKppB6yW6cWVcDHbDarIuzuBBaLhWrqVvwy/6wCMnhLXMbR4wnvtX/F5VxdAzJoRH+2BUYItlotmk6nLGW4gX6/z+IAT9+CLwPPr8DprnZ2MIwaQBsV+DBKUEfnQ8EtFRdFneBDKWhCW8EVGbdUQfxESR6qKhaHBrSgCe3fbLTpPlS70M0AAAAASUVORK5CYII=&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%; cursor: auto;">
+    			<span id="ctl00_cp_Content_rfv_Title" class="alertText" style="color:Red;display:none;">Required</span>
+    		</td>
+    	</tr>
+    	<tr>
+    		<td class="labelColumnWithDesc">
+    			Goal End Date
+    			<div class="labelColumnDesc">Used for SS/week calculation</div>
+    		</td>
+    		<td class="dataColumn">
+    			<input id="endDtTxt" name="ctl00$cp_Content$tb_Target" type="text" style="vertical-align:middle; width:100px;" class="hasDatepicker">
+          <button id="endDtCal" type="button" class="ui-datepicker-trigger"><img src="images/popupcalendar.gif" alt="Goal Target" title="Goal Target"></button>
+    			<a id="ctl00_cp_Content_cp_Target" href="javascript:void(0)" style="vertical-align:middle"></a>
+    			<span id="ctl00_cp_Content_rfv_Target" class="alertText" style="color:Red;display:none;">Required</span>
+    		</td>
+    	</tr>
+    	<tr>
+    		<td class="labelColumnWithDesc">
+    			Goal
+    			<div class="labelColumnDesc" style="white-space:nowrap;">Expected growth rate and score</div>
+    		</td>
+    		<td class="dataColumn">
+    			<span style="font-weight:bold;">Starting test: &nbsp;</span>
+
+    			<select id="startDtDropdown" name="ctl00$cp_Content$ddl_AnchorScore" >
+    	<option selected="selected" value="19569">3/17/2017 - 518 SS / 10 PR </option>
+    	<option value="22678">3/17/2017 - 518 SS / 10 PR </option>
+
+    </select>
+    			<br>
+    			(Sets intervention line; starts trend and goal lines)
+    			<br><br>
+
+    			<hr><br>
+    			<div style="padding: 0px;">
+    				<span style="font-weight:bold;">Select a goal type</span>
+    				<span class="exampleText">(based on students who scored similarly*)</span>
+    			</div>
+    			<div style="padding: 0px;">
+    				<span><input id="rbModerate" type="radio" name="ctl00$cp_Content$GoalType" value="rb_Moderate"></span>
+    				<span id="ctl00_cp_Content_sp_Moderate">Moderate: 50 SGP =&nbsp;</span><span id="ctl00_cp_Content_sp_ModerateData">(press Calculate Goal button)</span>
+    			</div>
+    			<div style="padding: 0px;">
+    				<span><input id="rbModAmbitious" type="radio" name="ctl00$cp_Content$GoalType" value="rb_ModAmbitious"></span>
+    				<span id="ctl00_cp_Content_sp_ModAmbitious">Moderately Ambitious: 66 SGP =&nbsp;</span><span id="ctl00_cp_Content_sp_ModAmbitiousData">(press Calculate Goal button)</span>
+    			</div>
+    			<div id="ctl00_cp_Content_dvCatchUp" style="padding: 0px;">
+    				<span><input id="rbCatchUp" type="radio" name="ctl00$cp_Content$GoalT ype" value="rb_CatchUp"></span>
+    				<span id="ctl00_cp_Content_sp_CatchUp">Catch Up/Keep Up:&nbsp;</span><span id="ctl00_cp_Content_sp_CatchUpData">(press Calculate Goal button)</span>
+    			</div>
+    			<div id="ctl00_cp_Content_dvStayUp" style="padding: 0px;">
+    				<span><input id="rbStayUp" type="radio" name="ctl00$cp_Content$GoalType" value="rb_StayUp"></span>
+    				<span id="ctl00_cp_Content_sp_StayUp">Stay Up/Move Up:&nbsp;</span><span id="ctl00_cp_Content_sp_StayUpData">(press Calculate Goal button)</span>
+    			</div>
+    			<div id="ctl00_cp_Content_div_Custom" style="padding:0px;">
+    				<br>
+    				<span style="font-weight:bold">Or define a custom goal:</span><br>
+    				<input id="rbCustom" type="radio" name="ctl00$cp_Content$GoalType" value="rb_Custom">
+    				<select name="ctl00$cp_Content$ddl_Custom" id="ddCustom" onfocus="SelectCustom()">
+    	<option selected="selected" value="CustomSS">Scaled Score</option>
+    	<option value="CustomPR">Percentile Rank</option>
+
+    </select>
+    				<input name="ctl00$cp_Content$tb_Custom" type="text" maxlength="4" id="txtCustom" onfocus="SelectCustom()" style="width:75px;">
+    				<span id="ctl00_cp_Content_sp_CustomError" class="alertText" style="margin-right:4px;"></span>
+    				<span id="ctl00_cp_Content_sp_CustomGoalWeek" style="font-weight:bold;"></span><span id="ctl00_cp_Content_sp_CustomGoal" style="font-weight:bold;"></span>
+    			</div>
+    			<br><br>
+    		</td>
+    	</tr>
+    </tbody></table>
+
+
+    <div class="pageButtonRow">
+    	<input type="submit" name="ctl00$cp_Content$btn_Cancel" value="Cancel" id="btnCancel">
+    	<input type="submit" name="ctl00$cp_Content$btn_CalcGoal" value="Calculate Goal" id="btnCalcGoal">
+    	<input type="submit" name="ctl00$cp_Content$btn_Save" value="Save" id="btnSave" disabled="disabled">
+    </div>
+  </body>
+
+
+</html>
