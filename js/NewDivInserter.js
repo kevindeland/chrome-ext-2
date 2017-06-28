@@ -5,7 +5,7 @@ function NewDivInserter () {
   var $div = $("<div>", {id: "jarvis", "class": "robot"});
   $("body").append($div);
 
-  $div.hide();
+  //$div.hide();
 
   var jarvisURL = chrome.runtime.getURL("../html/jarvis.html");
   log(jarvisURL);
