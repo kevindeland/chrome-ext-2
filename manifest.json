@@ -24,8 +24,10 @@
       "matches": ["https://rppres9.renlearn.com/*"],
       "js": ["js/jquery/jquery-3.2.1.min.js",
         "js/helpers.js",
+        "js/NewDivInserter.js",
         "js/BotStateManager.js",
-        "js/BotEventListener.js"
+        "js/BotEventListener.js",
+        "js/Main.js"
       ],
       "run_at": "document_end"
     }
