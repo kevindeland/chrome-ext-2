@@ -1,14 +1,15 @@
 
 
 function NewDivInserter () {
+  log("NewDivInserter()");
 
   var $div = $("<div>", {id: "jarvis", "class": "robot"});
   $("body").append($div);
 
-  //$div.hide();
+  $div.hide();
 
   var jarvisURL = chrome.runtime.getURL("../html/jarvis.html");
-  log(jarvisURL);
+  //log(jarvisURL);
   $div.load(jarvisURL, function() {
     var robotContainer = $(".robotContainer")
     log(robotContainer);

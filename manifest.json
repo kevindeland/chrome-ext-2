@@ -21,12 +21,11 @@
   ],
   "content_scripts": [
     {
-      "matches": ["https://rppres9.renlearn.com/*"],
+      "matches": ["https://rppres9.renlearn.com/*/STAR/ProgressMonitor/Intervention.aspx"],
       "css": ["css/style.css"],
       "js": ["js/jquery/jquery-3.2.1.min.js",
         "js/helpers.js",
         "js/NewDivInserter.js",
-        "js/BotStateManager.js",
         "js/BotEventListener.js",
         "js/Main.js"
       ],
@@ -34,7 +33,7 @@
     }
   ],
   "web_accessible_resources": [
-    "html/jarvis.html",
+    "html/*",
     "images/bot.png"
   ]
 }
