@@ -64,21 +64,40 @@ function BotEventListener() {
       botBuddy = {
         message: "Would you like some tips on how to name your intervention?",
         buttonOne: {
-          text: "Sure"
+          text: "Sure",
+          callback: function() {
+            showInterventionNameHelp();
+          }
         },
         buttonTwo: {
-          text: "No Thanks"
+          text: "No Thanks",
+          callback: hideBotBuddy
         }
-      }
+      };
       updateBotBuddy(botBuddy);
   });
+
+  function showInterventionNameHelp() {
+    log("showInterventionNameHelp");
+
+    botBuddy = {
+      message: MESSAGES.interventionNameHelp1 + "\n" + MESSAGES.interventionNameHelp2,
+      buttonOne: {
+        text: "Got it",
+        callback: hideBotBuddy
+      },
+      buttonTwo: null
+    };
+    updateBotBuddy(botBuddy);
+  }
 
   interventionName.on('blur', function() {
     if(isValidName(interventionName.val())) {
       wizardState.interventionName = interventionName.val();
       log('done editing intervention name to ' + wizardState.interventionName);
+      hideBotBuddy();
     }
-    hideBotBuddy();
+
 
   });
 
@@ -183,6 +202,7 @@ function BotEventListener() {
 function updateBotBuddy(botBuddy) {
   showBotBuddy();
 
+  // TODO make it accept multiple messages instead of just one
 	$('.messageText').html(botBuddy.message);
 
 	if(botBuddy.buttonThree) {
@@ -196,7 +216,7 @@ function updateBotBuddy(botBuddy) {
     $('.buttonThree').prop('onclick',null).off('click');
 	  $('.buttonThree').on('click', botBuddy.buttonThree.callback);
 	}
-	else {
+	else if (botBuddy.buttonTwo){
 	  $('.buttonOne').removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
 	  $('.buttonTwo').removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonTwo.text);
     $('.buttonOne').prop('onclick',null).off('click');
@@ -204,7 +224,13 @@ function updateBotBuddy(botBuddy) {
     $('.buttonTwo').prop('onclick',null).off('click');
 		$('.buttonTwo').on('click', botBuddy.buttonTwo.callback);
 		$('.buttonThree').hide();
-	}
+	} else {
+    $('.buttonOne').removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
+    $('.buttonOne').prop('onclick',null).off('click');
+   $('.buttonOne').on('click', botBuddy.buttonOne.callback);
+  $('.buttonTwo').hide();
+   $('.buttonThree').hide();
+  }
 }
 
 /*** for showing and hiding bot buddy ***/
