@@ -38,8 +38,12 @@ function BotEventListener() {
   /*** initialize ***/
   var studentNameDiv = $("#ctl00_cp_Content_td_Student")[0];
   var fullName = studentNameDiv.innerHTML;
-  wizardState.studentName = fullName.split(', ')[1];
-  log("Studnet name: " + wizardState.studentName);
+  wizardState.studentName = fullName.split(', ')[1]; // only first name
+  log("Student name: " + wizardState.studentName);
+
+  var startScoreText = $("#ctl00_cp_Content_ddl_AnchorScore " + "option:selected").text();
+  wizardState.startTest = parseDropdownTestScore(startScoreText);
+
 
 
   /*** Calculate Goal button ***/
@@ -56,12 +60,26 @@ function BotEventListener() {
   /*** Intervention name text input ***/
   var interventionName = $("#ctl00_cp_Content_tb_Title");
 
-  interventionName.on('mouseover', function() {
-      showBotBuddy();
+  interventionName.on('focus', function() {
+      botBuddy = {
+        message: "Would you like some tips on how to name your intervention?",
+        buttonOne: {
+          text: "Sure"
+        },
+        buttonTwo: {
+          text: "No Thanks"
+        }
+      }
+      updateBotBuddy(botBuddy);
   });
 
-  interventionName.on('mouseleave', function() {
-      hideBotBuddy();
+  interventionName.on('blur', function() {
+    if(isValidName(interventionName.val())) {
+      wizardState.interventionName = interventionName.val();
+      log('done editing intervention name to ' + wizardState.interventionName);
+    }
+    hideBotBuddy();
+
   });
 
 
@@ -91,8 +109,63 @@ function BotEventListener() {
         // log(d.currentTarget.outerHTML);
         log(goalEndDate[0]);
         log(goalEndDate[0].value);
+        wizardState.goalEndDate = Date.parse(goalEndDate[0].value)
+        var diff = compareTestDates(wizardState.startTest.date, wizardState.goalEndDate);
+
+        showInterventionLengthBuddy(diff);
+
     });
   });
+
+  function showInterventionLengthBuddy(diff) {
+    if(diff.valid) {
+      botBuddy = {
+        message : MESSAGES.interventionLengthLong.formatUnicorn({weeks: intToText(diff.weeks)}),
+        buttonOne : {
+          text: MESSAGES.greatButton,
+          callback: function() {
+            understandSgpBuddy();
+          }
+        },
+        buttonTwo : {
+          text: MESSAGES.learnMoreButton,
+          callback: function() {
+            showBigPopup("interventionLength");
+          }
+        },
+        buttonThree: {
+          text: 'change date',
+          callback: function() {
+            hideBotBuddy();
+          }
+        }
+      };
+      updateBotBuddy(botBuddy);
+    } else {
+      botBuddy = {
+        message : MESSAGES.interventionLenghtShort.formatUnicorn({weeks: intToText(diff.weeks), weekPlural: (diff.weeks == 1 ? '': 's')}),
+        buttonOne : {
+          text: 'yes',
+          callback: function() {
+            understandSgpBuddy();
+          }
+        },
+        buttonTwo : {
+          text: 'learn more',
+          callback: function() {
+            showBigPopup("interventionLength");
+          }
+        },
+        buttonThree: {
+          text: 'change date',
+          callback: function() {
+            hideBotBuddy();
+          }
+        }
+      };
+      updateBotBuddy(botBuddy);
+    }
+  };
 
 
 
@@ -102,6 +175,37 @@ function BotEventListener() {
 
 
 };
+
+
+//==============================
+// UI Helpers
+//==============================
+function updateBotBuddy(botBuddy) {
+  showBotBuddy();
+
+	$('.messageText').html(botBuddy.message);
+
+	if(botBuddy.buttonThree) {
+		$('.buttonOne').removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonOne.text);
+	  $('.buttonTwo').removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonTwo.text);
+	  $('.buttonThree').show().prop('value', botBuddy.buttonThree.text);
+    $('.buttonOne').prop('onclick',null).off('click');
+		$('.buttonOne').on('click', botBuddy.buttonOne.callback);
+    $('.buttonTwo').prop('onclick',null).off('click');
+		$('.buttonTwo').on('click', botBuddy.buttonTwo.callback);
+    $('.buttonThree').prop('onclick',null).off('click');
+	  $('.buttonThree').on('click', botBuddy.buttonThree.callback);
+	}
+	else {
+	  $('.buttonOne').removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
+	  $('.buttonTwo').removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonTwo.text);
+    $('.buttonOne').prop('onclick',null).off('click');
+	  $('.buttonOne').on('click', botBuddy.buttonOne.callback);
+    $('.buttonTwo').prop('onclick',null).off('click');
+		$('.buttonTwo').on('click', botBuddy.buttonTwo.callback);
+		$('.buttonThree').hide();
+	}
+}
 
 /*** for showing and hiding bot buddy ***/
 function showBotBuddy() {

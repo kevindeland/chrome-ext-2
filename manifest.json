@@ -25,6 +25,7 @@
       "css": ["css/style.css"],
       "js": ["js/jquery/jquery-3.2.1.min.js",
         "js/helpers.js",
+        "js/config.js",
         "js/NewDivInserter.js",
         "js/BotEventListener.js",
         "js/Main.js"
