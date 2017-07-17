@@ -60,6 +60,7 @@ function BotEventListener() {
   /*** Intervention name text input ***/
   var interventionName = $("#ctl00_cp_Content_tb_Title");
 
+  // TODO 7/17 only show intervention popup once
   interventionName.on('focus', function() {
       botBuddy = {
         message: "Would you like some tips on how to name your intervention?",
@@ -188,60 +189,38 @@ function BotEventListener() {
 
 
   function showInterventionLengthBuddy(diff) {
-    // TODO move if statement to message
+
+    botBuddy = {
+      message: null, // set message below
+      buttonOne : {
+        text: "Yes",
+        callback: function() {
+          // TODO 7/17
+          // do nothing
+        }
+      },
+      buttonTwo: {
+        text: 'change date',
+        callback: function() {
+          datePickerTrigger.trigger("click");
+          addEventToCalendarPopup();
+          hideBotBuddy();
+        }
+      },
+      buttonThree : {
+        text: "Teach me More",
+        callback: function() {
+          window.open('http://doc.renlearn.com/KMNet/R004336320GJBD8A.pdf', '_blank');
+        }
+      }
+    };
+
     if(diff.valid) {
-      botBuddy = {
-        message : MESSAGES.interventionLengthLong.formatUnicorn({weeks: intToText(diff.weeks)}),
-        buttonOne : {
-          text: MESSAGES.greatButton,
-          callback: function() {
-            understandSgpBuddy();
-          }
-        },
-        buttonTwo : {
-          text: MESSAGES.learnMoreButton,
-          callback: function() {
-            showBigPopup("interventionLength");
-          }
-        },
-        buttonThree: {
-          text: 'change date',
-          callback: function() {
-            // TODO add click
-            datePickerTrigger.trigger("click");
-            addEventToCalendarPopup();
-            hideBotBuddy();
-          }
-        }
-      };
-      updateBotBuddy(botBuddy);
+      botBuddy.message = MESSAGES.interventionLengthLong.formatUnicorn({weeks: intToText(diff.weeks)});
     } else {
-      botBuddy = {
-        message : MESSAGES.interventionLenghtShort.formatUnicorn({weeks: intToText(diff.weeks), weekPlural: (diff.weeks == 1 ? '': 's')}),
-        buttonOne : {
-          text: 'yes',
-          callback: function() {
-            understandSgpBuddy();
-          }
-        },
-        buttonTwo : {
-          text: 'learn more',
-          callback: function() {
-            showBigPopup("interventionLength");
-          }
-        },
-        buttonThree: {
-          text: 'change date',
-          callback: function() {
-            // TODO add click
-            datePickerTrigger.trigger("click");
-            addEventToCalendarPopup();
-            hideBotBuddy();
-          }
-        }
-      };
-      updateBotBuddy(botBuddy);
+      botBuddy.message = MESSAGES.interventionLenghtShort.formatUnicorn({weeks: intToText(diff.weeks), weekPlural: (diff.weeks == 1 ? '': 's')});
     }
+    updateBotBuddy(botBuddy);
   };
 
 

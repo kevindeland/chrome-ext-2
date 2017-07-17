@@ -35,6 +35,6 @@
   ],
   "web_accessible_resources": [
     "html/*",
-    "images/bot.png"
+    "images/*.png"
   ]
 }
