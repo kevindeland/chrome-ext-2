@@ -215,8 +215,7 @@ function BotEventListener() {
       buttonOne : {
         text: "Yes",
         callback: function() {
-          // TODO 7/17
-          // do nothing
+          hideBotBuddy();
         }
       },
       buttonTwo: {
