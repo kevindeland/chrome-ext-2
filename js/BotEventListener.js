@@ -44,15 +44,25 @@ function BotEventListener() {
   var startScoreText = $("#ctl00_cp_Content_ddl_AnchorScore " + "option:selected").text();
   wizardState.startTest = parseDropdownTestScore(startScoreText);
 
-  log($(".helpButton"));
+
+  /*** Panel button behavior ***/
   var helpButton = $(".helpButton > input");
-  log(helpButton);
   helpButton.on('click', function() {
     showHelpScreen();
   });
 
+  $(".close").on('click', function() {
+    hideBigPopup();
+  });
+
   function showHelpScreen() {
-    log("now showing help screen"); // TODO
+    showBigPopup();
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        hideBigPopup();
+      }
+    }
   }
 
 
@@ -287,4 +297,14 @@ function showBotBuddy() {
 
 function hideBotBuddy() {
   $("#jarvis").hide();
+}
+
+function showBigPopup() {
+  var modal = $("#modal");
+  modal.show();
+}
+
+function hideBigPopup() {
+  var modal = $("#modal");
+  modal.hide();
 }
