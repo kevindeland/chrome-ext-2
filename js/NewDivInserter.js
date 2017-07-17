@@ -1,6 +1,6 @@
 
 
-function NewDivInserter () {
+function NewDivInserter (callback) {
   log("NewDivInserter()");
 
   var $div = $("<div>", {id: "jarvis", "class": "robot"});
@@ -20,6 +20,13 @@ function NewDivInserter () {
     log(progressBar);
     progressBar.html('<img src="' + chrome.runtime.getURL("../images/progress_bar_1_4.png") + '"/>'); // TODO this doesn't work???
 
+    var helpButton = $(".helpButton");
+    log(helpButton);
+    helpButton.html('<input type="image" src="' + chrome.runtime.getURL("../images/help_button_placeholder.png") + '"/>');
+
+
+    callback();
   });
+
 
 };

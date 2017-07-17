@@ -44,6 +44,16 @@ function BotEventListener() {
   var startScoreText = $("#ctl00_cp_Content_ddl_AnchorScore " + "option:selected").text();
   wizardState.startTest = parseDropdownTestScore(startScoreText);
 
+  log($(".helpButton"));
+  var helpButton = $(".helpButton > input");
+  log(helpButton);
+  helpButton.on('click', function() {
+    showHelpScreen();
+  });
+
+  function showHelpScreen() {
+    log("now showing help screen"); // TODO
+  }
 
 
   /*** Calculate Goal button ***/

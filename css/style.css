@@ -13,6 +13,11 @@
 	max-height: 100%;
 }
 
+.helpButton input {
+	max-width: 25%;
+	float: right;
+}
+
 .messageWrapper {
 	border: 3px solid #4e92df;
   border-radius: 25px;
