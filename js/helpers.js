@@ -12,7 +12,17 @@ function parseDropdownTestScore(text) {
     date: Date.parse(parsedScoreText[1]),
     ss: parsedScoreText[2],
     pr: parsedScoreText[3]
-  }
+  };
+}
+
+function parseGoalData(text) {
+  regex = /^(\d{1,3}\.\d{1}) SS\/week = (\d{1,4}) SS/
+  parsedText = text.match(regex);
+
+  return {
+    rate: parsedText[1],
+    ss: parsedText[2]
+  };
 }
 
 // for validating intervention name

@@ -2,7 +2,6 @@
 function BotEventListener() {
   log("BotEventListener()");
 
-
   // holds the state of the GSW
   var wizardState = {
     studentName: undefined,
@@ -18,7 +17,8 @@ function BotEventListener() {
       prOrSs: undefined,
       value: undefined
     },
-    hasBeenCalculated: false
+    hasBeenCalculated: false,
+    goalData: undefined
   };
 
   // holds the state of the bot buddy
@@ -34,6 +34,27 @@ function BotEventListener() {
 		},
 		buttonThree: {}
   };
+
+  /*** Check if our load is the result of a "Calculate Goal" click... ***/
+  // define data goals
+  var moderateData = $("#ctl00_cp_Content_sp_ModerateData");
+  var modAmbitiousData = $("#ctl00_cp_Content_sp_ModAmbitiousData");
+  var catchupData = $("#ctl00_cp_Content_sp_CatchUpData");
+
+  if(moderateData.html().indexOf("Calculate") >= 0) {
+    log("Not yet calculated");
+    wizardState.hasBeenCalculated = false;
+  } else {
+    log("Has been calculated");
+    wizardState.goalData = {
+      moderate: parseGoalData(moderateData.html()),
+      modAmbitious: parseGoalData(modAmbitiousData.html()),
+      catchup: parseGoalData(catchupData.html())
+    };
+
+    showBigPopup("goalGraph", {data: wizardState.goalData});
+
+  }
 
   /*** initialize ***/
   var studentNameDiv = $("#ctl00_cp_Content_td_Student")[0];
@@ -56,26 +77,14 @@ function BotEventListener() {
   });
 
   function showHelpScreen() {
-    showBigPopup();
+    showBigPopup("help");
 
     window.onclick = function(event) {
       if (event.target == modal) {
         hideBigPopup();
       }
     }
-  }
-
-
-  /*** Calculate Goal button ***/
-  var calculateGoal = document.querySelectorAll("input[value=\"Calculate Goal\"]")[0];
-
-  calculateGoal.addEventListener('mouseover', function() {
-
-  });
-
-  calculateGoal.addEventListener('mouseleave', function() {
-
-  });
+  };
 
   /*** Intervention name text input ***/
   var interventionName = $("#ctl00_cp_Content_tb_Title");
@@ -209,6 +218,8 @@ function BotEventListener() {
 
 
   function showInterventionLengthBuddy(diff) {
+    var progressBar = $(".progressBar");
+    progressBar.html('<img src="' + chrome.runtime.getURL("../images/progress_bar_2_4.png") + '"/>');
 
     botBuddy = {
       message: null, // set message below
@@ -242,6 +253,30 @@ function BotEventListener() {
     updateBotBuddy(botBuddy);
   };
 
+
+  /*** Calculate Goal button ***/
+  var calculateGoal = $("input[name='ctl00$cp_Content$btn_CalcGoal']")[0];
+  log(calculateGoal);
+  calculateGoal.addEventListener('mouseover', function() {
+      log('about to click calculateGoal');
+      calculateGoalWindow();
+  });
+  /** when the Calculate Goal button is pressed **/
+  function calculateGoalWindow() {
+    // TODO https://developer.chrome.com/extensions/cookies
+    // background pages https://developer.chrome.com/extensions/background_pages
+    // ayy https://stackoverflow.com/questions/23038032/why-is-chrome-cookies-undefined-in-a-content-script
+  //  chrome.cookies.set({url: "https://rppres9.renlearn.com", name: "TestCookie", value: "123"});
+  }
+
+  var goalTypeBox = $(".optionsTable tbody tr:nth-child(4) .dataColumn div");
+  log(goalTypeBox);
+  goalTypeBox.on('click', function() {
+    log("clicked inside the magic box");
+    calculateGoal.trigger("click");
+    calculateGoalWindow();
+
+  });
 
 
 
@@ -298,9 +333,21 @@ function hideBotBuddy() {
   $("#jarvis").hide();
 }
 
-function showBigPopup() {
+function showBigPopup(name, params) {
   var modal = $("#modal");
   modal.show();
+
+  switch(name) {
+    case "goalGraph":
+    log("showing goal graphs");
+    log(params); // TODO do something with goals and scores
+    break;
+
+    case "help":
+    log("showing help screen");
+    break;
+  }
+
 }
 
 function hideBigPopup() {
