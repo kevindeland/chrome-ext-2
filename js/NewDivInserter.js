@@ -18,11 +18,11 @@ function NewDivInserter (callback) {
       // automagically insert images
       var robotContainer = $(".robotContainer")
       log(robotContainer);
-      robotContainer.html('<img src="' + chrome.runtime.getURL("../images/bot.png") + '"/>' ); // this works
+      robotContainer.html('<img src="' + chrome.runtime.getURL("../images/bot.png") + '"/>' );
 
       var progressBar = $(".progressBar");
       log(progressBar);
-      progressBar.html('<img src="' + chrome.runtime.getURL("../images/progress_bar_1_4.png") + '"/>'); // TODO this doesn't work???
+      progressBar.html('<img src="' + chrome.runtime.getURL("../images/progress_bar_1_4.png") + '"/>'); 
 
       var helpButton = $(".helpButton");
       log(helpButton);
