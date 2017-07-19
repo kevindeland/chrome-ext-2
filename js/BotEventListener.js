@@ -234,8 +234,7 @@ function BotEventListener() {
 
 
   function showInterventionLengthBuddy(diff) {
-    var progressBar = $(".progressBar");
-    progressBar.html('<img src="' + chrome.runtime.getURL("../images/progress_bar_2_4.png") + '"/>');
+    updateProgressBar(2);
 
     botBuddy = {
       message: null, // set message below
@@ -301,108 +300,182 @@ function BotEventListener() {
 
   });
 
-  /** Setting the starting test **/
+  //==============================
+  // UI Helpers
+  //==============================
+  function updateBotBuddy(parent, botBuddy) {
+    if(parent == "#jarvis") {
+      showBotBuddy();
+    }
 
+    // TODO make it accept multiple messages instead of just one
+  	$(parent + ' .chatMessageWrapper').html('');
+    if(botBuddy.messages) {
+      botBuddy.messages.forEach(function(m) {
+        $(parent + ' .chatMessageWrapper').append('<div class="chatMessage">' + m + '</div>');
+      });
+    }
+
+  	if(botBuddy.buttonThree) {
+  		$(parent + ' .buttonOne').removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonOne.text);
+  	  $(parent + ' .buttonTwo').removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonTwo.text);
+  	  $(parent + ' .buttonThree').show().prop('value', botBuddy.buttonThree.text);
+      $(parent + ' .buttonOne').prop('onclick',null).off('click');
+  		$(parent + ' .buttonOne').on('click', botBuddy.buttonOne.callback);
+      $(parent + ' .buttonTwo').prop('onclick',null).off('click');
+  		$(parent + ' .buttonTwo').on('click', botBuddy.buttonTwo.callback);
+      $(parent + ' .buttonThree').prop('onclick',null).off('click');
+  	  $(parent + ' .buttonThree').on('click', botBuddy.buttonThree.callback);
+  	}
+  	else if (botBuddy.buttonTwo){
+  	  $(parent + ' .buttonOne').show().removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
+  	  $(parent + ' .buttonTwo').show().removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonTwo.text);
+      $(parent + ' .buttonOne').prop('onclick',null).off('click');
+  	  $(parent + ' .buttonOne').on('click', botBuddy.buttonOne.callback);
+      $(parent + ' .buttonTwo').prop('onclick',null).off('click');
+  		$(parent + ' .buttonTwo').on('click', botBuddy.buttonTwo.callback);
+  		$(parent + ' .buttonThree').hide();
+  	} else {
+      $(parent + ' .buttonOne').show().removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
+      $(parent + ' .buttonOne').prop('onclick',null).off('click');
+     $(parent + ' .buttonOne').on('click', botBuddy.buttonOne.callback);
+    $(parent + ' .buttonTwo').hide();
+     $(parent + ' .buttonThree').hide();
+    }
+  }
+
+  /*** for showing and hiding bot buddy ***/
+  function showBotBuddy() {
+    $("#jarvis").show();
+  }
+
+  function hideBotBuddy(id) {
+    $("#jarvis").hide();
+  }
+
+  function showBigPopup(name, params) {
+
+    switch(name) {
+      case "goalGraph":
+      showGoalGraph(params);
+      break;
+
+      case "help":
+      log("showing help screen");
+      var modal = $("#modal");
+      modal.show();
+      break;
+    }
+
+  }
+
+  function showGoalGraph(params) {
+    var botBuddy = {
+      messages: [
+        MESSAGES.modGoalMessage1.formatUnicorn({
+          name: params.name.first, rate: params.data.moderate.rate, ss: params.data.moderate.ss}),
+        MESSAGES.modGoalMessage2
+      ],
+  		buttonOne: {
+  			text: "Confirm",
+  			callback: function() {
+          log("ayy");
+          hideBigPopup();
+          showConfirmationBuddy();
+        }
+  		},
+  		buttonTwo: {
+  			text: "Learn More",
+  			callback: undefined
+  		},
+      buttonThree: {
+        text: "Exit window",
+        callback: function() {
+          hideBigPopup();
+        }
+      }
+    };
+    updateBotBuddy('#modal', botBuddy);
+    var modal = $("#modal");
+    $(".modalTitle").html(MESSAGES.modalTitle.formatUnicorn({first: params.name.first, last: params.name.last}));
+    modal.show();
+  }
+
+  function hideBigPopup() {
+    var modal = $("#modal");
+    modal.hide();
+  }
+
+  function showConfirmationBuddy() {
+    updateProgressBar(4);
+
+    botBuddy = {
+      messages: [MESSAGES.confirmation.formatUnicorn({name: wizardState.studentName.first})],
+      buttonOne: {
+        text: "Continue",
+        callback: function() {
+          showMotivationBuddy();
+        }
+      }
+    };
+    updateBotBuddy("#jarvis", botBuddy);
+  };
+
+  function showMotivationBuddy() {
+    botBuddy = {
+      messages: [MESSAGES.motivation, MESSAGES.interventionEffectiveness],
+      buttonOne: {
+        text: "Continue",
+        callback: function() {
+          showFinalConfirmationBuddy();
+        }
+      }
+    };
+    updateBotBuddy("#jarvis", botBuddy);
+  };
+
+  function showFinalConfirmationBuddy() {
+    botBuddy = {
+      messages: [MESSAGES.finalConfirmation.formatUnicorn({name: wizardState.studentName.first})],
+      buttonOne: {
+        text: "Yes",
+        callback: function() {
+          readyToSave();
+        }
+      },
+      buttonTwo: {
+        text: "Change Goal",
+        callback: function() {
+          // TODO changeGoal()
+        }
+      }
+    };
+    updateBotBuddy("#jarvis", botBuddy);
+  };
+
+  function readyToSave() {
+    botBuddy = {
+      messages: [MESSAGES.readyToSave],
+      buttonOne: {
+        text: "Save",
+        callback: function() {
+          var saveButton = $("#ctl00_cp_Content_btn_Save");
+          saveButton.trigger("click");
+        }
+      },
+      buttonTwo: {
+        text: "Change Goal",
+        callback: function() {
+          // TODO changeGoal();
+        }
+      }
+    };
+    updateBotBuddy("#jarvis", botBuddy);
+  };
+
+  function updateProgressBar(step) {
+    var progressBar = $(".progressBar");
+    progressBar.html('<img src="' + chrome.runtime.getURL("../images/progress_bar_" + step + "_4.png") + '"/>');
+  }
 
 };
-
-
-//==============================
-// UI Helpers
-//==============================
-function updateBotBuddy(parent, botBuddy) {
-  if(parent == "#jarvis") {
-    showBotBuddy();
-  }
-
-  // TODO make it accept multiple messages instead of just one
-	$(parent + ' .chatMessageWrapper').html('');
-  if(botBuddy.messages) {
-    botBuddy.messages.forEach(function(m) {
-      $(parent + ' .chatMessageWrapper').append('<div class="chatMessage">' + m + '</div>');
-    });
-  }
-
-	if(botBuddy.buttonThree) {
-		$(parent + ' .buttonOne').removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonOne.text);
-	  $(parent + ' .buttonTwo').removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonTwo.text);
-	  $(parent + ' .buttonThree').show().prop('value', botBuddy.buttonThree.text);
-    $(parent + ' .buttonOne').prop('onclick',null).off('click');
-		$(parent + ' .buttonOne').on('click', botBuddy.buttonOne.callback);
-    $(parent + ' .buttonTwo').prop('onclick',null).off('click');
-		$(parent + ' .buttonTwo').on('click', botBuddy.buttonTwo.callback);
-    $(parent + ' .buttonThree').prop('onclick',null).off('click');
-	  $(parent + ' .buttonThree').on('click', botBuddy.buttonThree.callback);
-	}
-	else if (botBuddy.buttonTwo){
-	  $(parent + ' .buttonOne').removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
-	  $(parent + ' .buttonTwo').removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonTwo.text);
-    $(parent + ' .buttonOne').prop('onclick',null).off('click');
-	  $(parent + ' .buttonOne').on('click', botBuddy.buttonOne.callback);
-    $(parent + ' .buttonTwo').prop('onclick',null).off('click');
-		$(parent + ' .buttonTwo').on('click', botBuddy.buttonTwo.callback);
-		$(parent + ' .buttonThree').hide();
-	} else {
-    $(parent + ' .buttonOne').removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
-    $(parent + ' .buttonOne').prop('onclick',null).off('click');
-   $(parent + ' .buttonOne').on('click', botBuddy.buttonOne.callback);
-  $(parent + ' .buttonTwo').hide();
-   $(parent + ' .buttonThree').hide();
-  }
-}
-
-/*** for showing and hiding bot buddy ***/
-function showBotBuddy() {
-  $("#jarvis").show();
-}
-
-function hideBotBuddy(id) {
-  $("#jarvis").hide();
-}
-
-function showBigPopup(name, params) {
-
-  switch(name) {
-    case "goalGraph":
-    showGoalGraph(params);
-    break;
-
-    case "help":
-    log("showing help screen");
-    var modal = $("#modal");
-    modal.show();
-    break;
-  }
-
-}
-
-function showGoalGraph(params) {
-  var botBuddy = {
-    messages: [
-      MESSAGES.modGoalMessage1.formatUnicorn({
-        name: params.name.first, rate: params.data.moderate.rate, ss: params.data.moderate.ss}),
-      MESSAGES.modGoalMessage2
-    ],
-		buttonOne: {
-			text: "Confirm",
-			callback: undefined
-		},
-		buttonTwo: {
-			text: "Learn More",
-			callback: undefined
-		},
-    buttonThree: {
-      text: "Exit window",
-      callback: undefined
-    }
-  };
-  updateBotBuddy('#modal', botBuddy);
-  var modal = $("#modal");
-  $(".modalTitle").html(MESSAGES.modalTitle.formatUnicorn({first: params.name.first, last: params.name.last}));
-  modal.show();
-}
-
-function hideBigPopup() {
-  var modal = $("#modal");
-  modal.hide();
-}

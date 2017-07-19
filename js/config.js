@@ -27,7 +27,14 @@ MESSAGES =  {
 
   modalTitle: "Goal Options for {first} {last}",
   modGoalMessage1: "{name}'s moderate goal is 50 SGP and needs {rate} SS / week growth to reach {ss}",
-  modGoalMessage2: "This student will have to grow faster than 50% of students at the same percentile rank to reach this goal"
+  modGoalMessage2: "This student will have to grow faster than 50% of students at the same percentile rank to reach this goal",
+
+  /*** final confirmation sequence ***/
+  confirmation: "Great job comparing {name}'s goal setting options! There are still a few things to consider while you choose a goal for a student:",
+  motivation: "<strong>Motivation:</strong> motivated students have higher chances to achieve more challenging goals. Have you considered how to motivate Jamie?",
+  interventionEffectiveness: "<strong>Intervention Effectiveness:</strong> you should consider how intense your instruction is regarding intervention content, duration, frequency, class size, and past success.",
+  finalConfirmation: "Do you want to confirm the goal for {name}?",
+  readyToSave: "You're ready to save the goal you have selected by clicking the <strong>Save</strong> button."
 
 }
 
