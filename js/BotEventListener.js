@@ -152,6 +152,10 @@ function BotEventListener() {
   // TODO on click the calendar, check to see if GoalEndDate is valid, and is different
   goalEndDate.on('blur', function() {
     log('blur goalEndDate');
+    var enteredValue = goalEndDate[0].value;
+    var date = Date.parse(enteredValue);
+    log(date);
+    if(isNaN(date)) return;
 
     wizardState.goalEndDate = Date.parse(goalEndDate[0].value)
     var diff = compareTestDates(wizardState.startTest.date, wizardState.goalEndDate);
