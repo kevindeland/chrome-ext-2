@@ -22,7 +22,7 @@ function NewDivInserter (callback) {
 
       var progressBar = $(".progressBar");
       log(progressBar);
-      progressBar.html('<img src="' + chrome.runtime.getURL("../images/progress_bar_1_4.png") + '"/>'); 
+      progressBar.html('<img src="' + chrome.runtime.getURL("../images/progress_bar_1_4.png") + '"/>');
 
       var helpButton = $(".helpButton");
       log(helpButton);
@@ -47,7 +47,7 @@ function NewDivInserter (callback) {
       $modal.load(popupURL, function() {
         log("modal loaded");
 
-
+        $(".modalGraph").html('<img src="' + chrome.runtime.getURL("images/d3_graph.png") + '" width=50%/>');
         callback();
       });
   }

@@ -76,7 +76,7 @@ function BotEventListener() {
     showHelpScreen();
   });
 
-  $(".close").on('click', function() {
+  $("#modal .minimize").on('click', function() {
     hideBigPopup();
   });
 
@@ -98,7 +98,7 @@ function BotEventListener() {
     if(!interactionHistory.hasSeenInterventionName) {
       interactionHistory.hasSeenInterventionName = true;
       botBuddy = {
-        message: "Would you like some tips on how to name your intervention?",
+        messages: ["Would you like some tips on how to name your intervention?"],
         buttonOne: {
           text: "Sure",
           callback: function() {
@@ -110,7 +110,7 @@ function BotEventListener() {
           callback: hideBotBuddy
         }
       };
-      updateBotBuddy(botBuddy);
+      updateBotBuddy('#jarvis', botBuddy);
     } else {
       log("already saw intervention name help");
     }
@@ -120,14 +120,14 @@ function BotEventListener() {
     log("showInterventionNameHelp");
 
     botBuddy = {
-      message: MESSAGES.interventionNameHelp1 + "\n" + MESSAGES.interventionNameHelp2,
+      messages: [MESSAGES.interventionNameHelp1, MESSAGES.interventionNameHelp2],
       buttonOne: {
         text: "Got it",
         callback: hideBotBuddy
       },
       buttonTwo: null
     };
-    updateBotBuddy(botBuddy);
+    updateBotBuddy('#jarvis', botBuddy);
   }
 
   interventionName.on('blur', function() {
@@ -259,11 +259,11 @@ function BotEventListener() {
     };
 
     if(diff.valid) {
-      botBuddy.message = MESSAGES.interventionLengthLong.formatUnicorn({weeks: intToText(diff.weeks)});
+      botBuddy.messages = [MESSAGES.interventionLengthLong.formatUnicorn({weeks: intToText(diff.weeks)})];
     } else {
-      botBuddy.message = MESSAGES.interventionLenghtShort.formatUnicorn({weeks: intToText(diff.weeks), weekPlural: (diff.weeks == 1 ? '': 's')});
+      botBuddy.messages = [MESSAGES.interventionLenghtShort.formatUnicorn({weeks: intToText(diff.weeks), weekPlural: (diff.weeks == 1 ? '': 's')})];
     }
-    updateBotBuddy(botBuddy);
+    updateBotBuddy('#jarvis', botBuddy);
   };
 
 
@@ -274,7 +274,7 @@ function BotEventListener() {
     log('about to click calculateGoal');
     calculateGoalWindow();
   });
-  
+
   /** when the Calculate Goal button is pressed **/
   function calculateGoalWindow() {
     // TODO https://developer.chrome.com/extensions/cookies
@@ -304,37 +304,42 @@ function BotEventListener() {
 //==============================
 // UI Helpers
 //==============================
-function updateBotBuddy(botBuddy) {
+function updateBotBuddy(parent, botBuddy) {
   showBotBuddy();
 
   // TODO make it accept multiple messages instead of just one
-	$('.messageText').html(botBuddy.message);
+	$('.chatMessageWrapper').html('');
+  if(botBuddy.messages) {
+    botBuddy.messages.forEach(function(m) {
+      $('.chatMessageWrapper').append('<div class="chatMessage">' + m + '</div>');
+    });
+  }
 
 	if(botBuddy.buttonThree) {
-		$('.buttonOne').removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonOne.text);
-	  $('.buttonTwo').removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonTwo.text);
-	  $('.buttonThree').show().prop('value', botBuddy.buttonThree.text);
-    $('.buttonOne').prop('onclick',null).off('click');
-		$('.buttonOne').on('click', botBuddy.buttonOne.callback);
-    $('.buttonTwo').prop('onclick',null).off('click');
-		$('.buttonTwo').on('click', botBuddy.buttonTwo.callback);
-    $('.buttonThree').prop('onclick',null).off('click');
-	  $('.buttonThree').on('click', botBuddy.buttonThree.callback);
+		$(parent + ' .buttonOne').removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonOne.text);
+	  $(parent + ' .buttonTwo').removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonTwo.text);
+	  $(parent + ' .buttonThree').show().prop('value', botBuddy.buttonThree.text);
+    $(parent + ' .buttonOne').prop('onclick',null).off('click');
+		$(parent + ' .buttonOne').on('click', botBuddy.buttonOne.callback);
+    $(parent + ' .buttonTwo').prop('onclick',null).off('click');
+		$(parent + ' .buttonTwo').on('click', botBuddy.buttonTwo.callback);
+    $(parent + ' .buttonThree').prop('onclick',null).off('click');
+	  $(parent + ' .buttonThree').on('click', botBuddy.buttonThree.callback);
 	}
 	else if (botBuddy.buttonTwo){
-	  $('.buttonOne').removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
-	  $('.buttonTwo').removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonTwo.text);
-    $('.buttonOne').prop('onclick',null).off('click');
-	  $('.buttonOne').on('click', botBuddy.buttonOne.callback);
-    $('.buttonTwo').prop('onclick',null).off('click');
-		$('.buttonTwo').on('click', botBuddy.buttonTwo.callback);
-		$('.buttonThree').hide();
+	  $(parent + ' .buttonOne').removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
+	  $(parent + ' .buttonTwo').removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonTwo.text);
+    $(parent + ' .buttonOne').prop('onclick',null).off('click');
+	  $(parent + ' .buttonOne').on('click', botBuddy.buttonOne.callback);
+    $(parent + ' .buttonTwo').prop('onclick',null).off('click');
+		$(parent + ' .buttonTwo').on('click', botBuddy.buttonTwo.callback);
+		$(parent + ' .buttonThree').hide();
 	} else {
-    $('.buttonOne').removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
-    $('.buttonOne').prop('onclick',null).off('click');
-   $('.buttonOne').on('click', botBuddy.buttonOne.callback);
-  $('.buttonTwo').hide();
-   $('.buttonThree').hide();
+    $(parent + ' .buttonOne').removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
+    $(parent + ' .buttonOne').prop('onclick',null).off('click');
+   $(parent + ' .buttonOne').on('click', botBuddy.buttonOne.callback);
+  $(parent + ' .buttonTwo').hide();
+   $(parent + ' .buttonThree').hide();
   }
 }
 
@@ -343,7 +348,7 @@ function showBotBuddy() {
   $("#jarvis").show();
 }
 
-function hideBotBuddy() {
+function hideBotBuddy(id) {
   $("#jarvis").hide();
 }
 
@@ -366,7 +371,6 @@ function showBigPopup(name, params) {
 
 function showGoalGraph(params) {
   var botBuddy = {
-    message: "Jamie's moderate goal is 50 SGP and needs x SS / week growth to reach y",
     messages: [
       "Jamie's moderate goal is 50 SGP and needs x SS / week growth to reach y",
       "This student will have to grow faster than 50% of students at the same percentil rank to reach this goal"
@@ -384,7 +388,7 @@ function showGoalGraph(params) {
       callback: undefined
     }
   };
-  updateBotBuddy(botBuddy);
+  updateBotBuddy('#modal', botBuddy);
   var modal = $("#modal");
   modal.show();
 }

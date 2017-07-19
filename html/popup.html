@@ -1,19 +1,48 @@
 <!-- The Modal -->
 
-<div class="modalRobotContainer">
+<!--Progress Bar-->
+<div class="progressBar">
+  <div class="line"><!--Sarah you don't have this defined in CSS yet-->
 </div>
+</div>
+
 <!-- Modal content -->
 <div class="modalContainer">
-  <span class="close">&times;</span>
-  <div class="modalContent">Here is where the content goes..</div>
-
-  <div class="messageWrapper">
-    <div class="messageText"></div>
-    <div class="messageButtons">
-      <input type="button" class="buttonOne buttonWrapper" value="" />
-      <input type="button" class="buttonTwo buttonWrapper" value="" />
-      <input type="button" class="buttonThree buttonWrapper"value="" />
+  <div class="upperButtonPanel">
+    <input type="button" class="minimize" value="-"/>
+    <input type="button" class="maximize" value="+"/>
+  <div class="modalContent">
+    <div class="modalLeftBox">
+      <div class="chatBox">
+        <div class="robotPlaceholder"></div>
+        <div class="rIcon">R</div>
+        <div class="chatMessageWrapper" align=right>
+          <div class="chatMessage">Jamie's Moderate Goal is 50 SGP and needs 3.8 SS / week growth to reach 530 SS.</div>
+          <div class="chatMessage">This student will have to grow faster than 50% of students at the same percentile rank to meet this goal.</div>
+        </div>
+        <div class="buttonPanel">
+          <input type="button" class="buttonWrapper" id="sandwichButton" value="Confirm"/>
+          <input type="button" class="buttonWrapper" value="Learn More"/>
+        </div>
+      </div>
+      <div class="modalTitle">Goal Options for Jamie Rodolfich</div>
+      <div class="modalGraph">
+      </div>
     </div>
+
   </div>
-  
+</div>
+</div>
+
+<div class="bottomButtonPanel">
+  <button class="help">
+    <div class="rIcon">?
+    </div>
+    Help
+    </button>
+   <button class="lastMessage">
+    <div class="arrow-left">
+    </div>
+    Last Message
+    </button>
 </div>
