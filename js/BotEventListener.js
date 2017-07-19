@@ -35,6 +35,10 @@ function BotEventListener() {
 		buttonThree: {}
   };
 
+  var interactionHistory = {
+    hasSeenInterventionName: false
+  };
+
   /*** Check if our load is the result of a "Calculate Goal" click... ***/
   // define data goals
   var moderateData = $("#ctl00_cp_Content_sp_ModerateData");
@@ -91,6 +95,8 @@ function BotEventListener() {
 
   // TODO 7/17 only show intervention popup once
   interventionName.on('focus', function() {
+    if(!interactionHistory.hasSeenInterventionName) {
+      interactionHistory.hasSeenInterventionName = true;
       botBuddy = {
         message: "Would you like some tips on how to name your intervention?",
         buttonOne: {
@@ -105,6 +111,9 @@ function BotEventListener() {
         }
       };
       updateBotBuddy(botBuddy);
+    } else {
+      log("already saw intervention name help");
+    }
   });
 
   function showInterventionNameHelp() {
