@@ -23,7 +23,11 @@ MESSAGES =  {
   helpWithPRButton: 'please help me with PR',
   helpWithSSButton: 'please help me with SS',
 
-  maybeLater: 'maybe later'
+  maybeLater: 'maybe later',
+
+  modalTitle: "Goal Options for {first} {last}",
+  modGoalMessage1: "{name}'s moderate goal is 50 SGP and needs {rate} SS / week growth to reach {ss}",
+  modGoalMessage2: "This student will have to grow faster than 50% of students at the same percentile rank to reach this goal"
 
 }
 

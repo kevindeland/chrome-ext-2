@@ -16,9 +16,6 @@ function NewDivInserter (callback) {
     //log(jarvisURL);
     $jarvis.load(jarvisURL, function() {
       // automagically insert images
-      var robotContainer = $(".robotContainer")
-      log(robotContainer);
-      robotContainer.html('<img src="' + chrome.runtime.getURL("../images/bot.png") + '"/>' );
 
       var progressBar = $(".progressBar");
       log(progressBar);
@@ -26,7 +23,7 @@ function NewDivInserter (callback) {
 
       var helpButton = $(".helpButton");
       log(helpButton);
-      helpButton.html('<input type="image" src="' + chrome.runtime.getURL("../images/help_button_placeholder.png") + '"/>');
+      helpButton.html('<input type="image" src="' + chrome.runtime.getURL("../images/Help_Button_Icon.png") + '"/>');
 
 
       addModal();

@@ -39,6 +39,18 @@ function BotEventListener() {
     hasSeenInterventionName: false
   };
 
+  /*** initialize ***/
+  var studentNameDiv = $("#ctl00_cp_Content_td_Student")[0];
+  var fullName = studentNameDiv.innerHTML;
+  wizardState.studentName = {
+    last: fullName.split(', ')[0],
+    first: fullName.split(', ')[1]
+  };
+  log("Student name: " + wizardState.studentName);
+
+  var startScoreText = $("#ctl00_cp_Content_ddl_AnchorScore " + "option:selected").text();
+  wizardState.startTest = parseDropdownTestScore(startScoreText);
+
   /*** Check if our load is the result of a "Calculate Goal" click... ***/
   // define data goals
   var moderateData = $("#ctl00_cp_Content_sp_ModerateData");
@@ -50,25 +62,16 @@ function BotEventListener() {
     wizardState.hasBeenCalculated = false;
   } else {
     log("Has been calculated");
+    wizardState.hasBeenCalculated = true;
     wizardState.goalData = {
       moderate: parseGoalData(moderateData.html()),
       modAmbitious: parseGoalData(modAmbitiousData.html()),
       catchup: parseGoalData(catchupData.html())
     };
 
-    showBigPopup("goalGraph", {data: wizardState.goalData});
+    showBigPopup("goalGraph", {name: wizardState.studentName, data: wizardState.goalData});
 
   }
-
-  /*** initialize ***/
-  var studentNameDiv = $("#ctl00_cp_Content_td_Student")[0];
-  var fullName = studentNameDiv.innerHTML;
-  wizardState.studentName = fullName.split(', ')[1]; // only first name
-  log("Student name: " + wizardState.studentName);
-
-  var startScoreText = $("#ctl00_cp_Content_ddl_AnchorScore " + "option:selected").text();
-  wizardState.startTest = parseDropdownTestScore(startScoreText);
-
 
   /*** Panel button behavior ***/
   var helpButton = $(".helpButton > input");
@@ -287,15 +290,18 @@ function BotEventListener() {
   log(goalTypeBox);
   goalTypeBox.on('click', function() {
     log("clicked inside the magic box");
-    calculateGoal.trigger("click");
-    calculateGoalWindow();
+
+    if(!wizardState.hasBeenCalculated) {
+      calculateGoal.trigger("click");
+      calculateGoalWindow();
+    } else {
+      showBigPopup("goalGraph", {data: wizardState.goalData, name: wizardState.studentName});
+    }
+
 
   });
 
-
-
   /** Setting the starting test **/
-
 
 
 };
@@ -305,13 +311,15 @@ function BotEventListener() {
 // UI Helpers
 //==============================
 function updateBotBuddy(parent, botBuddy) {
-  showBotBuddy();
+  if(parent == "#jarvis") {
+    showBotBuddy();
+  }
 
   // TODO make it accept multiple messages instead of just one
-	$('.chatMessageWrapper').html('');
+	$(parent + ' .chatMessageWrapper').html('');
   if(botBuddy.messages) {
     botBuddy.messages.forEach(function(m) {
-      $('.chatMessageWrapper').append('<div class="chatMessage">' + m + '</div>');
+      $(parent + ' .chatMessageWrapper').append('<div class="chatMessage">' + m + '</div>');
     });
   }
 
@@ -354,7 +362,6 @@ function hideBotBuddy(id) {
 
 function showBigPopup(name, params) {
 
-
   switch(name) {
     case "goalGraph":
     showGoalGraph(params);
@@ -372,8 +379,9 @@ function showBigPopup(name, params) {
 function showGoalGraph(params) {
   var botBuddy = {
     messages: [
-      "Jamie's moderate goal is 50 SGP and needs x SS / week growth to reach y",
-      "This student will have to grow faster than 50% of students at the same percentil rank to reach this goal"
+      MESSAGES.modGoalMessage1.formatUnicorn({
+        name: params.name.first, rate: params.data.moderate.rate, ss: params.data.moderate.ss}),
+      MESSAGES.modGoalMessage2
     ],
 		buttonOne: {
 			text: "Confirm",
@@ -390,6 +398,7 @@ function showGoalGraph(params) {
   };
   updateBotBuddy('#modal', botBuddy);
   var modal = $("#modal");
+  $(".modalTitle").html(MESSAGES.modalTitle.formatUnicorn({first: params.name.first, last: params.name.last}));
   modal.show();
 }
 
