@@ -268,12 +268,13 @@ function BotEventListener() {
 
 
   /*** Calculate Goal button ***/
-  var calculateGoal = $("input[name='ctl00$cp_Content$btn_CalcGoal']")[0];
+  var calculateGoal = $("#ctl00_cp_Content_btn_CalcGoal");
   log(calculateGoal);
-  calculateGoal.addEventListener('mouseover', function() {
-      log('about to click calculateGoal');
-      calculateGoalWindow();
+  calculateGoal.on('mouseover', function() {
+    log('about to click calculateGoal');
+    calculateGoalWindow();
   });
+  
   /** when the Calculate Goal button is pressed **/
   function calculateGoalWindow() {
     // TODO https://developer.chrome.com/extensions/cookies
@@ -347,20 +348,45 @@ function hideBotBuddy() {
 }
 
 function showBigPopup(name, params) {
-  var modal = $("#modal");
-  modal.show();
+
 
   switch(name) {
     case "goalGraph":
-    log("showing goal graphs");
-    log(params); // TODO do something with goals and scores
+    showGoalGraph(params);
     break;
 
     case "help":
     log("showing help screen");
+    var modal = $("#modal");
+    modal.show();
     break;
   }
 
+}
+
+function showGoalGraph(params) {
+  var botBuddy = {
+    message: "Jamie's moderate goal is 50 SGP and needs x SS / week growth to reach y",
+    messages: [
+      "Jamie's moderate goal is 50 SGP and needs x SS / week growth to reach y",
+      "This student will have to grow faster than 50% of students at the same percentil rank to reach this goal"
+    ],
+		buttonOne: {
+			text: "Confirm",
+			callback: undefined
+		},
+		buttonTwo: {
+			text: "Learn More",
+			callback: undefined
+		},
+    buttonThree: {
+      text: "Exit window",
+      callback: undefined
+    }
+  };
+  updateBotBuddy(botBuddy);
+  var modal = $("#modal");
+  modal.show();
 }
 
 function hideBigPopup() {
