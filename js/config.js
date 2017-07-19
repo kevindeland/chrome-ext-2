@@ -4,12 +4,16 @@ MESSAGES =  {
   introButton1: 'yes please',
   introButton2: 'maybe later',
 
-  interventionNameHelp1: 'Try naming an intervention something that includes meaningfuldetails about what you are doing to help the student',
+  interventionNameHelp1: 'Try naming an intervention something that includes meaningful details about what you are doing to help the student',
   interventionNameHelp2: 'Consider including the instructional resource name, frequency of the intervention, and group side of the intervention.',
 
 
   interventionLengthLong: 'You set a Goal End Date of {weeks} weeks from now. This should be enough time to measure growth',
   interventionLenghtShort: 'You set a Goal End Date {weeks} week{weekPlural} after the benchmark. Experts recommend a minimum of eight weeks for effective interventions. Are you sure that\'s enough time?',
+
+  interventionLength1: 'You set a{n} {weeks}-week intervention. Experts recommend at least eight weeks for a 3rd Grade student.',
+  interventionLength2: 'Would you like to confirm this duration?',
+
 
   greatButton: 'great!',
   learnMoreButton: 'learn more',

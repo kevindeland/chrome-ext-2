@@ -237,7 +237,7 @@ function BotEventListener() {
     updateProgressBar(2);
 
     botBuddy = {
-      message: null, // set message below
+      messages: [MESSAGES.interventionLength1.formatUnicorn({weeks: diff.weeks, n: decideAorAn(diff.weeks) })],
       buttonOne : {
         text: "Yes",
         callback: function() {
@@ -261,9 +261,9 @@ function BotEventListener() {
     };
 
     if(diff.valid) {
-      botBuddy.messages = [MESSAGES.interventionLengthLong.formatUnicorn({weeks: intToText(diff.weeks)})];
+      // do nothing
     } else {
-      botBuddy.messages = [MESSAGES.interventionLenghtShort.formatUnicorn({weeks: intToText(diff.weeks), weekPlural: (diff.weeks == 1 ? '': 's')})];
+      // TODO highlight orange
     }
     updateBotBuddy('#jarvis', botBuddy);
   };
@@ -386,7 +386,9 @@ function BotEventListener() {
   		},
   		buttonTwo: {
   			text: "Learn More",
-  			callback: undefined
+  			callback: function() {
+          window.open("http://doc.renlearn.com/KMNet/R00571375CF86BBF.pdf", "_blank");
+        }
   		},
       buttonThree: {
         text: "Exit window",

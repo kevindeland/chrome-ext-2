@@ -52,3 +52,9 @@ function intToText(int) {
           "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen",
           "nineteen", "twenty", "twenty-one", "twenty-two", "twenty-three", "twenty-four"][int];
 }
+
+function decideAorAn(int) {
+  if(int == 8 || int == 11 || int == 18 || (int < 90 && int >=80)) return "n";
+  else return "";
+
+}
