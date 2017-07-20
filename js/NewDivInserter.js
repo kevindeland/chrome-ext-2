@@ -44,8 +44,16 @@ function NewDivInserter (callback) {
       $modal.load(popupURL, function() {
         log("modal loaded");
 
-        $(".modalGraph").html('<img src="' + chrome.runtime.getURL("images/d3_graph.png") + '" width=50%/>');
-        addHelpModal();
+        if(!USE_D3) {
+          $(".modalGraph").html('<img src="' + chrome.runtime.getURL("images/d3_graph.png") + '" width=50%/>');
+          addHelpModal();
+        } else {
+          $(".modalGraph").html('<div id="graph-body"></div>');
+          executeD3();
+          addHelpModal();
+        }
+
+
       });
   }
 

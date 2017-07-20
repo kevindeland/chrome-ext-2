@@ -1,3 +1,5 @@
+USE_D3 = false;
+
 MESSAGES =  {
 
   intro: 'I see you\'re setting a goal for {name}. Can I explain what the goal setting terms SGP and PR are?',
