@@ -76,18 +76,20 @@ function BotEventListener() {
   /*** Panel button behavior ***/
   var helpButton = $(".helpButton > input");
   helpButton.on('click', function() {
+    log("pressed help button");
     showHelpScreen();
   });
 
-  $("#modal .minimize").on('click', function() {
+  $(".modal .minimize").on('click', function() {
     hideBigPopup();
   });
 
   function showHelpScreen() {
-    showBigPopup("help");
-
+    var helpModal = $("#helpModal");
+    helpModal.show();
+    log("ayy");
     window.onclick = function(event) {
-      if (event.target == modal) {
+      if (event.target == helpModal) {
         hideBigPopup();
       }
     }
@@ -237,7 +239,9 @@ function BotEventListener() {
     updateProgressBar(2);
 
     botBuddy = {
-      messages: [MESSAGES.interventionLength1.formatUnicorn({weeks: diff.weeks, n: decideAorAn(diff.weeks) })],
+      messages: [
+        MESSAGES.interventionLength1.formatUnicorn({weeks: diff.weeks, n: decideAorAn(diff.weeks) }),
+        MESSAGES.interventionLength2],
       buttonOne : {
         text: "Yes",
         callback: function() {
@@ -362,8 +366,8 @@ function BotEventListener() {
 
       case "help":
       log("showing help screen");
-      var modal = $("#modal");
-      modal.show();
+      var help = $("#helpModal");
+      help.show();
       break;
     }
 
@@ -404,8 +408,10 @@ function BotEventListener() {
   }
 
   function hideBigPopup() {
-    var modal = $("#modal");
+    var modal = $(".modal");
     modal.hide();
+
+
   }
 
   function showConfirmationBuddy() {
@@ -448,7 +454,7 @@ function BotEventListener() {
       buttonTwo: {
         text: "Change Goal",
         callback: function() {
-          // TODO changeGoal()
+          showBigPopup("goalGraph", {name: wizardState.studentName, data: wizardState.goalData});
         }
       }
     };
@@ -468,7 +474,7 @@ function BotEventListener() {
       buttonTwo: {
         text: "Change Goal",
         callback: function() {
-          // TODO changeGoal();
+          showBigPopup("goalGraph", {name: wizardState.studentName, data: wizardState.goalData});
         }
       }
     };

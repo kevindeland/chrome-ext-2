@@ -1,4 +1,16 @@
 /*********** Robot Styles **********/
+.inVivoModal {
+    position:absolute; /* Stays in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 50px; /* Location of the box */
+    left: 57.5%;
+    top: 42px;
+    width: 419px; /* Width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: #F2FAFF; /* Fallback color */
+    background-color: #F2FAFF; /* Black w/ opacity */
+}
 
 .jarvis {
 	width: 20%;
@@ -19,22 +31,20 @@
 }
 
 .messageWrapper {
-	border: 3px solid #4e92df;
+	border: 3px solid white;
+  background: white;
   border-radius: 25px;
 	padding: 10%;
-  box-shadow: 5px 5px 5px #888888;
+  box-shadow: 0px 2px 4px rgba(0,0,0,50);
 }
 
-.buttonWrapper {
-  border: 1px solid #4e92df;
-  border-radius: 10px;
-  padding: 5%;
-  background-color: white;
+.buttonPanel{
+  margin-right:10%;
 }
 
 .buttonWrapper {
   float:right;
-  margin-top:5%;
+  margin-top:34px;
   margin-bottom:5%;
   border: 0.5px solid #009A65;
   border-radius: 10px;
@@ -68,14 +78,23 @@
 	margin: 5px;
 	padding: 5px;
   margin-top:5%;
+	width: 30%;
   background-color:#ffffff;
 	border: 5px solid white;
 	border-radius: 30px;
 	box-shadow: 0px 2px 4px 0px #888888;
 }
 
-#modal .chatBox {
-	width: 30%;
+.inVivoModal .chatBox{
+  margin: 5px;
+  padding: 5px;
+  margin-top:5%;
+  margin-right:7%;
+  width: 80%;
+  background-color:#ffffff;
+  border: 5px solid white;
+  border-radius: 30px;
+  box-shadow: 0px 2px 4px 0px #888888;
 }
 
 .chatMessage {
@@ -90,9 +109,20 @@
 .chatMessageWrapper .chatMessage {
 	background-color: #F3F5F7;
   text-align:left;
-	margin: 2px;
+  margin-top:3px;
 	padding: 4%;
   width: 70%;
+}
+
+.chatMessageTop{
+  background-color: #F3F5F7;
+  text-align:left;
+  margin-top:44px;
+  padding: 4%;
+  width: 70%;
+  font-family:"Roboto",Roboto,sans-serif;
+  font-size:13.5px;
+  border-radius:15px;
 }
 
 .rIcon {
@@ -201,6 +231,84 @@
   font-size: 24px;
   width:60%;
   font-family: "Roboto Slab",Roboto,serif;
+  color:#ffffff;
+  background-color:#009A65;
+  border-radius: 10px;
+}
+
+
+.lastMessage,
+.help {
+  float:right;
+  border: 0.5px solid #009A65;
+  border-radius: 28px;
+  box-shadow:0px 2px 4px 0px rgba(0,0,0,50);
+  padding: 1%;
+  margin-left:0%;
+  margin-right:12%;
+  background-color: white;
+  font-family:"Roboto Slab",Roboto,serif;
+  font-weight:bold;
+  font-size:14.7px;
+  color: #009A65;
+  text-align:left;
+}
+
+.lastMessageInVivo,
+.helpInVivo, .viewBotMessage,
+.viewGraphs {
+  float:right;
+  border: 0.5px solid #009A65;
+  border-radius: 28px;
+  box-shadow:0px 2px 4px 0px rgba(0,0,0,50);
+  padding: 1%;
+  margin-left:0%;
+  margin-right:10%;
+  margin-top:30px;
+  background-color: white;
+  font-family:"Roboto Slab",Roboto,serif;
+  font-weight:bold;
+  font-size:14.7px;
+  color: #009A65;
+  text-align:left;
+}
+
+
+.modalContainerHelp {
+    background-color: white;
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+    height: 50%;
+    border: 3px solid white;
+    border-radius: 25px;
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,50);}
+}
+
+.lastMessage:hover,
+.help:hover {
+  float:right;
+  border: 0.5px solid #009A65;
+  border-radius: 28px;
+  box-shadow:0px 2px 4px 0px rgba(0,0,0,50);
+  padding: 1%;
+  margin-left:0%;
+  margin-right:12%;
+  background-color: #009A65;
+  font-family:"Roboto Slab",Roboto,serif;
+  font-weight:bold;
+  font-size:14.7px;
+  color: white;
+  text-align:left;
+}
+
+
+.modalTitleHelp{
+  font-size: 34px;
+  width:100%;
+  padding:5px;
+  font-family: "Roboto Slab",Roboto,serif;
+  text-align:center; /*why is it aligning wierdly? what is this class nested in?*/
   color:#ffffff;
   background-color:#009A65;
   border-radius: 10px;

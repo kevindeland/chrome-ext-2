@@ -45,8 +45,24 @@ function NewDivInserter (callback) {
         log("modal loaded");
 
         $(".modalGraph").html('<img src="' + chrome.runtime.getURL("images/d3_graph.png") + '" width=50%/>');
-        callback();
+        addHelpModal();
       });
+  }
+
+  function addHelpModal() {
+    log("adding help modal");
+    var $help = $("<div>", {id: "helpModal", "class": "modal"});
+    $("body").append($help);
+
+    $help.hide();
+
+    var helpURL = chrome.runtime.getURL("../html/help_popup_box.html");
+
+    $help.load(helpURL, function() {
+      log("help loaded");
+
+      callback();
+    });
   }
 
 
