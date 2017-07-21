@@ -2,6 +2,9 @@ USE_D3 = false;
 
 MESSAGES =  {
 
+  welcome1: 'Welcome to the Goal Setting Wizard!',
+  welcome2: "Would you like me to show you an example of how to best use this tool to set personalized goals for students?",
+
   intro: 'I see you\'re setting a goal for {name}. Can I explain what the goal setting terms SGP and PR are?',
   introButton1: 'yes please',
   introButton2: 'maybe later',

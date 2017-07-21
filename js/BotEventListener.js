@@ -60,6 +60,9 @@ function BotEventListener() {
   if(moderateData.html().indexOf("Calculate") >= 0) {
     log("Not yet calculated");
     wizardState.hasBeenCalculated = false;
+
+    showWorkedExampleOption();
+
   } else {
     log("Has been calculated");
     wizardState.hasBeenCalculated = true;
@@ -71,6 +74,27 @@ function BotEventListener() {
 
     showBigPopup("goalGraph", {name: wizardState.studentName, data: wizardState.goalData});
 
+  }
+
+  function showWorkedExampleOption() {
+    botBuddy = {
+      messages: [MESSAGES.welcome1, MESSAGES.welcome2],
+      buttonOne: {
+        text: "Yes",
+        callback: function() {
+          window.open("https://projects.invisionapp.com/share/MRCOJJ62U#/screens", "_blank");
+        }
+      },
+      buttonTwo: {
+        text: "No",
+        callback: hideBotBuddy
+      },
+      buttonThree: {
+        text: "Never",
+        callback: hideBotBuddy
+      }
+    };
+    updateBotBuddy("#jarvis", botBuddy);
   }
 
   /*** Panel button behavior ***/
