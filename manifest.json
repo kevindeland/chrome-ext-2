@@ -31,7 +31,8 @@
         "js/NewDivInserter.js",
         "js/BotEventListener.js",
         "js/Main.js",
-        "js/d3/bars.js"
+        "js/d3/graph.js"
+
       ],
       "run_at": "document_end"
     }

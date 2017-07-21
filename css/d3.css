@@ -1,7 +1,3 @@
-svg {
-  background: #000000;
-}
-
 /*** bars ***/
 #cukuBar {
     fill: #4E92DF;
@@ -13,4 +9,13 @@ svg {
 
 #modAmbBar {
     fill: #F8E749;
+}
+
+
+/*** axis ***/
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
 }

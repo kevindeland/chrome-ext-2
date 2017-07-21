@@ -3,9 +3,27 @@ myApp = {};
 myApp.data = {};
 
 /**
- * TODO gets end and start dates from the interface
+ *  gets start test from the interface
  */
-myApp.data.getStartAndEndTests = function() {
+myApp.data.getStartTest = function() {
+
+  var startScoreText = $("#ctl00_cp_Content_ddl_AnchorScore " + "option:selected").text();
+  return parseDropdownTestScore(startScoreText);
+}
+
+// TODO bring in parseDropdownTestScore helper
+
+
+myApp.data.getEndDate = function() {
+
+  var goalEndDate = $("#ctl00_cp_Content_tb_Target");
+
+  var enteredValue = goalEndDate[0].value;
+  var date = Date.parse(enteredValue);
+  log(date);
+  if(isNaN(date)) return date;
+
+  return Date.parse(enteredValue);
 
 }
 
@@ -36,5 +54,12 @@ myApp.data.getCalculatedGoals = function() {
  * TODO implement this function
  */
 myApp.data.getBenchmarkData = function() {
+
+}
+
+/**
+ * TODO use mock data
+ */
+myApp.data.getStudentHistoricalData = function() {
 
 }

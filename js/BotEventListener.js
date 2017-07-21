@@ -48,8 +48,8 @@ function BotEventListener() {
   };
   log("Student name: " + wizardState.studentName);
 
-  var startScoreText = $("#ctl00_cp_Content_ddl_AnchorScore " + "option:selected").text();
-  wizardState.startTest = parseDropdownTestScore(startScoreText);
+  //var startScoreText = $("#ctl00_cp_Content_ddl_AnchorScore " + "option:selected").text();
+  wizardState.startTest = myApp.data.getStartTest();
 
   /*** Check if our load is the result of a "Calculate Goal" click... ***/
   // define data goals
@@ -182,13 +182,11 @@ function BotEventListener() {
   // DOES NOT WORK!
   // TODO on click the calendar, check to see if GoalEndDate is valid, and is different
   goalEndDate.on('blur', function() {
-    log('blur goalEndDate');
-    var enteredValue = goalEndDate[0].value;
-    var date = Date.parse(enteredValue);
-    log(date);
-    if(isNaN(date)) return;
 
-    wizardState.goalEndDate = Date.parse(goalEndDate[0].value)
+    var endDate = myApp.data.getEndDate();
+    if(isNaN(endDate)) return;
+
+    wizardState.goalEndDate = endDate;
     var diff = compareTestDates(wizardState.startTest.date, wizardState.goalEndDate);
 
     showInterventionLengthBuddy(diff);
@@ -433,7 +431,8 @@ function BotEventListener() {
     modal.show();
 
     initializeD3();
-    redrawBars();
+    //redrawBars();
+    redrawAxes();
   }
 
   function hideBigPopup() {
