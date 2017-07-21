@@ -1,3 +1,5 @@
+// TODO improved namespacing
+
 USE_D3 = true;
 
 MESSAGES =  {

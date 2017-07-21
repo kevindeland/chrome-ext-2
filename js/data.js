@@ -2,6 +2,16 @@ myApp = {};
 
 myApp.data = {};
 
+/**
+ * TODO gets end and start dates from the interface
+ */
+myApp.data.getStartAndEndTests = function() {
+
+}
+
+/**
+ * gets calculated goals from the interface
+ */
 myApp.data.getCalculatedGoals = function() {
 
   var moderateData = $("#ctl00_cp_Content_sp_ModerateData");
