@@ -429,6 +429,8 @@ function BotEventListener() {
     var modal = $("#modal");
     $(".modalTitle").html(MESSAGES.modalTitle.formatUnicorn({first: params.name.first, last: params.name.last}));
     modal.show();
+
+    drawBars(params.data);
   }
 
   function hideBigPopup() {

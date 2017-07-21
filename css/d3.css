@@ -1,21 +1,13 @@
-svg {
-  background: #000;
+
+/*** bars ***/
+#cukuBar {
+    fill: #4E92DF;
 }
 
-ellipse {
-  fill: #fff;
+#modBar {
+    fill: #EE6F30;
 }
 
-path {
-  fill: none;
-  stroke: #fff;
-  stroke-linecap: round;
-}
-
-.mid {
-  stroke-width: 4px;
-}
-
-.tail {
-  stroke-width: 2px;
+#modAmbBar {
+    fill: #F8E749;
 }

@@ -1,4 +1,4 @@
-USE_D3 = false;
+USE_D3 = true;
 
 MESSAGES =  {
 

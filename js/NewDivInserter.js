@@ -49,7 +49,7 @@ function NewDivInserter (callback) {
           addHelpModal();
         } else {
           $(".modalGraph").html('<div id="graph-body"></div>');
-          executeD3();
+          //executeD3();
           addHelpModal();
         }
 
