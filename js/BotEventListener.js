@@ -39,13 +39,7 @@ function BotEventListener() {
     hasSeenInterventionName: false
   };
 
-  /*** initialize ***/
-  var studentNameDiv = $("#ctl00_cp_Content_td_Student")[0];
-  var fullName = studentNameDiv.innerHTML;
-  wizardState.studentName = {
-    last: fullName.split(', ')[0],
-    first: fullName.split(', ')[1]
-  };
+  wizardState.studentName = myApp.data.getStudentName();
   log("Student name: " + wizardState.studentName);
 
   //var startScoreText = $("#ctl00_cp_Content_ddl_AnchorScore " + "option:selected").text();

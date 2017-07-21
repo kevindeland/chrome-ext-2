@@ -64,8 +64,19 @@ function redrawAxes() {
         .ticks(10);
 
     // TODO make start date come from past historical data
-    var startDate = myApp.data.getStartTest().date;
-    log(startDate);
+
+    var history = myApp.data.getStudentHistoricalData();
+    history.forEach(function(d) {
+      d.date = parseDate(d.date);
+    });
+    history.push(myApp.data.getStartTest());
+
+    var earliestTest = history.reduce(function(prev, current) {
+      return (prev.date < current.date) ? prev : current;
+    });
+    var startDate = earliestTest.date;
+
+
 
     var endDate = myApp.data.getEndDate();
 
@@ -102,5 +113,36 @@ function redrawAxes() {
     //     .call(yAxis)
     //
 
+    /************************************************/
+    /*** here is where we start with student data ***/
+    /************************************************/
+
+    drawStartingTest(svg, x, y);
+
 
 }
+
+function drawStartingTest(svg, x, y) {
+    var data = myApp.data.getStudentHistoricalData();
+
+    data.forEach(function(d) {
+      d.date = parseDate(d.date);
+    });
+
+    data.push(myApp.data.getStartTest());
+
+    svg.selectAll(".dot")
+        .data(data)
+        .enter().append("circle")
+        .attr("class", "dot")
+        .attr("r", 3.5)
+        .attr("cx", function(d) {
+          return x(d.date);
+        })
+        .attr("cy", function(d) {
+          return y(d.score);
+        });
+
+};
+
+var parseDate = d3.time.format("%d-%b-%y").parse;

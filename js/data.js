@@ -3,15 +3,40 @@ myApp = {};
 myApp.data = {};
 
 /**
+ * gets student name from the interface
+ */
+myApp.data.getStudentName = function() {
+  var studentNameDiv = $("#ctl00_cp_Content_td_Student")[0];
+  var fullName = studentNameDiv.innerHTML;
+
+  return {
+    last: fullName.split(', ')[0],
+    first: fullName.split(', ')[1]
+  };
+}
+
+/**
  *  gets start test from the interface
  */
 myApp.data.getStartTest = function() {
 
   var startScoreText = $("#ctl00_cp_Content_ddl_AnchorScore " + "option:selected").text();
-  return parseDropdownTestScore(startScoreText);
+
+  regex = /^(\d{1,2}\/\d{1,2}\/\d{4}) \- (\d{1,3}) SS \/ (\d{1,3}) PR/
+  parsedScoreText = startScoreText.match(regex);
+
+  return {
+    date: Date.parse(parsedScoreText[1]),
+    ss: parsedScoreText[2],
+    pr: parsedScoreText[3],
+    score: parsedScoreText[2]
+  };
 }
 
-// TODO bring in parseDropdownTestScore helper
+// for parsing the score date
+function parseDropdownTestScore(text) {
+
+}
 
 
 myApp.data.getEndDate = function() {
@@ -62,4 +87,18 @@ myApp.data.getBenchmarkData = function() {
  */
 myApp.data.getStudentHistoricalData = function() {
 
+  var firstName = myApp.data.getStudentName().first;
+
+  switch(firstName) {
+
+    case "Amber":
+    default:
+    return [
+      {date: "30-Aug-16", score: 395},
+      {date: "14-Oct-16", score: 415},
+      {date: "16-Nov-16", score: 400},
+      {date: "26-Dec-16", score: 440}
+    ];
+
+  }
 }
