@@ -66,6 +66,8 @@ function BotEventListener() {
   } else {
     log("Has been calculated");
     wizardState.hasBeenCalculated = true;
+
+    // TODO do I need to do this???
     wizardState.goalData = {
       moderate: parseGoalData(moderateData.html()),
       modAmbitious: parseGoalData(modAmbitiousData.html()),
@@ -430,7 +432,8 @@ function BotEventListener() {
     $(".modalTitle").html(MESSAGES.modalTitle.formatUnicorn({first: params.name.first, last: params.name.last}));
     modal.show();
 
-    drawBars(params.data);
+    initializeD3();
+    redrawBars();
   }
 
   function hideBigPopup() {

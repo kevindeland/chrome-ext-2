@@ -7,3 +7,9 @@ window.onload = function () {
   });
 
 };
+
+window.onresize = function() {
+  log("resizing window!!!");
+
+  redrawBars();
+};
