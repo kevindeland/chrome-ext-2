@@ -117,16 +117,15 @@ function redrawAxes() {
     /*** here is where we start with student data ***/
     /************************************************/
 
-    drawStartingTest(svg, x, y);
-
-    drawModerateLine(svg, x, y);
+    drawHistoricalTests(svg, x, y);
+    drawGoalLines(svg, x, y);
 
 }
 
 /**
  * draws the starting test and the historical data
  */
-function drawStartingTest(svg, x, y) {
+function drawHistoricalTests(svg, x, y) {
     var data = myApp.data.getStudentHistoricalData();
 
     data.forEach(function(d) {
@@ -154,7 +153,7 @@ function drawStartingTest(svg, x, y) {
 /**
  * TODO draw moderate
  */
- function drawModerateLine(svg, x, y) {
+ function drawGoalLines(svg, x, y) {
 
    var calculatedGoals = myApp.data.getCalculatedGoals();
 
@@ -174,24 +173,102 @@ function drawStartingTest(svg, x, y) {
       .datum(mod)
       .attr("id", "lineMod")
       .attr("class", "line moderate")
-      .attr("d", xyLine);
+      .attr("d", xyLine)
+      .on("click", function(){
+          d3.select("#lineCuku").attr("class", "line cuku");
+          d3.select("#lineMod").attr("class", "line moderate selected");
+          d3.select("#lineAmb").attr("class", "line ambitious");
+
+          updateBuddyScores({
+            name: "Moderate",
+            rate: calculatedGoals.moderate.rate,
+            ss: calculatedGoals.moderate.ss,
+            pct: 50
+          });
+
+          $("#ctl00_cp_Content_rb_Moderate").trigger("click");
+      });
 
    var cuku = [startingPoint, {date: endDate, score: calculatedGoals.catchup.ss}];
    svg.append("path")
       .datum(cuku)
       .attr("id", "lineCuku")
       .attr("class", "line cuku")
-      .attr("d", xyLine);
+      .attr("d", xyLine)
+      .on("click", function(){
+          d3.select("#lineCuku").attr("class", "line cuku selected");
+          d3.select("#lineMod").attr("class", "line moderate");
+          d3.select("#lineAmb").attr("class", "line ambitious");
+
+          updateBuddyScores({
+            name: "Catch Up",
+            rate: calculatedGoals.catchup.rate,
+            ss: calculatedGoals.catchup.ss,
+            pct: undefined // TODO how to calculate this???
+          });
+
+          $("#ctl00_cp_Content_rb_CatchUp").trigger("click");
+      });
 
     var amb = [startingPoint, {date: endDate, score: calculatedGoals.modAmbitious.ss}];
     svg.append("path")
        .datum(amb)
        .attr("id", "lineAmb")
        .attr("class", "line ambitious")
-       .style("stroke-dasharray", ("3, 3"))
-       .attr("d", xyLine);
+       .style("stroke-dasharray", ("7, 3")) // NOTE how to do in CSS? http://www.d3noob.org/2013/01/making-dashed-line-in-d3js.html
+       .attr("d", xyLine)
+       .on("click", function(){
+           d3.select("#lineCuku").attr("class", "line cuku");
+           d3.select("#lineMod").attr("class", "line moderate");
+           d3.select("#lineAmb").attr("class", "line ambitious selected");
+
+           updateBuddyScores({
+             name: "Ambitious",
+             rate: calculatedGoals.modAmbitious.rate,
+             ss: calculatedGoals.modAmbitious.ss,
+             pct: 66
+           });
+
+           // TODO fuck! it triggers
+           $("#ctl00_cp_Content_rb_ModAmbitious").trigger("click");
+       });
 
 
+ }
+
+ function updateBuddyScores(goal) {
+   // TODO take out all the extra garbage?
+
+   var name = myApp.data.getStudentName().first;
+
+   var botBuddy = {
+     messages: [
+       MESSAGES.goalMessage1.formatUnicorn({
+         name: name, goalName: goal.name, rate: goal.rate, ss: goal.ss}),
+       MESSAGES.goalMessage2.formatUnicorn({pct: goal.pct})
+     ],
+     buttonOne: {
+       text: "Confirm",
+       callback: function() {
+         log("ayy");
+         hideBigPopup();
+         showConfirmationBuddy();
+       }
+     },
+     buttonTwo: {
+       text: "Learn More",
+       callback: function() {
+         window.open("http://doc.renlearn.com/KMNet/R00571375CF86BBF.pdf", "_blank");
+       }
+     },
+     buttonThree: {
+       text: "Exit window",
+       callback: function() {
+         hideBigPopup();
+       }
+     }
+   };
+   updateBotBuddy('#modal', botBuddy);
  }
 
 /**
