@@ -33,12 +33,6 @@ myApp.data.getStartTest = function() {
   };
 }
 
-// for parsing the score date
-function parseDropdownTestScore(text) {
-
-}
-
-
 myApp.data.getEndDate = function() {
 
   var goalEndDate = $("#ctl00_cp_Content_tb_Target");
@@ -61,6 +55,16 @@ myApp.data.getCalculatedGoals = function() {
   var modAmbitiousData = $("#ctl00_cp_Content_sp_ModAmbitiousData");
   var catchupData = $("#ctl00_cp_Content_sp_CatchUpData");
 
+  function parseGoalData(text) {
+    regex = /^(\d{1,3}\.\d{1}) SS\/week = (\d{1,4}) SS/
+    parsedText = text.match(regex);
+
+    return {
+      rate: parsedText[1],
+      ss: parsedText[2]
+    };
+  }
+
   // check if goals have been calculated
   if(moderateData.html().indexOf("Calculate") >= 0) {
     return null;
@@ -73,13 +77,26 @@ myApp.data.getCalculatedGoals = function() {
   }
 }
 
-// TODO bring in my parseGoalData helper
-
 /**
  * TODO implement this function
  */
 myApp.data.getBenchmarkData = function() {
 
+  return {
+    urgent: [
+      {date: "1-Aug-16", score: 310},
+      {date: "1-May-17", score: 400}
+    ],
+    onWatch: [
+      {date: "1-Aug-16", score: 370},
+      {date: "1-May-17", score: 460}
+    ],
+    benchmark: [
+      {date: "1-Aug-16", score: 430},
+      {date: "1-May-17", score: 520}
+    ]
+
+  };
 }
 
 /**

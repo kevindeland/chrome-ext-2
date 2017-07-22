@@ -119,9 +119,13 @@ function redrawAxes() {
 
     drawStartingTest(svg, x, y);
 
+    drawModerateLine(svg, x, y);
 
 }
 
+/**
+ * draws the starting test and the historical data
+ */
 function drawStartingTest(svg, x, y) {
     var data = myApp.data.getStudentHistoricalData();
 
@@ -133,15 +137,67 @@ function drawStartingTest(svg, x, y) {
 
     svg.selectAll(".dot")
         .data(data)
-        .enter().append("circle")
+        .enter().append("circle") // FIXME make them diamonds
         .attr("class", "dot")
-        .attr("r", 3.5)
+        .attr("r", function(d) {
+          return d.ss ? 5 : 3;
+        })
         .attr("cx", function(d) {
           return x(d.date);
         })
         .attr("cy", function(d) {
           return y(d.score);
         });
+
+};
+
+/**
+ * TODO draw moderate
+ */
+ function drawModerateLine(svg, x, y) {
+
+   var calculatedGoals = myApp.data.getCalculatedGoals();
+
+   var startingPoint = myApp.data.getStartTest();
+   var endDate = myApp.data.getEndDate();
+
+   var xyLine = d3.svg.line()
+      .x(function(d) {
+        return x(d.date);
+      })
+      .y(function(d) {
+        return y(d.score);
+      });
+
+  var mod = [startingPoint, {date: endDate, score: calculatedGoals.moderate.ss}];
+   svg.append("path")
+      .datum(mod)
+      .attr("id", "lineMod")
+      .attr("class", "line moderate")
+      .attr("d", xyLine);
+
+   var cuku = [startingPoint, {date: endDate, score: calculatedGoals.catchup.ss}];
+   svg.append("path")
+      .datum(cuku)
+      .attr("id", "lineCuku")
+      .attr("class", "line cuku")
+      .attr("d", xyLine);
+
+    var amb = [startingPoint, {date: endDate, score: calculatedGoals.modAmbitious.ss}];
+    svg.append("path")
+       .datum(amb)
+       .attr("id", "lineAmb")
+       .attr("class", "line ambitious")
+       .style("stroke-dasharray", ("3, 3"))
+       .attr("d", xyLine);
+
+
+ }
+
+/**
+ * TODO draw gray benchmark backgrounds
+ */
+function drawBenchmarks(svg, x, y) {
 
 };
 

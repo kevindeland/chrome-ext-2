@@ -1,3 +1,26 @@
+/*** background ***/
+svg {
+  background: #f2f2f2;
+}
+
+/** lines **/
+.line {
+   stroke-width: 3;
+    fill: none;
+}
+
+.cuku {
+    stroke: #4E92DF;
+}
+
+.moderate {
+    stroke: #EE6F30;
+}
+
+.ambitious {
+    stroke: #FEBF2D;
+}
+
 /*** bars ***/
 #cukuBar {
     fill: #4E92DF;

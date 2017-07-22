@@ -6,18 +6,6 @@ function log(string) {
   if(LOG_LEVEL == 'debug') {console.log(string)}
 }
 
-// for parsing the score date
-function parseDropdownTestScore(text) {
-  regex = /^(\d{1,2}\/\d{1,2}\/\d{4}) \- (\d{1,3}) SS \/ (\d{1,3}) PR/
-  parsedScoreText = text.match(regex);
-
-  return {
-    date: Date.parse(parsedScoreText[1]),
-    ss: parsedScoreText[2],
-    pr: parsedScoreText[3]
-  };
-}
-
 function parseGoalData(text) {
   regex = /^(\d{1,3}\.\d{1}) SS\/week = (\d{1,4}) SS/
   parsedText = text.match(regex);
