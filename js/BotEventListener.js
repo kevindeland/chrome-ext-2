@@ -4,47 +4,10 @@ function BotEventListener() {
 
   // holds the state of the GSW
   var wizardState = {
-    studentName: undefined,
-    interventionName: undefined,
-    goalEndDate: undefined,
-    startTest: {
-      date: undefined,
-      ss: undefined,
-      pr: undefined
-    },
-    endGoal: {
-      goalType: undefined,
-      prOrSs: undefined,
-      value: undefined
-    },
     hasBeenCalculated: false,
-    goalData: undefined,
+    hasSeenInterventionName: false,
     goalGraphOpen: false
   };
-
-  // holds the state of the bot buddy
-  var botBuddy = {
-    message: undefined,
-		buttonOne: {
-			text: undefined,
-			callback: undefined
-		},
-		buttonTwo: {
-			text: undefined,
-			callback: undefined
-		},
-		buttonThree: {}
-  };
-
-  var interactionHistory = {
-    hasSeenInterventionName: false
-  };
-
-  wizardState.studentName = myApp.data.getStudentName();
-  log("Student name: " + wizardState.studentName);
-
-  //var startScoreText = $("#ctl00_cp_Content_ddl_AnchorScore " + "option:selected").text();
-  wizardState.startTest = myApp.data.getStartTest();
 
   /*** Check if our load is the result of a "Calculate Goal" click... ***/
   // define data goals
@@ -62,14 +25,7 @@ function BotEventListener() {
     log("Has been calculated");
     wizardState.hasBeenCalculated = true;
 
-    // TODO do I need to do this???
-    wizardState.goalData = {
-      moderate: parseGoalData(moderateData.html()),
-      modAmbitious: parseGoalData(modAmbitiousData.html()),
-      catchup: parseGoalData(catchupData.html())
-    };
-
-    showBigPopup("goalGraph", {name: wizardState.studentName, data: wizardState.goalData});
+    showBigPopup("goalGraph");
 
   }
 
@@ -119,10 +75,9 @@ function BotEventListener() {
   /*** Intervention name text input ***/
   var interventionName = $("#ctl00_cp_Content_tb_Title");
 
-  // TODO 7/17 only show intervention popup once
   interventionName.on('focus', function() {
-    if(!interactionHistory.hasSeenInterventionName) {
-      interactionHistory.hasSeenInterventionName = true;
+    if(!wizardState.hasSeenInterventionName) {
+      wizardState.hasSeenInterventionName = true;
       botBuddy = {
         messages: ["Would you like some tips on how to name your intervention?"],
         buttonOne: {
@@ -158,8 +113,6 @@ function BotEventListener() {
 
   interventionName.on('blur', function() {
     if(isValidName(interventionName.val())) {
-      wizardState.interventionName = interventionName.val();
-      log('done editing intervention name to ' + wizardState.interventionName);
       hideBotBuddy();
     }
 
@@ -181,8 +134,8 @@ function BotEventListener() {
     var endDate = myApp.data.getEndDate();
     if(isNaN(endDate)) return;
 
-    wizardState.goalEndDate = endDate;
-    var diff = compareTestDates(wizardState.startTest.date, wizardState.goalEndDate);
+    var startTest = myApp.data.getStartTest();
+    var diff = compareTestDates(startTest.date, endDate);
 
     showInterventionLengthBuddy(diff);
   });
@@ -224,15 +177,6 @@ function BotEventListener() {
       });
       dateClickables.on('click', function(d) {
           log('clicked date');
-          // log(d.currentTarget.outerText);
-          // log(d.currentTarget.textContent);
-          // log(d.currentTarget.outerHTML);
-          //log(goalEndDate[0]);
-          //log(goalEndDate[0].value);
-          // wizardState.goalEndDate = Date.parse(goalEndDate[0].value)
-          // var diff = compareTestDates(wizardState.startTest.date, wizardState.goalEndDate);
-          //
-          // showInterventionLengthBuddy(diff);
 
       });
     }
@@ -304,7 +248,8 @@ function BotEventListener() {
     if(!wizardState.hasBeenCalculated) {
       calculateGoal.trigger("click");
     } else if (!wizardState.goalGraphOpen){ // if goal graph is open, we want to click radio buttons without response
-      showBigPopup("goalGraph", {data: wizardState.goalData, name: wizardState.studentName});
+      // XXX 2
+      showBigPopup("goalGraph",);
     }
 
 
@@ -314,11 +259,11 @@ function BotEventListener() {
   // UI Helpers
   //==============================
 
-  function showBigPopup(name, params) {
+  function showBigPopup(name) {
 
     switch(name) {
       case "goalGraph":
-      showGoalGraph(params);
+      showGoalGraph();
       break;
 
       case "help":
@@ -330,14 +275,18 @@ function BotEventListener() {
 
   }
 
-  function showGoalGraph(params) {
-    var botBuddy = {
+  function showGoalGraph() {
+    var studentName = myApp.data.getStudentName();
+
+    var goalData = myApp.data.getCalculatedGoals();
+
+    botBuddy = {
       messages: [
         MESSAGES.goalMessage1.formatUnicorn({
-          name: params.name.first,
+          name: studentName.first,
           goalName: "Moderate",
-          rate: params.data.moderate.rate,
-          ss: params.data.moderate.ss}),
+          rate: goalData.moderate.rate,
+          ss: goalData.moderate.ss}),
         MESSAGES.goalMessage2.formatUnicorn({
           pct: 50
         })
@@ -365,7 +314,7 @@ function BotEventListener() {
     };
     updateBotBuddy('#modal', botBuddy);
     var modal = $("#modal");
-    $(".modalTitle").html(MESSAGES.modalTitle.formatUnicorn({first: params.name.first, last: params.name.last}));
+    $(".modalTitle").html(MESSAGES.modalTitle.formatUnicorn({first: studentName.first, last: studentName.last}));
     modal.show();
     wizardState.goalGraphOpen = true;
     initializeD3();
@@ -383,7 +332,7 @@ function BotEventListener() {
     updateProgressBar(4);
 
     botBuddy = {
-      messages: [MESSAGES.confirmation.formatUnicorn({name: wizardState.studentName.first})],
+      messages: [MESSAGES.confirmation.formatUnicorn({name: myApp.data.getStudentName().first})],
       buttonOne: {
         text: "Continue",
         callback: function() {
@@ -396,7 +345,9 @@ function BotEventListener() {
 
   function showMotivationBuddy() {
     botBuddy = {
-      messages: [MESSAGES.motivation, MESSAGES.interventionEffectiveness],
+      messages: [
+        MESSAGES.motivation.formatUnicorn({name: myApp.data.getStudentName().first}),
+        MESSAGES.interventionEffectiveness],
       buttonOne: {
         text: "Continue",
         callback: function() {
@@ -409,7 +360,7 @@ function BotEventListener() {
 
   function showFinalConfirmationBuddy() {
     botBuddy = {
-      messages: [MESSAGES.finalConfirmation.formatUnicorn({name: wizardState.studentName.first})],
+      messages: [MESSAGES.finalConfirmation.formatUnicorn({name: myApp.data.getStudentName().first})],
       buttonOne: {
         text: "Yes",
         callback: function() {
@@ -419,7 +370,7 @@ function BotEventListener() {
       buttonTwo: {
         text: "Change Goal",
         callback: function() {
-          showBigPopup("goalGraph", {name: wizardState.studentName, data: wizardState.goalData});
+          showBigPopup("goalGraph");
         }
       }
     };
@@ -439,7 +390,7 @@ function BotEventListener() {
       buttonTwo: {
         text: "Change Goal",
         callback: function() {
-          showBigPopup("goalGraph", {name: wizardState.studentName, data: wizardState.goalData});
+          showBigPopup("goalGraph");
         }
       }
     };
@@ -458,7 +409,6 @@ function updateBotBuddy(parent, botBuddy) {
     showBotBuddy();
   }
 
-  // TODO make it accept multiple messages instead of just one
   $(parent + ' .chatMessageWrapper').html('');
   if(botBuddy.messages) {
     botBuddy.messages.forEach(function(m) {
@@ -492,6 +442,15 @@ function updateBotBuddy(parent, botBuddy) {
   $(parent + ' .buttonTwo').hide();
    $(parent + ' .buttonThree').hide();
   }
+}
+
+/** like updateBotBuddy, but only updates messages) **/
+function updateBuddyMessages(parent, messages) {
+  $(parent + ' .chatMessageWrapper').html('');
+  messages.forEach(function(m) {
+    $(parent + ' .chatMessageWrapper').append('<div class="chatMessage">' + m + '</div>');
+  });
+
 }
 
 /*** for showing and hiding bot buddy ***/

@@ -63,8 +63,7 @@ function redrawAxes() {
         .orient("left")
         .ticks(10);
 
-    // TODO make start date come from past historical data
-
+    // make start date come from past historical data
     var history = myApp.data.getStudentHistoricalData();
     history.forEach(function(d) {
       d.date = parseDate(d.date);
@@ -81,7 +80,7 @@ function redrawAxes() {
     var endDate = myApp.data.getEndDate();
 
     x.domain([startDate, endDate]);
-    y.domain([400, 600]) // FIXME dynamic
+    y.domain([400, 600]) // TODO dynamic
 
     // draw x axis
     svg.append("g")
@@ -151,7 +150,7 @@ function drawHistoricalTests(svg, x, y) {
 };
 
 /**
- * TODO draw moderate
+ * draw goal lines for all types
  */
  function drawGoalLines(svg, x, y) {
 
@@ -229,7 +228,6 @@ function drawHistoricalTests(svg, x, y) {
              pct: 66
            });
 
-           // TODO fuck! it triggers
            $("#ctl00_cp_Content_rb_ModAmbitious").trigger("click");
        });
 
@@ -237,38 +235,16 @@ function drawHistoricalTests(svg, x, y) {
  }
 
  function updateBuddyScores(goal) {
-   // TODO take out all the extra garbage?
 
    var name = myApp.data.getStudentName().first;
 
-   var botBuddy = {
-     messages: [
-       MESSAGES.goalMessage1.formatUnicorn({
-         name: name, goalName: goal.name, rate: goal.rate, ss: goal.ss}),
-       MESSAGES.goalMessage2.formatUnicorn({pct: goal.pct})
-     ],
-     buttonOne: {
-       text: "Confirm",
-       callback: function() {
-         log("ayy");
-         hideBigPopup();
-         showConfirmationBuddy();
-       }
-     },
-     buttonTwo: {
-       text: "Learn More",
-       callback: function() {
-         window.open("http://doc.renlearn.com/KMNet/R00571375CF86BBF.pdf", "_blank");
-       }
-     },
-     buttonThree: {
-       text: "Exit window",
-       callback: function() {
-         hideBigPopup();
-       }
-     }
-   };
-   updateBotBuddy('#modal', botBuddy);
+   var messages = [
+     MESSAGES.goalMessage1.formatUnicorn({
+       name: name, goalName: goal.name, rate: goal.rate, ss: goal.ss}),
+     MESSAGES.goalMessage2.formatUnicorn({pct: goal.pct})
+   ];
+
+   updateBuddyMessages('#modal', messages);
  }
 
 /**

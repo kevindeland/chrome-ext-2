@@ -12,5 +12,6 @@ window.onresize = function() {
   log("resizing window!!!");
 
   //redrawBars();
+  // BUG don't do this if the graph window is not open
   redrawAxes();
 };
