@@ -388,3 +388,70 @@
 	width: 10%;
 	height: 10%;
 }
+
+/*Baby Bot Buttons*/
+
+.babyBotPanel {
+  float:right;
+  margin-left:798px;
+  margin-right:330px;
+  margin-top:198px;
+  margin-bottom:556px;
+
+}
+
+.viewBotMessage,
+.viewGraphs {
+  float:right;
+  border: 0.5px solid #009A65;
+  border-radius: 28px;
+  box-shadow:0px 2px 4px 0px rgba(0,0,0,50);
+  padding-top:13px;
+  padding-bottom:17px;
+  margin-top:14px;
+  background-color: white;
+  font-family:"Roboto Slab",Roboto,serif;
+  font-weight:bold;
+  font-size:12px;
+  color: #009A65;
+  text-align:left;
+}
+
+#babyBotR {
+  height:23.58px;
+    width:23.58px;
+    border-radius:50%;
+    border-radius:50%;
+    text-align:center;
+    color: #ffffff;
+    background-color:#009A65;
+    padding:auto;
+    margin-top:11px;
+    margin-left:15px;
+    margin-right:16px;
+    float: left;
+    font-family:"Roboto",Roboto,serif;
+    font-size: 12px;
+    font-weight:lighter;
+
+}
+
+.alert{
+  background-color:transparent;
+  border:transparent;
+  margin-bottom:0px;
+}
+
+#arrow-top{
+    width:0;
+    height:0;
+    border-left:15px solid transparent;
+    border-right:15px solid transparent;
+    border-bottom:20px solid #FF8300;
+    color:white;
+    font-family:"Roboto",Roboto,sans-serif;
+    font-weight:bold;
+    font-size:14px;
+    padding-right:5px;
+    padding-top:5px;
+}

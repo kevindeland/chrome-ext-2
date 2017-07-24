@@ -69,8 +69,27 @@ function NewDivInserter (callback) {
     $help.load(helpURL, function() {
       log("help loaded");
 
+      addBabyBot();
+    });
+  }
+
+  function addBabyBot() {
+    log("adding baby bot");
+    var $baby = $("<div>", {id: "babyBot"});
+    $("body").append($baby);
+
+    //$baby.hide();
+
+    var babyURL = chrome.runtime.getURL("../html/baby_bot.html");
+
+    $baby.load(babyURL, function() {
+
+      var graphImg = chrome.runtime.getURL("../images/Graphs_Icon.png");
+      $(".viewGraphs").html('<img src="' + graphImg + '"/>See Graphs')
+
       callback();
     });
+
   }
 
 
