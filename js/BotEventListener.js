@@ -35,7 +35,7 @@ function BotEventListener() {
       buttonOne: {
         text: "Yes",
         callback: function() {
-          window.open("https://projects.invisionapp.com/share/MRCOJJ62U#/screens", "_blank");
+          window.open(LINKS.workedExample, "_blank");
         }
       },
       buttonTwo: {
@@ -51,7 +51,7 @@ function BotEventListener() {
   }
 
   /*** Panel button behavior ***/
-  var helpButton = $(".helpButton > input");
+  var helpButton = $("button.helpInVivo");
   helpButton.on('click', function() {
     log("pressed help button");
     showHelpScreen();
@@ -71,6 +71,16 @@ function BotEventListener() {
       }
     }
   };
+
+  var leftHelpButton = $(".helpModuleLeft");
+  leftHelpButton.on('click', function() {
+    window.open(LINKS.workedExample, "_blank_");
+  });
+
+  var rightHelpButton = $(".helpModuleRight");
+  rightHelpButton.on('click', function() {
+    window.open(LINKS.starMathResources, "_blank_");
+  });
 
   /*** Intervention name text input ***/
   var interventionName = $("#ctl00_cp_Content_tb_Title");
@@ -222,7 +232,7 @@ function BotEventListener() {
       buttonThree : {
         text: "Teach me More",
         callback: function() {
-          window.open('http://doc.renlearn.com/KMNet/R004336320GJBD8A.pdf', '_blank');
+          window.open(LINKS.rtiResource, '_blank');
         }
       }
     };
@@ -302,7 +312,7 @@ function BotEventListener() {
   		buttonTwo: {
   			text: "Learn More",
   			callback: function() {
-          window.open("http://doc.renlearn.com/KMNet/R00571375CF86BBF.pdf", "_blank");
+          window.open(LINKS.sgpResource, "_blank");
         }
   		},
       buttonThree: {
@@ -399,7 +409,7 @@ function BotEventListener() {
 
   function updateProgressBar(step) {
     var progressBar = $(".progressBar");
-    progressBar.html('<img src="' + chrome.runtime.getURL("../images/progress_bar_" + step + "_4.png") + '"/>');
+    progressBar.html('<img src="' + chrome.runtime.getURL("../images/progress_bar/progress_bar_" + step + "_4.png") + '"/>');
   }
 
 };

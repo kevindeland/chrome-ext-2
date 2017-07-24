@@ -19,12 +19,11 @@ function NewDivInserter (callback) {
 
       var progressBar = $(".progressBar");
       log(progressBar);
-      progressBar.html('<img src="' + chrome.runtime.getURL("../images/progress_bar_1_4.png") + '"/>');
+      progressBar.html('<img src="' + chrome.runtime.getURL("../images/progress_bar/progress_bar_1_4.png") + '"/>');
 
       var helpButton = $(".helpButton");
       log(helpButton);
       helpButton.html('<input type="image" src="' + chrome.runtime.getURL("../images/Help_Button_Icon.png") + '"/>');
-
 
       addModal();
     });
@@ -43,6 +42,11 @@ function NewDivInserter (callback) {
 
       $modal.load(popupURL, function() {
         log("modal loaded");
+
+        $("#projectedPerformanceLine").attr("src", chrome.runtime.getURL("../images/lines/projected-performance-line.png"));
+        $("#moderateGoal > img").attr("src", chrome.runtime.getURL("../images/lines/moderate-goal-line.png"));
+        $("#moderatelyAmbitiousGoal > img").attr("src", chrome.runtime.getURL("../images/lines/moderately-ambitious-line.png"));
+        $("#cukuGoal > img").attr("src", chrome.runtime.getURL("../images/lines/cuku-line.png"));
 
         if(!USE_D3) {
           $(".modalGraph").html('<img src="' + chrome.runtime.getURL("images/d3_graph.png") + '" width=50%/>');
@@ -69,6 +73,9 @@ function NewDivInserter (callback) {
     $help.load(helpURL, function() {
       log("help loaded");
 
+      $(".helpModuleLeft .topModuleBlue").html('<img src="' + chrome.runtime.getURL("../images/worked_example_thumbnail.png") + '" width=100%/>');
+      $(".helpModuleRight .topModuleBlue").html('<img src="' + chrome.runtime.getURL("../images/resources_thumbnail.png") + '" width=100%/>');
+
       addBabyBot();
     });
   }
@@ -78,7 +85,7 @@ function NewDivInserter (callback) {
     var $baby = $("<div>", {id: "babyBot"});
     $("body").append($baby);
 
-    //$baby.hide();
+    $baby.hide();
 
     var babyURL = chrome.runtime.getURL("../html/baby_bot.html");
 

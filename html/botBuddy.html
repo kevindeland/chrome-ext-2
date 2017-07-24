@@ -1,22 +1,37 @@
 <div class="inVivoModal">
 
-    <div class="progressBar">
-    </div>
+  <!-- Progress Bar -->
+  <div class="progressBar">
+    <!-- image added in NewDivInserter.js -->
+  </div>
 
-    <div class="chatBox">
-      <div class="robotPlaceholder"></div>
-      <div class="rIcon">R</div>
-      <div class="chatMessageWrapper" align=right></div>
-      <div class="messageButtons">
-        <input type="button" class="buttonOne buttonWrapper" value="" />
-        <input type="button" class="buttonTwo buttonWrapper" value="" />
-        <input type="button" class="buttonThree buttonWrapper"value="" />
+  <div class="chatBox">
+    <div class="robotPlaceholder"></div> <!-- no CSS exists -->
+    <div class="rIcon">R</div>
+    <div class="chatMessageAlignVertically">
+      <div class="chatMessageWrapper" align=right>
+        <!-- messages of class "chatMessage" are added dynamically in the function updateBotBuddy
+        inside BotEventListener.js -->
       </div>
     </div>
-
-
-    <div class="extraButtonPanel">
-      <div class="helpButton"></div>
+    <div class="buttonPanel">
+      <!-- buttons get the class "twoButtons" or "threeButtons"
+      added dynamically inside updateBotBuddy -->
+      <input type="button" class="buttonOne buttonWrapper" id="sandwichButton" value="" />
+      <input type="button" class="buttonTwo buttonWrapper" value="" />
+      <input type="button" class="buttonThree buttonWrapper"value="" />
     </div>
+  </div>
 
+
+  <div class="bottomButtonPanel">
+    <button class="helpInVivo">
+      <div class="rIcon">?</div>
+      Help
+    </button>
+    <button class="lastMessageInVivo">
+      <div id="arrow-left"></div>
+      Last Message
+    </button>
+  </div>
 </div>

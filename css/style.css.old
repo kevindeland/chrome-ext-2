@@ -1,0 +1,434 @@
+/*********** Robot Styles **********/
+
+.inVivoModal {
+    position:absolute; /* Stays in place */
+    z-index: 1; /* Sit on top */
+    margin-top: 42px;
+    padding-top: 50px; /* Location of the box */
+    left: 57.5%;
+    top: 0;
+    width: 419px; /* Width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(238,238,238,.30); /* Fallback color */
+    background-color: rgba(238,238,238,.30); /* Black w/ opacity */
+}
+
+.buttonPanel{
+  margin-right:21px;
+}
+
+.buttonWrapper {
+  float:right;
+  margin-top:32px;
+  margin-bottom:5%;
+  border: 0.5px solid #009A65;
+  border-radius: 10px;
+  box-shadow:0px 2px 4px 0px rgba(0,0,0,50);
+  padding: 5%;
+  background-color: white;
+  font-family:"Roboto",Roboto,serif;
+  font-weight:bold;
+  font-size:74%%;
+  text-transform: uppercase;
+  color: #009A65;
+}
+
+.buttonWrapper#sandwichButton {
+  margin-left:2%;
+}
+
+.buttonWrapper:hover {
+  background-color:#009A65;
+  color:white;
+  cursor:pointer;
+}
+
+.buttonWrapper:active {
+  box-shadow:0px 0px 0px 0px;
+}
+
+.messageText {
+	background-color: white;
+  font-family:"Roboto",Roboto,serif;
+  font-size:13.5px;
+}
+
+.messageButtons {
+	margin-top: 5%;
+}
+
+.twoButtons {
+	width: 49%;
+	white-space: normal;
+}
+
+.threeButtons {
+	width: 31%;
+	white-space: normal;
+}
+
+.buttonOne {}
+.buttonTwo {}
+.buttonThree {}
+
+/*********** Robot Styles **********/
+
+.chatBox {
+	float: right;
+  margin-top: 42px;
+  margin-left:50px;
+  margin-right:0px;
+	padding: 5px;
+	width: 302px;
+  height:287px;
+  background-color:#ffffff;
+	border: 5px solid white;
+	border-radius: 30px;
+	box-shadow: 0px 2px 4px 0px #888888;
+}
+
+.chatBox#inVivo{
+  margin: 5px;
+  padding: 5px;
+  margin-top:5%;
+  margin-right:7%;
+  width: 80%;
+  background-color:#ffffff;
+  border: 5px solid white;
+  border-radius: 30px;
+  box-shadow: 0px 2px 4px 0px #888888;
+}
+
+.chatMessageAlignVertically {
+  float:right;
+  padding-right:27px;
+  padding-left:14px;
+  padding-top:26px;
+  width:220px;
+}
+
+.chatMessage {
+	float:left;
+  margin: 5px;
+	padding: 5px;
+	border-radius: 15px;
+  font-size:13.5px;
+  font-family:"Roboto",Roboto,sans-serif;
+}
+
+.chatMessageWrapper {
+  align: right;
+}
+
+.chatMessageWrapper .chatMessage {
+	background-color: #EEEEEE;
+  text-align:left;
+  margin-top:3px;
+	padding: 4%;
+  width: 218px;
+}
+
+.chatMessageTop{
+  background-color: #EEEEEE;
+  text-align:left;
+  margin-top:44px;
+  padding: 4%;
+  width: 70%;
+  font-family:"Roboto",Roboto,sans-serif;
+  font-size:13.5px;
+  border-radius:15px;
+}
+
+.rIcon {
+  height:26px;
+    width:26px;
+    border-radius:50%;
+    border-radius:50%;
+    text-align:center;
+    color: #ffffff;
+    background-color:#009A65;
+    padding:2%;
+    margin-top:10%;
+    float: left;
+    font-family:"Roboto",Roboto,serif;
+    font-size: 18px;
+    font-weight:lighter;
+}
+
+#arrow-left {
+  width:0;
+  height:0;
+  border-top:15px solid transparent;
+  border-bottom:15px solid transparent;
+  border-right:15px solid #009A65;
+}
+
+/************ Modal styles  *******************/
+/***** aka "I like it when you call me big popup" *****/
+/* The Modal (background) */
+.modal {
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.65); /* Black w/ opacity */
+}
+
+/* Modal Content */
+
+.modalContainer {
+    background-color: #F2FAFF;
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+    height: 50%;
+    border: 3px solid #F2FAFF;
+    border-radius: 25px;
+    box-shadow: 10px 10px 50px rgba(0,0,0,50);}
+
+/*.backgroundModalContainer {
+    background-color: #ffffff;
+    /*maybe I'll put z-index here
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+    height: 50%;
+    border:3px solid #ffffff;
+    border-radius: 25px;
+}*/
+
+
+.modalTitle {
+  font-size: 24px;
+  width:60%;
+  font-family: "Roboto Slab",Roboto,serif;
+  color:#ffffff;
+  background-color:#009A65;
+  border-radius: 10px;
+}
+
+
+.lastMessage,
+.help {
+  float:right;
+  border: 0.5px solid #009A65;
+  border-radius: 28px;
+  box-shadow:0px 2px 4px 0px rgba(0,0,0,50);
+  padding: 1%;
+  margin-left:0%;
+  margin-right:12%;
+  background-color: white;
+  font-family:"Roboto Slab",Roboto,serif;
+  font-weight:bold;
+  font-size:14.7px;
+  color: #009A65;
+  text-align:left;
+}
+
+.lastMessageInVivo,
+.helpInVivo, .viewBotMessage,
+.viewGraphs {
+  float:right;
+  border: 0.5px solid #009A65;
+  border-radius: 28px;
+  box-shadow:0px 2px 4px 0px rgba(0,0,0,50);
+  padding: 1%;
+  margin-left:0%;
+  margin-right:10%;
+  margin-top:30px;
+  background-color: white;
+  font-family:"Roboto Slab",Roboto,serif;
+  font-weight:bold;
+  font-size:14.7px;
+  color: #009A65;
+  text-align:left;
+}
+
+
+.modalContainerHelp {
+    background-color: white;
+    margin: auto;
+    padding: 20px;
+    width: 80%;
+    height: 50%;
+    border: 3px solid white;
+    border-radius: 25px;
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,50);}
+}
+
+.lastMessage:hover,
+.help:hover {
+  float:right;
+  border: 0.5px solid #009A65;
+  border-radius: 28px;
+  box-shadow:0px 2px 4px 0px rgba(0,0,0,50);
+  padding: 1%;
+  margin-left:0%;
+  margin-right:12%;
+  background-color: #009A65;
+  font-family:"Roboto Slab",Roboto,serif;
+  font-weight:bold;
+  font-size:14.7px;
+  color: white;
+  text-align:left;
+}
+
+
+.modalTitleHelp{
+  font-size: 34px;
+  width:100%;
+  padding:5px;
+  font-family: "Roboto Slab",Roboto,serif;
+  text-align:center; /*why is it aligning wierdly? what is this class nested in?*/
+  color:#ffffff;
+  background-color:#009A65;
+  border-radius: 10px;
+}
+
+/* Minimize and Maximize Button Panel */
+.minimize {
+    height:18px;
+    width:18px;
+    border-radius:50%;
+    border-radius:50%;
+    text-align:center;
+    color: #000000;
+    background-color:#F8C31C;
+    border-color:#F8C31C;
+    float: right;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.maximize {
+  height:18px;
+    width:18px;
+    border-radius:50%;
+    border-radius:50%;
+    text-align:center;
+    color: #000000;
+    background-color:#7ED321;
+    border-color:#7ED321;
+    float: right;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.minimize:hover,
+.minimize:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.maximize:hover,
+.maximize:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/*Bottom Menu Buttons*/
+
+.bottomButtonPanel {
+  margin-top:2%;
+}
+
+.lastMessage,
+.help {
+  float:right;
+  border: 0.5px solid #009A65;
+  border-radius: 28px;
+  box-shadow:0px 2px 4px 0px rgba(0,0,0,50);
+  padding: 1%;
+  margin-left:0%;
+  margin-right:12%;
+  background-color: white;
+  font-family:"Roboto Slab",Roboto,serif;
+  font-weight:bold;
+  font-size:14.7px;
+  color: #009A65;
+  text-align:left;
+}
+
+.modalRobotContainer {
+	text-align: center;
+}
+
+.modalRobotContainer img {
+	width: 10%;
+	height: 10%;
+}
+
+/*Baby Bot Buttons*/
+
+.babyBotPanel {
+  float:right;
+  margin-left:798px;
+  margin-right:330px;
+  margin-top:198px;
+  margin-bottom:556px;
+
+}
+
+.viewBotMessage,
+.viewGraphs {
+  float:right;
+  border: 0.5px solid #009A65;
+  border-radius: 28px;
+  box-shadow:0px 2px 4px 0px rgba(0,0,0,50);
+  padding-top:13px;
+  padding-bottom:17px;
+  margin-top:14px;
+  background-color: white;
+  font-family:"Roboto Slab",Roboto,serif;
+  font-weight:bold;
+  font-size:12px;
+  color: #009A65;
+  text-align:left;
+}
+
+#babyBotR {
+  height:23.58px;
+    width:23.58px;
+    border-radius:50%;
+    border-radius:50%;
+    text-align:center;
+    color: #ffffff;
+    background-color:#009A65;
+    padding:auto;
+    margin-top:11px;
+    margin-left:15px;
+    margin-right:16px;
+    float: left;
+    font-family:"Roboto",Roboto,serif;
+    font-size: 12px;
+    font-weight:lighter;
+
+}
+
+.alert{
+  background-color:transparent;
+  border:transparent;
+  margin-bottom:0px;
+}
+
+#arrow-top{
+    width:0;
+    height:0;
+    border-left:15px solid transparent;
+    border-right:15px solid transparent;
+    border-bottom:20px solid #FF8300;
+    color:white;
+    font-family:"Roboto",Roboto,sans-serif;
+    font-weight:bold;
+    font-size:14px;
+    padding-right:5px;
+    padding-top:5px;
+}

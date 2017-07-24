@@ -1,0 +1,111 @@
+/*** for buttons and componenets which are reused ***/
+
+/************ Progress Bar  *******************/
+
+.progressBar {
+  margin-left:62%;
+  margin-bottom:2%;
+}
+
+/***** R Icon ****/
+
+.rIcon {
+  height:26px;
+    width:26px;
+    border-radius:50%;
+    border-radius:50%;
+    text-align:center;
+    color: #ffffff;
+    background-color:#009A65;
+    padding:2%;
+    margin-top:10%;
+    float: left;
+    font-family:"Roboto",Roboto,serif;
+    font-size: 18px;
+    font-weight:lighter;
+}
+
+
+/*** More buttons ***/
+.download {
+  float:right;
+  text-shadow:0px 2px 4px 0px rgba(0,0,0,50);
+  padding: 1%;
+  margin-right:4%;
+  background-color: transparent;
+  border: transparent;
+  font-family:"Roboto",Roboto,serif;
+  font-weight:bold;
+  font-size:14px;
+  color: white;
+  text-align:left;
+  text-decoration:underline;
+}
+
+.download:hover,
+.download:focus {
+  cursor:pointer;
+}
+
+.moderateGoalText {
+  font-family:"Roboto",Roboto,sans-serif;
+  font-size:12px;
+  font-weight:400;
+  padding-left:43px;
+}
+
+/*** Minimize and Maximize Button Panel ***/
+.minimize {
+    height:18px;
+    width:18px;
+    border-radius:28%;
+    text-align:center;
+    color: #000000;
+    background-color:#F8C31C;
+    border-color:#F8C31C;
+    float: right;
+    font-size: 12px;
+    font-weight: bold;
+}
+.minimize:hover,
+.minimize:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/*** Help and Last Message Buttons ***/
+.help, .lastMessage {
+  float:right;
+  border: 0.5px solid #009A65;
+  border-radius: 28px;
+  box-shadow:0px 2px 4px 0px rgba(0,0,0,50);
+  padding: 1%;
+  margin-left:0%;
+  margin-right:12%;
+  height:46px;
+  width:131px;
+  background-color: white;
+  font-family:"Roboto Slab",Roboto,serif;
+  font-weight:bold;
+  font-size:14.7px;
+  color: #009A65;
+  text-align:left;
+}
+
+.lastMessage:hover,
+.help:hover {
+  float:right;
+  border: 0.5px solid #009A65;
+  border-radius: 28px;
+  box-shadow:0px 2px 4px 0px rgba(0,0,0,50);
+  padding: 1%;
+  margin-left:0%;
+  margin-right:12%;
+  background-color: #009A65;
+  font-family:"Roboto Slab",Roboto,serif;
+  font-weight:bold;
+  font-size:14.7px;
+  color: white;
+  text-align:left;
+}

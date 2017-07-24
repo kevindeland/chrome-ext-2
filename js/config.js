@@ -2,6 +2,13 @@
 
 USE_D3 = true;
 
+LINKS = {
+  workedExample: "https://projects.invisionapp.com/share/WYCKQRK8E#/screens",
+  rtiResource: "http://doc.renlearn.com/KMNet/R004336320GJBD8A.pdf",
+  sgpResource: "http://doc.renlearn.com/KMNet/R00571375CF86BBF.pdf",
+  starMathResources: "http://help.renaissance.com/sm/Resources"
+}
+
 MESSAGES =  {
 
   welcome1: 'Welcome to the Goal Setting Wizard!',

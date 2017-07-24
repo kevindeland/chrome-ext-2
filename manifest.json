@@ -22,7 +22,7 @@
   "content_scripts": [
     {
       "matches": ["https://rppres9.renlearn.com/*/STAR/ProgressMonitor/Intervention.aspx"],
-      "css": ["css/style.css", "css/d3.css"],
+      "css": ["css/style.css", "css/components.css", "css/d3.css"],
       "js": ["js/jquery/jquery-3.2.1.min.js",
         "js/d3/d3.v3.min.js",
         "js/helpers.js",

@@ -1,49 +1,66 @@
 <!-- The Modal -->
 
 <!--Progress Bar-->
-<div class="progressBar">
-  <div class="line"><!--Sarah you don't have this defined in CSS yet-->
-</div>
-</div>
+<div class="progressBar"></div>
 
 <!-- Modal content -->
 <div class="modalContainer">
-  <div class="upperButtonPanel">
-    <input type="button" class="minimize" value="-"/>
-    <input type="button" class="maximize" value="+"/>
-  <div class="modalContent">
-    <div class="modalLeftBox">
-      <div class="chatBox">
-        <div class="robotPlaceholder"></div>
-        <div class="rIcon">R</div>
+  <button class="hideHelper">EXIT</button>
+  <div class="modalContent"> <!-- no CSS -->
+    <div class="chatBox">
+      <div class="rIcon">R</div>
+      <div class="chatMessageAlignVertically">
         <div class="chatMessageWrapper" align=right>
           <div class="chatMessage">Jamie's Moderate Goal is 50 SGP and needs 3.8 SS / week growth to reach 530 SS.</div>
           <div class="chatMessage">This student will have to grow faster than 50% of students at the same percentile rank to meet this goal.</div>
         </div>
-        <div class="buttonPanel">
-          <input type="button" class="buttonOne buttonWrapper"/>
-          <input type="button" class="buttonTwo buttonWrapper"/>
-          <input type="button" class="buttonThree buttonWrapper"/>
-        </div>
       </div>
-      <div class="modalTitle"></div>
-      <div class="modalGraph">
+      <div class="buttonPanel">
+        <input type="button" class="buttonOne buttonWrapper"/>
+        <input type="button" class="buttonTwo buttonWrapper"/>
+        <input type="button" class="buttonThree buttonWrapper"/>
       </div>
+    </div>
+    <div class="modalTitle"><!-- Title added dynamically --></div>
+    <button class="download">Download</button>
+    <div class="modalGraph"></div>
+
+    <div class="legend">
+      <div class="lineKey">
+        <img id="projectedPerformanceLine"/> <!-- source added in js -->
+        Student's Projected Performance
+      </div>
+      <button class="goalButton" id="moderateGoal">
+        <img/> <!-- source added in js -->
+        Moderate Goal
+        <div class="moderateGoalText">testing</div>
+      </button>
+      <button class="goalButton" id="moderatelyAmbitiousGoal">
+        <img/>  <!-- source added in js -->
+        Moderately Ambitious Goal
+        <div class="moderateGoalText">testing</div>
+      </button>
+      <button class="goalButton" id="cukuGoal">
+        <img/>  <!-- source added in js -->
+        Catch Up Keep Up Goal
+        <div class="moderateGoalText">testing</div>
+      </button>
+      <button class="goalButton" id="addCustomGoal">
+      Add Custom Goal
+        <div class="moderateGoalText">testing</div>
+      </button>
     </div>
 
   </div>
 </div>
-</div>
 
 <div class="bottomButtonPanel">
   <button class="help">
-    <div class="rIcon">?
-    </div>
+    <div class="rIcon">?</div>
     Help
-    </button>
-   <button class="lastMessage">
-    <div class="arrow-left">
-    </div>
+  </button>
+  <button class="lastMessage">
+    <div class="arrow-left"></div>
     Last Message
-    </button>
+  </button>
 </div>
