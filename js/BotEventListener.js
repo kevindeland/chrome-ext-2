@@ -57,7 +57,7 @@ function BotEventListener() {
     showHelpScreen();
   });
 
-  $(".modal .minimize").on('click', function() {
+  $(".exit").on('click', function() {
     hideBigPopup();
   });
 

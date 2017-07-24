@@ -29,8 +29,6 @@ function NewDivInserter (callback) {
     });
   }
 
-
-
   function addModal() {
 
       var $modal = $("<div>", {id: "modal", "class": "modal"});
