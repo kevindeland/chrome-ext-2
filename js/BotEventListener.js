@@ -47,7 +47,7 @@ function BotEventListener() {
         callback: hideBotBuddy
       }
     };
-    updateBotBuddy("#jarvis", botBuddy);
+    updateBotBuddy("#botBuddy", botBuddy);
   }
 
   /*** Panel button behavior ***/
@@ -91,7 +91,7 @@ function BotEventListener() {
           callback: hideBotBuddy
         }
       };
-      updateBotBuddy('#jarvis', botBuddy);
+      updateBotBuddy('#botBuddy', botBuddy);
     } else {
       log("already saw intervention name help");
     }
@@ -108,7 +108,7 @@ function BotEventListener() {
       },
       buttonTwo: null
     };
-    updateBotBuddy('#jarvis', botBuddy);
+    updateBotBuddy('#botBuddy', botBuddy);
   }
 
   interventionName.on('blur', function() {
@@ -232,7 +232,7 @@ function BotEventListener() {
     } else {
       // TODO highlight orange
     }
-    updateBotBuddy('#jarvis', botBuddy);
+    updateBotBuddy('#botBuddy', botBuddy);
   };
 
 
@@ -340,7 +340,7 @@ function BotEventListener() {
         }
       }
     };
-    updateBotBuddy("#jarvis", botBuddy);
+    updateBotBuddy("#botBuddy", botBuddy);
   };
 
   function showMotivationBuddy() {
@@ -355,7 +355,7 @@ function BotEventListener() {
         }
       }
     };
-    updateBotBuddy("#jarvis", botBuddy);
+    updateBotBuddy("#botBuddy", botBuddy);
   };
 
   function showFinalConfirmationBuddy() {
@@ -374,7 +374,7 @@ function BotEventListener() {
         }
       }
     };
-    updateBotBuddy("#jarvis", botBuddy);
+    updateBotBuddy("#botBuddy", botBuddy);
   };
 
   function readyToSave() {
@@ -394,7 +394,7 @@ function BotEventListener() {
         }
       }
     };
-    updateBotBuddy("#jarvis", botBuddy);
+    updateBotBuddy("#botBuddy", botBuddy);
   };
 
   function updateProgressBar(step) {
@@ -405,7 +405,7 @@ function BotEventListener() {
 };
 
 function updateBotBuddy(parent, botBuddy) {
-  if(parent == "#jarvis") {
+  if(parent == "#botBuddy") {
     showBotBuddy();
   }
 
@@ -455,9 +455,9 @@ function updateBuddyMessages(parent, messages) {
 
 /*** for showing and hiding bot buddy ***/
 function showBotBuddy() {
-  $("#jarvis").show();
+  $("#botBuddy").show();
 }
 
 function hideBotBuddy(id) {
-  $("#jarvis").hide();
+  $("#botBuddy").hide();
 }

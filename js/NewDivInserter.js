@@ -7,14 +7,14 @@ function NewDivInserter (callback) {
 
 
   function addRobot() {
-    var $jarvis = $("<div>", {id: "jarvis", "class": "robot"});
-    $("body").append($jarvis);
+    var $botBuddy = $("<div>", {id: "botBuddy", "class": "robot"});
+    $("body").append($botBuddy);
 
-    $jarvis.hide();
+    $botBuddy.hide();
 
-    var jarvisURL = chrome.runtime.getURL("../html/jarvis.html");
-    //log(jarvisURL);
-    $jarvis.load(jarvisURL, function() {
+    var botBuddyURL = chrome.runtime.getURL("../html/botBuddy.html");
+    //log(botBuddyURL);
+    $botBuddy.load(botBuddyURL, function() {
       // automagically insert images
 
       var progressBar = $(".progressBar");
