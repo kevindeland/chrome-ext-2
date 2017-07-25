@@ -1,14 +1,16 @@
 var myApp = myApp || {};
 
+myApp.eventListener = {};
+
+// holds the state of the GSW
+myApp.wizardState = {
+  hasBeenCalculated: false,
+  hasSeenInterventionName: false,
+  goalGraphOpen: false
+};
+
 function BotEventListener() {
   log("BotEventListener()");
-
-  // holds the state of the GSW
-  var wizardState = {
-    hasBeenCalculated: false,
-    hasSeenInterventionName: false,
-    goalGraphOpen: false
-  };
 
   /*** Check if our load is the result of a "Calculate Goal" click... ***/
   // define data goals
@@ -19,10 +21,23 @@ function BotEventListener() {
 
   /*** COOKIES ***/
   var hasClickedNever = readCookie("NeverDoWorkedExample");
+  var lastAction = readCookie("lastAction");
 
-  if(moderateData.html().indexOf("Calculate") >= 0) {
+  if(lastAction == "startTestDropdown") {
+
+    eraseCookie("lastAction");
+    log("we just changed the startTest...");
+    var endDate = myApp.data.getEndDate();
+    if(isNaN(endDate)) return;
+
+    var startTest = myApp.data.getStartTest();
+    var diff = compareTestDates(startTest.date, endDate);
+
+    myApp.buddy.showInterventionLengthBuddy(diff);
+
+  } else if(moderateData.html().indexOf("Calculate") >= 0) {
     log("Not yet calculated");
-    wizardState.hasBeenCalculated = false;
+    myApp.wizardState.hasBeenCalculated = false;
 
     if(!hasClickedNever) {
       myApp.buddy.showWorkedExampleOption();
@@ -30,11 +45,14 @@ function BotEventListener() {
 
   } else {
     log("Has been calculated");
-    wizardState.hasBeenCalculated = true;
+    myApp.wizardState.hasBeenCalculated = true;
 
     myApp.updater.showBigPopup("goalGraph");
 
-  } // FIXME ITEM 2: what happens if this was a begin goal change???
+  }
+  /** FIXME ITEM 2
+   * what is the logic flow?
+   */
   // FIXME ITEM 3 we don't want it opening the big popup every time...
 
   /*** Panel button behavior ***/
@@ -49,7 +67,7 @@ function BotEventListener() {
     myApp.updater.hideBigPopup();
 
     // FIXME only if you're hiding the goal box
-    myApp.updater.showBabyBuddy();
+    myApp.updater.showBabyBuddy({graphDisabled: true});
   });
 
   var leftHelpButton = $(".helpModuleLeft");
@@ -68,8 +86,8 @@ function BotEventListener() {
 
   interventionName.on('focus', function() {
 
-    if(!wizardState.hasSeenInterventionName) {
-      wizardState.hasSeenInterventionName = true;
+    if(!myApp.wizardState.hasSeenInterventionName) {
+      myApp.wizardState.hasSeenInterventionName = true;
       myApp.buddy.showInterventionNamePrompt();
     } else {
       log("already saw intervention name help");
@@ -164,6 +182,14 @@ function BotEventListener() {
 
   }
 
+
+  /*** Starting Test Dropdown Selection ***/
+  var startTestDropdown = $("#ctl00_cp_Content_ddl_AnchorScore");
+  startTestDropdown.on("change", function() {
+    log("changed start test!");
+    createCookie("lastAction", "startTestDropdown", 7);
+  });
+
   /*** Calculate Goal button ***/
   var calculateGoal = $("#ctl00_cp_Content_btn_CalcGoal");
   log(calculateGoal);
@@ -175,9 +201,9 @@ function BotEventListener() {
   goalTypeBox.on('click', function() {
     log("clicked inside the magic box");
 
-    if(!wizardState.hasBeenCalculated) {
+    if(!myApp.wizardState.hasBeenCalculated) {
       calculateGoal.trigger("click");
-    } else if (!wizardState.goalGraphOpen){ // if goal graph is open, we want to click radio buttons without response
+    } else if (!myApp.wizardState.goalGraphOpen){ // if goal graph is open, we want to click radio buttons without response
       // FIXME ITEM 4... be able to click on different boxes without opening box
       myApp.updater.showBigPopup("goalGraph");
     }

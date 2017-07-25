@@ -204,6 +204,7 @@ function drawHistoricalTests(svg, x, y) {
  }
 
  function selectGoalLine(goalType) {
+   log("selectGoalLine: " + goalType);
 
    var calculatedGoals = myApp.data.getCalculatedGoals();
 

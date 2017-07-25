@@ -76,10 +76,19 @@ myApp.data.getCalculatedGoals = function() {
   if(moderateData.html().indexOf("Calculate") >= 0) {
     return null;
   } else {
+    var moderate = parseGoalData(moderateData.html());
+    moderate.sgp = 50;
+
+    var modAmbitious = parseGoalData(modAmbitiousData.html());
+    modAmbitious.sgp = 66;
+
+    var catchup = parseGoalData(catchupData.html());
+    catchup.sgp = "XX"; // FIXME
+
     return {
-      moderate: parseGoalData(moderateData.html()),
-      modAmbitious: parseGoalData(modAmbitiousData.html()),
-      catchup: parseGoalData(catchupData.html())
+      moderate: moderate,
+      modAmbitious: modAmbitious,
+      catchup: catchup
     };
   }
 }
