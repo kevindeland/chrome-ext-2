@@ -182,4 +182,20 @@ myApp.updater.showGoalGraph = function() {
 
 }
 
-/*** TODO ITEM 5 add updater (show, hide) for baby bot ***/
+/*** ITEM 5 add updater (show, hide) for baby bot ***/
+myApp.updater.showBabyBuddy = function(config) {
+  $("#babyBot").show();
+
+  // if goals have not yet been calculated, then view graph button is disabled
+  if(config.graphDisabled) {
+    log("disabled");
+    $(".viewGraphs").addClass("viewGraphsDisabled");
+  } else {
+    log("enabled");
+    $(".viewGraphs").removeClass("viewGraphsDisabled");
+  }
+};
+
+myApp.updater.hideBabyBuddy = function() {
+  $("#babyBot").hide();
+};

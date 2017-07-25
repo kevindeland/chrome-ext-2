@@ -19,7 +19,10 @@ myApp.buddy = {
       },
       buttonThree: {
         text: "Never",
-        callback: myApp.updater.hideBotBuddy // TODO ITEM 6 make this actually do something
+        callback: function() {
+          myApp.updater.hideBotBuddy();
+          createCookie("NeverDoWorkedExample", "true", 7);
+        }
       }
     };
     myApp.updater.updateBotBuddy("#botBuddy", botBuddy);
@@ -70,6 +73,8 @@ myApp.buddy = {
         text: "Yes",
         callback: function() {
           myApp.updater.hideBotBuddy(); // TODO ITEM 8 Trigger Calculate Goal
+          var calculateGoal = $("#ctl00_cp_Content_btn_CalcGoal");
+          calculateGoal.trigger("click");
         }
       },
       buttonTwo: {

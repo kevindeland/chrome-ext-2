@@ -19,6 +19,7 @@
     "activeTab",
     "https://ajax.googleapis.com/"
   ],
+  
   "content_scripts": [
     {
       "matches": ["https://rppres9.renlearn.com/*/STAR/ProgressMonitor/Intervention.aspx"],
