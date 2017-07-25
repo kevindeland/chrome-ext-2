@@ -443,31 +443,35 @@ function updateBotBuddy(parent, botBuddy) {
     });
   }
 
+  var buttonOne = $(parent + ' .buttonOne');
+  var buttonTwo = $(parent + ' .buttonTwo');
+  var buttonThree = $(parent + ' .buttonThree');
+
   if(botBuddy.buttonThree) {
-    $(parent + ' .buttonOne').removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonOne.text);
-    $(parent + ' .buttonTwo').removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonTwo.text);
-    $(parent + ' .buttonThree').show().prop('value', botBuddy.buttonThree.text);
-    $(parent + ' .buttonOne').prop('onclick',null).off('click');
-    $(parent + ' .buttonOne').on('click', botBuddy.buttonOne.callback);
-    $(parent + ' .buttonTwo').prop('onclick',null).off('click');
-    $(parent + ' .buttonTwo').on('click', botBuddy.buttonTwo.callback);
-    $(parent + ' .buttonThree').prop('onclick',null).off('click');
-    $(parent + ' .buttonThree').on('click', botBuddy.buttonThree.callback);
+    buttonOne.removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonOne.text);
+    buttonTwo.removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonTwo.text);
+    buttonThree.show().prop('value', botBuddy.buttonThree.text);
+    buttonOne.prop('onclick',null).off('click');
+    buttonOne.on('click', botBuddy.buttonOne.callback);
+    buttonTwo.prop('onclick',null).off('click');
+    buttonTwo.on('click', botBuddy.buttonTwo.callback);
+    buttonThree.prop('onclick',null).off('click');
+    buttonThree.on('click', botBuddy.buttonThree.callback);
   }
   else if (botBuddy.buttonTwo){
-    $(parent + ' .buttonOne').show().removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
-    $(parent + ' .buttonTwo').show().removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonTwo.text);
-    $(parent + ' .buttonOne').prop('onclick',null).off('click');
-    $(parent + ' .buttonOne').on('click', botBuddy.buttonOne.callback);
-    $(parent + ' .buttonTwo').prop('onclick',null).off('click');
-    $(parent + ' .buttonTwo').on('click', botBuddy.buttonTwo.callback);
-    $(parent + ' .buttonThree').hide();
+    buttonOne.show().removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
+    buttonTwo.show().removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonTwo.text);
+    buttonOne.prop('onclick',null).off('click');
+    buttonOne.on('click', botBuddy.buttonOne.callback);
+    buttonTwo.prop('onclick',null).off('click');
+    buttonTwo.on('click', botBuddy.buttonTwo.callback);
+    buttonThree.hide();
   } else {
-    $(parent + ' .buttonOne').show().removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
-    $(parent + ' .buttonOne').prop('onclick',null).off('click');
-   $(parent + ' .buttonOne').on('click', botBuddy.buttonOne.callback);
-  $(parent + ' .buttonTwo').hide();
-   $(parent + ' .buttonThree').hide();
+    buttonOne.show().removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
+    buttonOne.prop('onclick',null).off('click');
+   buttonOne.on('click', botBuddy.buttonOne.callback);
+  buttonTwo.hide();
+   buttonThree.hide();
   }
 }
 
