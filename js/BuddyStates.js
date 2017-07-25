@@ -25,6 +25,23 @@ myApp.buddy = {
     myApp.updater.updateBotBuddy("#botBuddy", botBuddy);
   },
 
+  showInterventionNamePrompt: function() {
+    botBuddy = {
+      messages: ["Would you like some tips on how to name your intervention?"],
+      buttonOne: {
+        text: "Sure",
+        callback: function() {
+          myApp.buddy.showInterventionNameHelp();
+        }
+      },
+      buttonTwo: {
+        text: "No Thanks",
+        callback: myApp.updater.hideBotBuddy
+      }
+    };
+    myApp.updater.updateBotBuddy('#botBuddy', botBuddy);
+  },
+
   showInterventionNameHelp: function()  {
     log("showInterventionNameHelp");
 

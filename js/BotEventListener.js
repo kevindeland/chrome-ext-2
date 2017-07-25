@@ -58,22 +58,10 @@ function BotEventListener() {
   var interventionName = $("#ctl00_cp_Content_tb_Title");
 
   interventionName.on('focus', function() {
+    // TODO this should be moved into BuddyStates.js
     if(!wizardState.hasSeenInterventionName) {
       wizardState.hasSeenInterventionName = true;
-      botBuddy = {
-        messages: ["Would you like some tips on how to name your intervention?"],
-        buttonOne: {
-          text: "Sure",
-          callback: function() {
-            myApp.buddy.showInterventionNameHelp();
-          }
-        },
-        buttonTwo: {
-          text: "No Thanks",
-          callback: myApp.updater.hideBotBuddy
-        }
-      };
-      myApp.updater.updateBotBuddy('#botBuddy', botBuddy);
+      myApp.buddy.showInterventionNamePrompt();
     } else {
       log("already saw intervention name help");
     }
