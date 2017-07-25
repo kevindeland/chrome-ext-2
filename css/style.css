@@ -65,8 +65,13 @@
   width: 218px;
 }
 
-.buttonPanel{
-  margin-right:21px;
+.botButtonPanel{
+  width:210px;
+  float:right;
+  bottom-margin:0px;
+  margin-top:12.25%;
+  margin-left:2%;
+  position:fixed;
 }
 
 .buttonWrapper {
@@ -100,12 +105,12 @@
 }
 
 .twoButtons {
-	width: 49%;
+	width: 100px;
 	white-space: normal;
 }
 
 .threeButtons {
-	width: 25%;
+	width: 65px;
 	white-space: normal;
 }
 
@@ -397,6 +402,14 @@
   text-transform:uppercase;
   padding-left:87%;
   padding-top:2%;
+  font-family:"Roboto",Roboto,sans-serif;
+  font-weight:bold;
+}
+
+.exitHelpWindow:hover,.exitGoalWindow:hover,
+.exitBuddyWindow:hover {
+  cursor:pointer;
+  text-decoration:underline;
 }
 
 .hideHelper:hover,
