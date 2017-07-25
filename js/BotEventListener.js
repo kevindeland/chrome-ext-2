@@ -1,14 +1,16 @@
 var myApp = myApp || {};
 
+myApp.eventListener = {};
+
+// holds the state of the GSW
+myApp.wizardState = {
+  hasBeenCalculated: false,
+  hasSeenInterventionName: false,
+  goalGraphOpen: false
+};
+
 function BotEventListener() {
   log("BotEventListener()");
-
-  // holds the state of the GSW
-  var wizardState = {
-    hasBeenCalculated: false,
-    hasSeenInterventionName: false,
-    goalGraphOpen: false
-  };
 
   /*** Check if our load is the result of a "Calculate Goal" click... ***/
   // define data goals
@@ -35,7 +37,7 @@ function BotEventListener() {
 
   } else if(moderateData.html().indexOf("Calculate") >= 0) {
     log("Not yet calculated");
-    wizardState.hasBeenCalculated = false;
+    myApp.wizardState.hasBeenCalculated = false;
 
     if(!hasClickedNever) {
       myApp.buddy.showWorkedExampleOption();
@@ -43,7 +45,7 @@ function BotEventListener() {
 
   } else {
     log("Has been calculated");
-    wizardState.hasBeenCalculated = true;
+    myApp.wizardState.hasBeenCalculated = true;
 
     myApp.updater.showBigPopup("goalGraph");
 
@@ -65,7 +67,7 @@ function BotEventListener() {
     myApp.updater.hideBigPopup();
 
     // FIXME only if you're hiding the goal box
-    myApp.updater.showBabyBuddy();
+    myApp.updater.showBabyBuddy({graphDisabled: true});
   });
 
   var leftHelpButton = $(".helpModuleLeft");
@@ -84,8 +86,8 @@ function BotEventListener() {
 
   interventionName.on('focus', function() {
 
-    if(!wizardState.hasSeenInterventionName) {
-      wizardState.hasSeenInterventionName = true;
+    if(!myApp.wizardState.hasSeenInterventionName) {
+      myApp.wizardState.hasSeenInterventionName = true;
       myApp.buddy.showInterventionNamePrompt();
     } else {
       log("already saw intervention name help");
@@ -195,9 +197,9 @@ function BotEventListener() {
   goalTypeBox.on('click', function() {
     log("clicked inside the magic box");
 
-    if(!wizardState.hasBeenCalculated) {
+    if(!myApp.wizardState.hasBeenCalculated) {
       calculateGoal.trigger("click");
-    } else if (!wizardState.goalGraphOpen){ // if goal graph is open, we want to click radio buttons without response
+    } else if (!myApp.wizardState.goalGraphOpen){ // if goal graph is open, we want to click radio buttons without response
       // FIXME ITEM 4... be able to click on different boxes without opening box
       myApp.updater.showBigPopup("goalGraph");
     }

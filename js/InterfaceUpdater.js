@@ -131,7 +131,7 @@ myApp.updater.showHelpScreen = function() {
 myApp.updater.hideBigPopup = function () {
   var modal = $(".modal");
   modal.hide();
-  // FIXME myApp.wizardState.setAttr("goalGraphOpen" = false;
+  myApp.wizardState.goalGraphOpen = false;
 }
 
 myApp.updater.showGoalGraph = function() {
@@ -175,7 +175,7 @@ myApp.updater.showGoalGraph = function() {
   var modal = $("#modal");
   $(".modalTitleText").html(MESSAGES.modalTitle.formatUnicorn({first: studentName.first, last: studentName.last}));
   modal.show();
-  // FIXME wizardState.goalGraphOpen = true;
+  myApp.wizardState.goalGraphOpen = true;
   initializeD3();
   //redrawBars();
   redrawAxes();
