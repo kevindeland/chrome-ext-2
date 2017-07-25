@@ -384,10 +384,19 @@
 
 .exitHelpWindow {
   color: #FFFFFF;
+  text-transform:uppercase;
 }
 
 .exitGoalWindow {
   color: #009A65;
+  text-transform:uppercase;
+}
+
+.exitBuddyWindow{
+  color:#009A65;
+  text-transform:uppercase;
+  padding-left:87%;
+  padding-top:2%;
 }
 
 .hideHelper:hover,
