@@ -61,6 +61,7 @@ function BotEventListener() {
     hideBigPopup();
   });
 
+  /*** Help Window ***/
   function showHelpScreen() {
     var helpModal = $("#helpModal");
     helpModal.show();
@@ -82,6 +83,7 @@ function BotEventListener() {
     window.open(LINKS.starMathResources, "_blank_");
   });
 
+  /*** End Help Window ***/
   /*** Intervention name text input ***/
   var interventionName = $("#ctl00_cp_Content_tb_Title");
 
@@ -262,10 +264,22 @@ function BotEventListener() {
       calculateGoal.trigger("click");
     } else if (!wizardState.goalGraphOpen){ // if goal graph is open, we want to click radio buttons without response
       // XXX 2
-      showBigPopup("goalGraph",);
+      showBigPopup("goalGraph");
     }
 
+  });
 
+  /*** Goal Buttons inside goal popup ***/
+  $(".goalButton#moderateGoal").on('click', function() {
+    selectGoalLine("mod");
+  });
+
+  $(".goalButton#moderatelyAmbitiousGoal").on('click', function() {
+    selectGoalLine("amb");
+  });
+
+  $(".goalButton#cukuGoal").on('click', function() {
+    selectGoalLine("cuku");
   });
 
   //==============================
