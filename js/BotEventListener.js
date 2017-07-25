@@ -28,7 +28,8 @@ function BotEventListener() {
 
     myApp.updater.showBigPopup("goalGraph");
 
-  } // TODO we don't want it opening the big popup every time...
+  } // FIXME ITEM 2: what happens if this was a begin goal change???
+  // FIXME ITEM 3 we don't want it opening the big popup every time...
 
   /*** Panel button behavior ***/
   var helpButton = $("button.help");
@@ -58,7 +59,7 @@ function BotEventListener() {
   var interventionName = $("#ctl00_cp_Content_tb_Title");
 
   interventionName.on('focus', function() {
-    // TODO this should be moved into BuddyStates.js
+
     if(!wizardState.hasSeenInterventionName) {
       wizardState.hasSeenInterventionName = true;
       myApp.buddy.showInterventionNamePrompt();
@@ -82,7 +83,7 @@ function BotEventListener() {
   });
 
   // DOES NOT WORK!
-  // TODO on click the calendar, check to see if GoalEndDate is valid, and is different
+  // FIXME ITEM 1 on click the calendar, check to see if GoalEndDate is valid, and is different
   goalEndDate.on('blur', function() {
 
     var endDate = myApp.data.getEndDate();
@@ -155,6 +156,8 @@ function BotEventListener() {
   var calculateGoal = $("#ctl00_cp_Content_btn_CalcGoal");
   log(calculateGoal);
 
+
+  /*** Choosing goal types in the box ***/
   var goalTypeBox = $(".optionsTable tbody tr:nth-child(4) .dataColumn div");
   log(goalTypeBox);
   goalTypeBox.on('click', function() {
@@ -163,11 +166,12 @@ function BotEventListener() {
     if(!wizardState.hasBeenCalculated) {
       calculateGoal.trigger("click");
     } else if (!wizardState.goalGraphOpen){ // if goal graph is open, we want to click radio buttons without response
-      // XXX 2
+      // FIXME ITEM 4... be able to click on different boxes without opening box
       myApp.updater.showBigPopup("goalGraph");
     }
 
   });
+  /***************************************/
 
   /*** Goal Buttons inside goal popup ***/
   $(".goalButton#moderateGoal").on('click', function() {
@@ -181,5 +185,8 @@ function BotEventListener() {
   $(".goalButton#cukuGoal").on('click', function() {
     selectGoalLine("cuku");
   });
+
+
+  /*** TODO ITEM 5 add listeners for baby bot ***/
 
 };

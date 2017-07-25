@@ -19,7 +19,7 @@ myApp.buddy = {
       },
       buttonThree: {
         text: "Never",
-        callback: myApp.updater.hideBotBuddy // TODO make this actually do something
+        callback: myApp.updater.hideBotBuddy // TODO ITEM 6 make this actually do something
       }
     };
     myApp.updater.updateBotBuddy("#botBuddy", botBuddy);
@@ -69,7 +69,7 @@ myApp.buddy = {
       buttonOne : {
         text: "Yes",
         callback: function() {
-          myApp.updater.hideBotBuddy();
+          myApp.updater.hideBotBuddy(); // TODO ITEM 8 Trigger Calculate Goal
         }
       },
       buttonTwo: {
@@ -139,7 +139,7 @@ myApp.buddy = {
       buttonTwo: {
         text: "Change Goal",
         callback: function() {
-          myApp.updater.showBigPopup("goalGraph");
+          myApp.updater.showBigPopup("goalGraph"); // FIXME ITEM 7
         }
       }
     };
@@ -159,7 +159,7 @@ myApp.buddy = {
       buttonTwo: {
         text: "Change Goal",
         callback: function() {
-          myApp.updater.showBigPopup("goalGraph");
+          myApp.updater.showBigPopup("goalGraph"); // FIXME ITEM 7
         }
       }
     };

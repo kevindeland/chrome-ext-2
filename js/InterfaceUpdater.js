@@ -181,3 +181,5 @@ myApp.updater.showGoalGraph = function() {
   redrawAxes();
 
 }
+
+/*** TODO ITEM 5 add updater (show, hide) for baby bot ***/
