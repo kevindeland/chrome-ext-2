@@ -25,7 +25,7 @@ MESSAGES =  {
   interventionLengthLong: 'You set a Goal End Date of {weeks} weeks from now. This should be enough time to measure growth',
   interventionLenghtShort: 'You set a Goal End Date {weeks} week{weekPlural} after the benchmark. Experts recommend a minimum of eight weeks for effective interventions. Are you sure that\'s enough time?',
 
-  interventionLength1: 'You set a{n} {weeks}-week intervention. Experts recommend at least eight weeks for a 3rd Grade student.',
+  interventionLength1: 'You set a{n} {weeks}-week intervention. Experts recommend at least eight weeks for a {grade} Grade student.',
   interventionLength2: 'Would you like to confirm this duration?',
 
 

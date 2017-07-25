@@ -174,18 +174,7 @@ function drawHistoricalTests(svg, x, y) {
       .attr("class", "line moderate")
       .attr("d", xyLine)
       .on("click", function(){
-          d3.select("#lineCuku").attr("class", "line cuku");
-          d3.select("#lineMod").attr("class", "line moderate selected");
-          d3.select("#lineAmb").attr("class", "line ambitious");
-
-          updateBuddyScores({
-            name: "Moderate",
-            rate: calculatedGoals.moderate.rate,
-            ss: calculatedGoals.moderate.ss,
-            pct: 50
-          });
-
-          $("#ctl00_cp_Content_rb_Moderate").trigger("click");
+          selectGoalLine("mod");
       });
 
    var cuku = [startingPoint, {date: endDate, score: calculatedGoals.catchup.ss}];
@@ -195,18 +184,7 @@ function drawHistoricalTests(svg, x, y) {
       .attr("class", "line cuku")
       .attr("d", xyLine)
       .on("click", function(){
-          d3.select("#lineCuku").attr("class", "line cuku selected");
-          d3.select("#lineMod").attr("class", "line moderate");
-          d3.select("#lineAmb").attr("class", "line ambitious");
-
-          updateBuddyScores({
-            name: "Catch Up",
-            rate: calculatedGoals.catchup.rate,
-            ss: calculatedGoals.catchup.ss,
-            pct: undefined // TODO how to calculate this???
-          });
-
-          $("#ctl00_cp_Content_rb_CatchUp").trigger("click");
+        selectGoalLine("cuku");
       });
 
     var amb = [startingPoint, {date: endDate, score: calculatedGoals.modAmbitious.ss}];
@@ -217,21 +195,82 @@ function drawHistoricalTests(svg, x, y) {
        .style("stroke-dasharray", ("7, 3")) // NOTE how to do in CSS? http://www.d3noob.org/2013/01/making-dashed-line-in-d3js.html
        .attr("d", xyLine)
        .on("click", function(){
-           d3.select("#lineCuku").attr("class", "line cuku");
-           d3.select("#lineMod").attr("class", "line moderate");
-           d3.select("#lineAmb").attr("class", "line ambitious selected");
 
-           updateBuddyScores({
-             name: "Ambitious",
-             rate: calculatedGoals.modAmbitious.rate,
-             ss: calculatedGoals.modAmbitious.ss,
-             pct: 66
-           });
-
-           $("#ctl00_cp_Content_rb_ModAmbitious").trigger("click");
+         selectGoalLine("amb");
        });
 
 
+ }
+
+ function selectGoalLine(goalType) {
+
+   var calculatedGoals = myApp.data.getCalculatedGoals();
+
+   switch(goalType) {
+     /*** Moderate goal ***/
+     case "mod":
+       d3.select("#lineCuku").attr("class", "line cuku");
+       d3.select("#lineMod").attr("class", "line moderate selected");
+       d3.select("#lineAmb").attr("class", "line ambitious");
+
+       $("#moderateGoal").addClass("goalButtonSelected");
+       $("#moderatelyAmbitiousGoal").removeClass("goalButtonSelected");
+       $("#cukuGoal").removeClass("goalButtonSelected");
+
+       updateBuddyScores({
+         name: "Moderate",
+         rate: calculatedGoals.moderate.rate,
+         ss: calculatedGoals.moderate.ss,
+         pct: 50
+       });
+
+       $("#ctl00_cp_Content_rb_Moderate").trigger("click");
+
+       break;
+
+       /*** Moderately Ambitious goal ***/
+     case "amb":
+       d3.select("#lineCuku").attr("class", "line cuku");
+       d3.select("#lineMod").attr("class", "line moderate");
+       d3.select("#lineAmb").attr("class", "line ambitious selected");
+
+       $("#moderateGoal").removeClass("goalButtonSelected");
+       $("#moderatelyAmbitiousGoal").addClass("goalButtonSelected");
+       $("#cukuGoal").removeClass("goalButtonSelected");
+
+       updateBuddyScores({
+         name: "Ambitious",
+         rate: calculatedGoals.modAmbitious.rate,
+         ss: calculatedGoals.modAmbitious.ss,
+         pct: 66
+       });
+
+       $("#ctl00_cp_Content_rb_ModAmbitious").trigger("click");
+       break;
+
+       /*** Catchup Keepup Goal ***/
+     case "cuku":
+       // update line selections
+      d3.select("#lineCuku").attr("class", "line cuku selected");
+      d3.select("#lineMod").attr("class", "line moderate");
+      d3.select("#lineAmb").attr("class", "line ambitious");
+
+      $("#moderateGoal").removeClass("goalButtonSelected");
+      $("#moderatelyAmbitiousGoal").removeClass("goalButtonSelected");
+      $("#cukuGoal").addClass("goalButtonSelected");
+
+      // update text
+      updateBuddyScores({
+        name: "Catch Up",
+        rate: calculatedGoals.catchup.rate,
+        ss: calculatedGoals.catchup.ss,
+        pct: undefined // TODO how to calculate this???
+      });
+
+      // trigger a click on the radio button
+      $("#ctl00_cp_Content_rb_CatchUp").trigger("click");
+      break;
+   }
  }
 
  function updateBuddyScores(goal) {
