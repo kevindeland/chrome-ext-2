@@ -62,10 +62,14 @@ function BotEventListener() {
     myApp.updater.showHelpScreen();
   });
 
-  // FIXME ITEM 9: different exit behavior for
-  $(".exit").on('click', function() {
-    myApp.updater.hideBigPopup();
-
+  $(".exitHelpWindow").on('click', function() {
+    myApp.updater.hideHelpScreen();
+    // FIXME only if you're hiding the goal box
+    myApp.updater.showBabyBuddy({graphDisabled: true});
+  });
+	
+	$(".exitGoalWindow").on('click', function() {
+		myApp.updater.hideBigPopup();
     // FIXME only if you're hiding the goal box
     myApp.updater.showBabyBuddy({graphDisabled: true});
   });

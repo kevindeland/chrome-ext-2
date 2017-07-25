@@ -128,6 +128,12 @@ myApp.updater.showHelpScreen = function() {
   }
 };
 
+myApp.updater.hideHelpScreen = function () {
+  var helpModal = $("#helpModal");
+  helpModal.hide();
+  myApp.wizardState.goalGraphOpen = false;
+}
+
 myApp.updater.hideBigPopup = function () {
   var modal = $(".modal");
   modal.hide();
