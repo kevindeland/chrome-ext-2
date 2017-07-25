@@ -86,22 +86,26 @@ function BotEventListener() {
   /*** Setting the goal end date *()*/
   var goalEndDate = $("#ctl00_cp_Content_tb_Target");
 
-  goalEndDate.on('change', function() {
-    log('change goalEndDate');
-  });
+	//Updates the bot buddy's text to say the amount of week(s) it'll be for the goal
+	goalEndDate.on('blur', function(e) {
+		if(e.relatedTarget && e.relatedTarget.innerText != "") {
+			var bigOleDateString = (parseInt($('.ui-datepicker-month').val())+1) + '-' + e.relatedTarget.innerText + '-' + $('.ui-datepicker-year').val();
+			console.log("Selected date: " + bigOleDateString);
+			var endDate = new Date(bigOleDateString);
+			var startTest = myApp.data.getStartTest();
+			var diff = compareTestDates(startTest.date, endDate.getTime());
 
-  // DOES NOT WORK!
-  // FIXME ITEM 1 on click the calendar, check to see if GoalEndDate is valid, and is different
-  goalEndDate.on('blur', function() {
+			myApp.buddy.showInterventionLengthBuddy(diff);
+		} else {
+			var endDate = myApp.data.getEndDate();
+			if(isNaN(endDate)) return;
 
-    var endDate = myApp.data.getEndDate();
-    if(isNaN(endDate)) return;
+			var startTest = myApp.data.getStartTest();
+			var diff = compareTestDates(startTest.date, endDate);
 
-    var startTest = myApp.data.getStartTest();
-    var diff = compareTestDates(startTest.date, endDate);
-
-    myApp.buddy.showInterventionLengthBuddy(diff);
-  });
+			myApp.buddy.showInterventionLengthBuddy(diff);
+		}
+	});
 
   // some divs do not appear until this button is clicked, so we
   // have to find them on click

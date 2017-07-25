@@ -94,10 +94,8 @@ myApp.buddy = {
       }
     };
 
-    if(diff.valid) {
-      // do nothing
-    } else {
-      // TODO highlight orange
+    if(!diff.valid) {
+      //Highlight orange
     }
     myApp.updater.updateBotBuddy('#botBuddy', botBuddy);
   },
