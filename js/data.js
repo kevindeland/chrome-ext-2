@@ -16,6 +16,13 @@ myApp.data.getStudentName = function() {
 }
 
 /**
+ * placeholder for getting student grade
+ */
+ myApp.data.getStudentGrade = function() {
+   return "3rd";
+ }
+
+/**
  *  gets start test from the interface
  */
 myApp.data.getStartTest = function() {

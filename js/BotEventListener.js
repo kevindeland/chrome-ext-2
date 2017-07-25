@@ -51,7 +51,7 @@ function BotEventListener() {
   }
 
   /*** Panel button behavior ***/
-  var helpButton = $("button.helpInVivo");
+  var helpButton = $("button.help");
   helpButton.on('click', function() {
     log("pressed help button");
     showHelpScreen();
@@ -213,7 +213,10 @@ function BotEventListener() {
 
     botBuddy = {
       messages: [
-        MESSAGES.interventionLength1.formatUnicorn({weeks: diff.weeks, n: decideAorAn(diff.weeks) }),
+        MESSAGES.interventionLength1.formatUnicorn({
+          weeks: diff.weeks, n: decideAorAn(diff.weeks),
+          grade: myApp.data.getStudentGrade()
+        }),
         MESSAGES.interventionLength2],
       buttonOne : {
         text: "Yes",
