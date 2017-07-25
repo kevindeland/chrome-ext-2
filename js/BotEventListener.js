@@ -38,11 +38,13 @@ function BotEventListener() {
     myApp.updater.showHelpScreen();
   });
 
+  // FIXME ITEM 9: different exit behavior for
   $(".exit").on('click', function() {
     myApp.updater.hideBigPopup();
+
+    // FIXME only if you're hiding the goal box
+    myApp.updater.showBabyBuddy();
   });
-
-
 
   var leftHelpButton = $(".helpModuleLeft");
   leftHelpButton.on('click', function() {
@@ -187,6 +189,26 @@ function BotEventListener() {
   });
 
 
-  /*** TODO ITEM 5 add listeners for baby bot ***/
+  $(".exitBuddyWindow").on('click', function() {
+    myApp.updater.hideBotBuddy();
+
+    // if goals have not yet been calculated, then view graph button is disabled
+    if(myApp.data.getCalculatedGoals() == null) {
+      myApp.updater.showBabyBuddy({graphDisabled: true});
+    } else {
+      myApp.updater.showBabyBuddy({graphDisabled: false});
+    }
+
+  });
+  /*** ITEM 5 add listeners for baby bot ***/
+  $(".viewBotMessage").on('click', function() {
+    myApp.updater.hideBabyBuddy();
+    myApp.updater.showBotBuddy();
+  });
+
+  $(".viewGraphs").on('click', function() {
+    myApp.updater.hideBabyBuddy();
+    myApp.updater.showGoalGraph();
+  });
 
 };
