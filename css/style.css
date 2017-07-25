@@ -7,7 +7,7 @@
     padding-top: 50px; /* Location of the box */
     left: 57.5%;
     top: 0;
-    width: 419px; /* Width */
+    width: 418px; /* Width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgba(238,238,238,.30); /* Fallback color */
@@ -16,10 +16,9 @@
 
 /*** Chat box **/
 .chatBox {
-	float: right;
   margin-top: 42px;
-  margin-left:50px;
-  margin-right:0px;
+  margin-left:48px;
+  margin-right:66px;
 	padding: 5px;
 	width: 302px;
   height:287px;
@@ -117,7 +116,7 @@
 /*** bottom button panel ***/
 
 .bottomButtonPanel {
-  margin-top:2%;
+  margin-top:33px;
 }
 
 
