@@ -73,6 +73,8 @@ myApp.buddy = {
         text: "Yes",
         callback: function() {
           myApp.updater.hideBotBuddy(); // TODO ITEM 8 Trigger Calculate Goal
+          var calculateGoal = $("#ctl00_cp_Content_btn_CalcGoal");
+          calculateGoal.trigger("click");
         }
       },
       buttonTwo: {
