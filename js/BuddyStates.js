@@ -21,9 +21,7 @@ myApp.buddy = {
         text: "Never",
         callback: function() {
           myApp.updater.hideBotBuddy();
-          chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
-            console.log("received response");
-          }); // TODO ITEM 6 make this actually do something
+          createCookie("NeverDoWorkedExample", "true", 7);
         }
       }
     };

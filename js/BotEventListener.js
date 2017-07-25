@@ -16,11 +16,17 @@ function BotEventListener() {
   var modAmbitiousData = $("#ctl00_cp_Content_sp_ModAmbitiousData");
   var catchupData = $("#ctl00_cp_Content_sp_CatchUpData");
 
+
+  /*** COOKIES ***/
+  var hasClickedNever = readCookie("NeverDoWorkedExample");
+
   if(moderateData.html().indexOf("Calculate") >= 0) {
     log("Not yet calculated");
     wizardState.hasBeenCalculated = false;
 
-    myApp.buddy.showWorkedExampleOption();
+    if(!hasClickedNever) {
+      myApp.buddy.showWorkedExampleOption();
+    }
 
   } else {
     log("Has been calculated");
