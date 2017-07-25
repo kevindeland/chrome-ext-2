@@ -173,7 +173,7 @@ myApp.updater.showGoalGraph = function() {
   };
   myApp.updater.updateBotBuddy('#modal', botBuddy);
   var modal = $("#modal");
-  $(".modalTitle").html(MESSAGES.modalTitle.formatUnicorn({first: studentName.first, last: studentName.last}));
+  $(".modalTitleText").html(MESSAGES.modalTitle.formatUnicorn({first: studentName.first, last: studentName.last}));
   modal.show();
   // FIXME wizardState.goalGraphOpen = true;
   initializeD3();

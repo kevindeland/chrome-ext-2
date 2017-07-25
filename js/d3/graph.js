@@ -3,6 +3,8 @@ function initializeD3() {
   var containerWidth = $(".modalTitle").width();
   var svgWidth = containerWidth,
       svgHeight = 250;
+  log("width=" + svgWidth);
+  log("height=" + svgHeight);
 
   if(d3.select("svg")[0][0] != null) {
     // only add graph once
@@ -23,10 +25,9 @@ function redrawAxes() {
       bottom: 20,
       left: 60
     };
-
-    var containerWidth = $(".modalTitle").width() - margin.left - margin.right;
+    var containerWidth = $(".modalTitle").width()  - margin.top - margin.bottom;//$(".modalTitle").width() - margin.left - margin.right;
     var svgWidth = containerWidth,
-        svgHeight = 350 - margin.top - margin.bottom;
+        svgHeight = 300 - margin.top - margin.bottom;
 
 
     $("svg").empty();

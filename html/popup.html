@@ -6,27 +6,12 @@
 <!-- Modal content -->
 <div class="modalContainer">
   <div class="modalHeader">
-    <div class="modalTitle"><!-- Title added dynamically --></div>
-    <button class="exit exitGoalWindow">EXIT</button>
+    <div class="modalTitle">
+      <div class="modalTitleText"></div>
+      <button class="download">Download</button>
+     </div>  
   </div>
-  <div class="modalContent"> <!-- no CSS -->
-    <div class="chatBox">
-      <div class="rIcon">R</div>
-      <div class="chatMessageAlignVertically">
-        <div class="chatMessageWrapper" align=right>
-          <div class="chatMessage">Jamie's Moderate Goal is 50 SGP and needs 3.8 SS / week growth to reach 530 SS.</div>
-          <div class="chatMessage">This student will have to grow faster than 50% of students at the same percentile rank to meet this goal.</div>
-        </div>
-      </div>
-      <div class="buttonPanel">
-        <input type="button" class="buttonOne buttonWrapper"/>
-        <input type="button" class="buttonTwo buttonWrapper"/>
-        <input type="button" class="buttonThree buttonWrapper"/>
-      </div>
-    </div>
-    <button class="download">Download</button>
-    <div class="modalGraph"></div>
-
+    <button class="exit exitGoalWindow">EXIT</button>
     <div class="legend">
       <div class="lineKey">
         <img id="projectedPerformanceLine"/> <!-- source added in js -->
@@ -51,7 +36,25 @@
       Add Custom Goal
         <div class="moderateGoalText">testing</div>
       </button>
+    </div>  
+  <div class="modalContent"> <!-- no CSS -->
+    <div class="chatBox" id="inVivo">
+      <div class="rIcon">R</div>
+      <div class="chatMessageAlignVertically">
+        <div class="chatMessageWrapper" align=right>
+          <div class="chatMessage">Jamie's Moderate Goal is 50 SGP and needs 3.8 SS / week growth to reach 530 SS.</div>
+          <div class="chatMessage">This student will have to grow faster than 50% of students at the same percentile rank to meet this goal.</div>
+        </div>
+      </div>
+      <div class="botButtonPanel" id="popup">
+        <input type="button" class="buttonOne buttonWrapper"/>
+        <input type="button" class="buttonTwo buttonWrapper"/>
+        <input type="button" class="buttonThree buttonWrapper"/>
+      </div>
     </div>
+  <div class="modalGraph"></div>
+
+  <div class="modalContent"> <!-- no CSS -->
 
   </div>
 </div>
