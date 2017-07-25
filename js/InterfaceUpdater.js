@@ -172,6 +172,9 @@ myApp.updater.showGoalGraph = function() {
     }
   };
   myApp.updater.updateBotBuddy('#modal', botBuddy);
+
+  myApp.updater.updateGoalButtons();
+
   var modal = $("#modal");
   $(".modalTitleText").html(MESSAGES.modalTitle.formatUnicorn({first: studentName.first, last: studentName.last}));
   modal.show();
@@ -180,6 +183,28 @@ myApp.updater.showGoalGraph = function() {
   //redrawBars();
   redrawAxes();
 
+}
+
+myApp.updater.updateGoalButtons = function() {
+  var goalData = myApp.data.getCalculatedGoals();
+  var buttonText = "{sgp} SGP = {rate} SS/week = {ss} SS";
+  $("#cukuGoal > .goalText").html(buttonText.formatUnicorn({
+    sgp: goalData.catchup.sgp,
+    rate: goalData.catchup.rate,
+    ss: goalData.catchup.ss
+  }));
+
+  $("#moderateGoal > .goalText").html(buttonText.formatUnicorn({
+    sgp: goalData.moderate.sgp,
+    rate: goalData.moderate.rate,
+    ss: goalData.moderate.ss
+  }));
+
+  $("#moderatelyAmbitiousGoal > .goalText").html(buttonText.formatUnicorn({
+    sgp: goalData.modAmbitious.sgp,
+    rate: goalData.modAmbitious.rate,
+    ss: goalData.modAmbitious.ss
+  }));
 }
 
 /*** ITEM 5 add updater (show, hide) for baby bot ***/
