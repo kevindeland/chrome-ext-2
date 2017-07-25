@@ -17,8 +17,15 @@
   },
   "permissions": [
     "activeTab",
-    "https://ajax.googleapis.com/"
+    "https://ajax.googleapis.com/",
+    "cookies",
+    "*://*.renlearn.com/"
   ],
+
+  "background": {
+    "scripts": ["js/cookieListener.js"]
+  },
+
   "content_scripts": [
     {
       "matches": ["https://rppres9.renlearn.com/*/STAR/ProgressMonitor/Intervention.aspx"],

@@ -19,7 +19,12 @@ myApp.buddy = {
       },
       buttonThree: {
         text: "Never",
-        callback: myApp.updater.hideBotBuddy // TODO ITEM 6 make this actually do something
+        callback: function() {
+          myApp.updater.hideBotBuddy();
+          chrome.runtime.sendMessage({greeting: "hello"}, function(response) {
+            console.log("received response");
+          }); // TODO ITEM 6 make this actually do something
+        }
       }
     };
     myApp.updater.updateBotBuddy("#botBuddy", botBuddy);
