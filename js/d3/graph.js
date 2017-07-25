@@ -217,7 +217,7 @@ function drawHistoricalTests(svg, x, y) {
        $("#moderatelyAmbitiousGoal").removeClass("goalButtonSelected");
        $("#cukuGoal").removeClass("goalButtonSelected");
 
-       updateBuddyScores({
+       myApp.updater.updateBuddyScores({
          name: "Moderate",
          rate: calculatedGoals.moderate.rate,
          ss: calculatedGoals.moderate.ss,
@@ -238,7 +238,7 @@ function drawHistoricalTests(svg, x, y) {
        $("#moderatelyAmbitiousGoal").addClass("goalButtonSelected");
        $("#cukuGoal").removeClass("goalButtonSelected");
 
-       updateBuddyScores({
+       myApp.updater.updateBuddyScores({
          name: "Ambitious",
          rate: calculatedGoals.modAmbitious.rate,
          ss: calculatedGoals.modAmbitious.ss,
@@ -260,7 +260,7 @@ function drawHistoricalTests(svg, x, y) {
       $("#cukuGoal").addClass("goalButtonSelected");
 
       // update text
-      updateBuddyScores({
+      myApp.updater.updateBuddyScores({
         name: "Catch Up",
         rate: calculatedGoals.catchup.rate,
         ss: calculatedGoals.catchup.ss,
@@ -273,18 +273,7 @@ function drawHistoricalTests(svg, x, y) {
    }
  }
 
- function updateBuddyScores(goal) {
 
-   var name = myApp.data.getStudentName().first;
-
-   var messages = [
-     MESSAGES.goalMessage1.formatUnicorn({
-       name: name, goalName: goal.name, rate: goal.rate, ss: goal.ss}),
-     MESSAGES.goalMessage2.formatUnicorn({pct: goal.pct})
-   ];
-
-   updateBuddyMessages('#modal', messages);
- }
 
 /**
  * TODO draw gray benchmark backgrounds

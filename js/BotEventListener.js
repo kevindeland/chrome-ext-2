@@ -1,3 +1,4 @@
+var myApp = myApp || {};
 
 function BotEventListener() {
   log("BotEventListener()");
@@ -19,59 +20,28 @@ function BotEventListener() {
     log("Not yet calculated");
     wizardState.hasBeenCalculated = false;
 
-    showWorkedExampleOption();
+    myApp.buddy.showWorkedExampleOption();
 
   } else {
     log("Has been calculated");
     wizardState.hasBeenCalculated = true;
 
-    showBigPopup("goalGraph");
+    myApp.updater.showBigPopup("goalGraph");
 
-  }
-
-  function showWorkedExampleOption() {
-    botBuddy = {
-      messages: [MESSAGES.welcome1, MESSAGES.welcome2],
-      buttonOne: {
-        text: "Yes",
-        callback: function() {
-          window.open(LINKS.workedExample, "_blank");
-        }
-      },
-      buttonTwo: {
-        text: "No",
-        callback: hideBotBuddy
-      },
-      buttonThree: {
-        text: "Never",
-        callback: hideBotBuddy
-      }
-    };
-    updateBotBuddy("#botBuddy", botBuddy);
-  }
+  } // TODO we don't want it opening the big popup every time...
 
   /*** Panel button behavior ***/
   var helpButton = $("button.help");
   helpButton.on('click', function() {
     log("pressed help button");
-    showHelpScreen();
+    myApp.updater.showHelpScreen();
   });
 
   $(".exit").on('click', function() {
-    hideBigPopup();
+    myApp.updater.hideBigPopup();
   });
 
-  /*** Help Window ***/
-  function showHelpScreen() {
-    var helpModal = $("#helpModal");
-    helpModal.show();
-    log("ayy");
-    window.onclick = function(event) {
-      if (event.target == helpModal) {
-        hideBigPopup();
-      }
-    }
-  };
+
 
   var leftHelpButton = $(".helpModuleLeft");
   leftHelpButton.on('click', function() {
@@ -95,42 +65,26 @@ function BotEventListener() {
         buttonOne: {
           text: "Sure",
           callback: function() {
-            showInterventionNameHelp();
+            myApp.buddy.showInterventionNameHelp();
           }
         },
         buttonTwo: {
           text: "No Thanks",
-          callback: hideBotBuddy
+          callback: myApp.updater.hideBotBuddy
         }
       };
-      updateBotBuddy('#botBuddy', botBuddy);
+      myApp.updater.updateBotBuddy('#botBuddy', botBuddy);
     } else {
       log("already saw intervention name help");
     }
   });
 
-  function showInterventionNameHelp() {
-    log("showInterventionNameHelp");
-
-    botBuddy = {
-      messages: [MESSAGES.interventionNameHelp1, MESSAGES.interventionNameHelp2],
-      buttonOne: {
-        text: "Got it",
-        callback: hideBotBuddy
-      },
-      buttonTwo: null
-    };
-    updateBotBuddy('#botBuddy', botBuddy);
-  }
-
   interventionName.on('blur', function() {
     if(isValidName(interventionName.val())) {
-      hideBotBuddy();
+      myApp.updater.hideBotBuddy();
     }
 
-
   });
-
 
   /*** Setting the goal end date *()*/
   var goalEndDate = $("#ctl00_cp_Content_tb_Target");
@@ -149,7 +103,7 @@ function BotEventListener() {
     var startTest = myApp.data.getStartTest();
     var diff = compareTestDates(startTest.date, endDate);
 
-    showInterventionLengthBuddy(diff);
+    myApp.buddy.showInterventionLengthBuddy(diff);
   });
 
   // some divs do not appear until this button is clicked, so we
@@ -209,48 +163,6 @@ function BotEventListener() {
 
   }
 
-
-  function showInterventionLengthBuddy(diff) {
-    updateProgressBar(2);
-
-    botBuddy = {
-      messages: [
-        MESSAGES.interventionLength1.formatUnicorn({
-          weeks: diff.weeks, n: decideAorAn(diff.weeks),
-          grade: myApp.data.getStudentGrade()
-        }),
-        MESSAGES.interventionLength2],
-      buttonOne : {
-        text: "Yes",
-        callback: function() {
-          hideBotBuddy();
-        }
-      },
-      buttonTwo: {
-        text: 'change date',
-        callback: function() {
-          datePickerTrigger.trigger("click");
-          addEventToCalendarPopup();
-          hideBotBuddy();
-        }
-      },
-      buttonThree : {
-        text: "Teach me More",
-        callback: function() {
-          window.open(LINKS.rtiResource, '_blank');
-        }
-      }
-    };
-
-    if(diff.valid) {
-      // do nothing
-    } else {
-      // TODO highlight orange
-    }
-    updateBotBuddy('#botBuddy', botBuddy);
-  };
-
-
   /*** Calculate Goal button ***/
   var calculateGoal = $("#ctl00_cp_Content_btn_CalcGoal");
   log(calculateGoal);
@@ -264,7 +176,7 @@ function BotEventListener() {
       calculateGoal.trigger("click");
     } else if (!wizardState.goalGraphOpen){ // if goal graph is open, we want to click radio buttons without response
       // XXX 2
-      showBigPopup("goalGraph");
+      myApp.updater.showBigPopup("goalGraph");
     }
 
   });
@@ -282,213 +194,4 @@ function BotEventListener() {
     selectGoalLine("cuku");
   });
 
-  //==============================
-  // UI Helpers
-  //==============================
-
-  function showBigPopup(name) {
-
-    switch(name) {
-      case "goalGraph":
-      showGoalGraph();
-      break;
-
-      case "help":
-      log("showing help screen");
-      var help = $("#helpModal");
-      help.show();
-      break;
-    }
-
-  }
-
-  function showGoalGraph() {
-    var studentName = myApp.data.getStudentName();
-
-    var goalData = myApp.data.getCalculatedGoals();
-
-    botBuddy = {
-      messages: [
-        MESSAGES.goalMessage1.formatUnicorn({
-          name: studentName.first,
-          goalName: "Moderate",
-          rate: goalData.moderate.rate,
-          ss: goalData.moderate.ss}),
-        MESSAGES.goalMessage2.formatUnicorn({
-          pct: 50
-        })
-      ],
-  		buttonOne: {
-  			text: "Confirm",
-  			callback: function() {
-          log("ayy");
-          hideBigPopup();
-          showConfirmationBuddy();
-        }
-  		},
-  		buttonTwo: {
-  			text: "Learn More",
-  			callback: function() {
-          window.open(LINKS.sgpResource, "_blank");
-        }
-  		},
-      buttonThree: {
-        text: "Exit window",
-        callback: function() {
-          hideBigPopup();
-        }
-      }
-    };
-    updateBotBuddy('#modal', botBuddy);
-    var modal = $("#modal");
-    $(".modalTitle").html(MESSAGES.modalTitle.formatUnicorn({first: studentName.first, last: studentName.last}));
-    modal.show();
-    wizardState.goalGraphOpen = true;
-    initializeD3();
-    //redrawBars();
-    redrawAxes();
-  }
-
-  function hideBigPopup() {
-    var modal = $(".modal");
-    modal.hide();
-    wizardState.goalGraphOpen = false;
-  }
-
-  function showConfirmationBuddy() {
-    updateProgressBar(4);
-
-    botBuddy = {
-      messages: [MESSAGES.confirmation.formatUnicorn({name: myApp.data.getStudentName().first})],
-      buttonOne: {
-        text: "Continue",
-        callback: function() {
-          showMotivationBuddy();
-        }
-      }
-    };
-    updateBotBuddy("#botBuddy", botBuddy);
-  };
-
-  function showMotivationBuddy() {
-    botBuddy = {
-      messages: [
-        MESSAGES.motivation.formatUnicorn({name: myApp.data.getStudentName().first}),
-        MESSAGES.interventionEffectiveness],
-      buttonOne: {
-        text: "Continue",
-        callback: function() {
-          showFinalConfirmationBuddy();
-        }
-      }
-    };
-    updateBotBuddy("#botBuddy", botBuddy);
-  };
-
-  function showFinalConfirmationBuddy() {
-    botBuddy = {
-      messages: [MESSAGES.finalConfirmation.formatUnicorn({name: myApp.data.getStudentName().first})],
-      buttonOne: {
-        text: "Yes",
-        callback: function() {
-          readyToSave();
-        }
-      },
-      buttonTwo: {
-        text: "Change Goal",
-        callback: function() {
-          showBigPopup("goalGraph");
-        }
-      }
-    };
-    updateBotBuddy("#botBuddy", botBuddy);
-  };
-
-  function readyToSave() {
-    botBuddy = {
-      messages: [MESSAGES.readyToSave],
-      buttonOne: {
-        text: "Save",
-        callback: function() {
-          var saveButton = $("#ctl00_cp_Content_btn_Save");
-          saveButton.trigger("click");
-        }
-      },
-      buttonTwo: {
-        text: "Change Goal",
-        callback: function() {
-          showBigPopup("goalGraph");
-        }
-      }
-    };
-    updateBotBuddy("#botBuddy", botBuddy);
-  };
-
-  function updateProgressBar(step) {
-    var progressBar = $(".progressBar");
-    progressBar.html('<img src="' + chrome.runtime.getURL("../images/progress_bar/progress_bar_" + step + "_4.png") + '"/>');
-  }
-
 };
-
-function updateBotBuddy(parent, botBuddy) {
-  if(parent == "#botBuddy") {
-    showBotBuddy();
-  }
-
-  $(parent + ' .chatMessageWrapper').html('');
-  if(botBuddy.messages) {
-    botBuddy.messages.forEach(function(m) {
-      $(parent + ' .chatMessageWrapper').append('<div class="chatMessage">' + m + '</div>');
-    });
-  }
-
-  var buttonOne = $(parent + ' .buttonOne');
-  var buttonTwo = $(parent + ' .buttonTwo');
-  var buttonThree = $(parent + ' .buttonThree');
-
-  if(botBuddy.buttonThree) {
-    buttonOne.removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonOne.text);
-    buttonTwo.removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonTwo.text);
-    buttonThree.show().prop('value', botBuddy.buttonThree.text);
-    buttonOne.prop('onclick',null).off('click');
-    buttonOne.on('click', botBuddy.buttonOne.callback);
-    buttonTwo.prop('onclick',null).off('click');
-    buttonTwo.on('click', botBuddy.buttonTwo.callback);
-    buttonThree.prop('onclick',null).off('click');
-    buttonThree.on('click', botBuddy.buttonThree.callback);
-  }
-  else if (botBuddy.buttonTwo){
-    buttonOne.show().removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
-    buttonTwo.show().removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonTwo.text);
-    buttonOne.prop('onclick',null).off('click');
-    buttonOne.on('click', botBuddy.buttonOne.callback);
-    buttonTwo.prop('onclick',null).off('click');
-    buttonTwo.on('click', botBuddy.buttonTwo.callback);
-    buttonThree.hide();
-  } else {
-    buttonOne.show().removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
-    buttonOne.prop('onclick',null).off('click');
-   buttonOne.on('click', botBuddy.buttonOne.callback);
-  buttonTwo.hide();
-   buttonThree.hide();
-  }
-}
-
-/** like updateBotBuddy, but only updates messages) **/
-function updateBuddyMessages(parent, messages) {
-  $(parent + ' .chatMessageWrapper').html('');
-  messages.forEach(function(m) {
-    $(parent + ' .chatMessageWrapper').append('<div class="chatMessage">' + m + '</div>');
-  });
-
-}
-
-/*** for showing and hiding bot buddy ***/
-function showBotBuddy() {
-  $("#botBuddy").show();
-}
-
-function hideBotBuddy(id) {
-  $("#botBuddy").hide();
-}

@@ -29,6 +29,8 @@
         "js/config.js",
         "js/data.js",
         "js/NewDivInserter.js",
+        "js/InterfaceUpdater.js",
+        "js/BuddyStates.js",
         "js/BotEventListener.js",
         "js/Main.js",
         "js/d3/graph.js"
