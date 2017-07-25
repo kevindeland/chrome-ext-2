@@ -131,7 +131,7 @@ myApp.updater.showHelpScreen = function() {
 myApp.updater.hideBigPopup = function () {
   var modal = $(".modal");
   modal.hide();
-  // FIXME wizardState.goalGraphOpen = false;
+  // FIXME myApp.wizardState.setAttr("goalGraphOpen" = false;
 }
 
 myApp.updater.showGoalGraph = function() {

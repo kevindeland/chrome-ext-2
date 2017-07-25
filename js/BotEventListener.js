@@ -19,8 +19,21 @@ function BotEventListener() {
 
   /*** COOKIES ***/
   var hasClickedNever = readCookie("NeverDoWorkedExample");
+  var lastAction = readCookie("lastAction");
 
-  if(moderateData.html().indexOf("Calculate") >= 0) {
+  if(lastAction == "startTestDropdown") {
+
+    eraseCookie("lastAction");
+    log("we just changed the startTest...");
+    var endDate = myApp.data.getEndDate();
+    if(isNaN(endDate)) return;
+
+    var startTest = myApp.data.getStartTest();
+    var diff = compareTestDates(startTest.date, endDate);
+
+    myApp.buddy.showInterventionLengthBuddy(diff);
+
+  } else if(moderateData.html().indexOf("Calculate") >= 0) {
     log("Not yet calculated");
     wizardState.hasBeenCalculated = false;
 
@@ -34,7 +47,10 @@ function BotEventListener() {
 
     myApp.updater.showBigPopup("goalGraph");
 
-  } // FIXME ITEM 2: what happens if this was a begin goal change???
+  }
+  /** FIXME ITEM 2
+   * what is the logic flow?
+   */
   // FIXME ITEM 3 we don't want it opening the big popup every time...
 
   /*** Panel button behavior ***/
@@ -159,6 +175,14 @@ function BotEventListener() {
     });
 
   }
+
+
+  /*** Starting Test Dropdown Selection ***/
+  var startTestDropdown = $("#ctl00_cp_Content_ddl_AnchorScore");
+  startTestDropdown.on("change", function() {
+    log("changed start test!");
+    createCookie("lastAction", "startTestDropdown", 7);
+  });
 
   /*** Calculate Goal button ***/
   var calculateGoal = $("#ctl00_cp_Content_btn_CalcGoal");
