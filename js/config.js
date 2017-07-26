@@ -3,7 +3,7 @@
 USE_D3 = true;
 
 LINKS = {
-  workedExample: "https://projects.invisionapp.com/share/WYCKQRK8E#/screens",
+  workedExample: "https://projects.invisionapp.com/share/T9CP8GASE#/screens",
   rtiResource: "http://doc.renlearn.com/KMNet/R004336320GJBD8A.pdf",
   sgpResource: "http://doc.renlearn.com/KMNet/R00571375CF86BBF.pdf",
   starMathResources: "http://help.renaissance.com/sm/Resources"
@@ -28,6 +28,7 @@ MESSAGES =  {
   interventionLength1: 'You set a{n} {weeks}-week intervention. Experts recommend at least eight weeks for a {grade} Grade student.',
   interventionLength2: 'Would you like to confirm this duration?',
 
+  readyToCalculateGoal: "Click on the Goal section or the View Graphs button below to see graphs explaining each different goal type option.",
 
   greatButton: 'great!',
   learnMoreButton: 'learn more',
