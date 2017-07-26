@@ -8,7 +8,13 @@
   <div class="modalHeader">
     <div class="modalTitle">
       <div class="modalTitleText"></div>
-      <button class="download">Download</button>
+      <button class="download">
+      <!--@kevin this is a place for js source insertion for "../images/button_icons/download-icon.png". D is a placeholder for the icon currently, but modalTitle buttons will not have text, just icons.-->
+      D
+      </button>
+      <button class="expand">
+      <!--@kevin this is a place for js source insertion for "../images/button_icons/expand-icon.png". D is a placeholder for the icon currently, but modalTitle buttons will not have text, just icons.-->
+      E
      </div>
   </div>
     <button class="exit exitGoalWindow">EXIT</button>
@@ -34,8 +40,10 @@
       </button>
     <div class = "customGoalAlign">  
       <button class="goalButton" id="addCustomGoal">
-      <img src="../images/lines/custom-goal-icon.png"/> 
-      Add Custom Goal <!--this text should update or be replaced spacially with a metrics dropdown menu-->
+      <img src="../images/lines/custom-goal-icon.png"/> <!--@kevin here's an image link for js"-->
+      <img src="../images/lines/edit-icon.png"/> <!--@kevin here's an image link for js"-->
+
+      Add Custom Goal <!--@kevin this text should update or be replaced spacially with a metrics dropdown menu. Additionally, if a custom goal has already been added, this should no longer read Add Custom Goal, but it should read Edit Custom Goal. -->
       <div class="dropdown">
         <img src="../images/lines/dropdown-down-arrow.png" align="left"/>
         <button onclick="myFunction()" class="dropbtn">Scaled Score</button> <!--myFunction is a placeholdere for whatever javascript function we want to use-->
@@ -73,11 +81,10 @@
 
 <div class="bottomButtonPanel">
   <button class="help">
-    <div class="rIcon">?</div>
+    <img/> <!--@Kevin this is a javascript insertion place for "../images/button_icons/help-icon.png"-->
     Help
   </button>
   <button class="lastMessage">
-    <div class="arrow-left"></div>
-    Last Message
+    <img/> <!--@Kevin this is a javascript insertion place for "../images/button_icons/previous-page-icon.png"-->
   </button>
 </div>

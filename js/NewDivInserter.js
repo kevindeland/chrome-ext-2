@@ -25,6 +25,11 @@ function NewDivInserter (callback) {
       log(helpButton);
       helpButton.html('<input type="image" src="' + chrome.runtime.getURL("../images/Help_Button_Icon.png") + '"/>');
 
+      var helpButtonImage = $(".helpInVivo > img");
+      helpButtonImage.attr("src", chrome.runtime.getURL("../images/button_icons/help-icon.png"));
+
+      var lastMessageInVivo = $(".lastMessageInVivo > img");
+      lastMessageInVivo.attr("src", chrome.runtime.getURL("../images/button_icons/previous-page-icon.png"));
       addModal();
     });
   }
@@ -55,7 +60,6 @@ function NewDivInserter (callback) {
           //executeD3();
           addHelpModal();
         }
-
 
       });
   }
