@@ -378,7 +378,7 @@
   padding-left:30px;
 }
 
-.goalButton#addCustomGoal {
+#addCustomGoal.goalButton {
   float:right;
   border: 0.5px solid transparent;
   border-radius: 28px;
