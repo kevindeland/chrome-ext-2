@@ -45,6 +45,7 @@ function NewDivInserter (callback) {
         $("#moderateGoal > img").attr("src", chrome.runtime.getURL("../images/lines/moderate-goal-line.png"));
         $("#moderatelyAmbitiousGoal > img").attr("src", chrome.runtime.getURL("../images/lines/moderately-ambitious-line.png"));
         $("#cukuGoal > img").attr("src", chrome.runtime.getURL("../images/lines/cuku-line.png"));
+        $("#addCustomGoal > img").attr("src", chrome.runtime.getURL("../images/lines/custom-goal-icon.png"));
 
         if(!USE_D3) {
           $(".modalGraph").html('<img src="' + chrome.runtime.getURL("images/d3_graph.png") + '" width=50%/>');
