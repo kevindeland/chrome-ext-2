@@ -50,3 +50,22 @@ svg {
     stroke: black;
     shape-rendering: crispEdges;
 }
+
+/*** benchmark ***/
+.passing {
+  fill: #CCCCCC
+}
+
+.onWatch {
+  fill: #BBBBBB
+}
+
+.urgent {
+  fill: #AAAAAA
+}
+
+#startTestPopup {
+  fill: #FFFFFF;
+  rx: 6;
+  ry: 6;
+}

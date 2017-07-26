@@ -1,6 +1,11 @@
 window.onload = function () {
   log("page loaded, adding script to page");
 
+  log("么么哒");
+  log("么么哒");
+  log("么么哒");
+  log("么么哒");
+
   window.NewDivInserter = new NewDivInserter(function() {
     // need to do as callback so all divs are available
     window.BotEventListener = new BotEventListener();
