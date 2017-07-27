@@ -97,9 +97,14 @@
   width: 218px;
 }
 
-#popup.chatMessageWrapper,
-#popup.chatMessage {
-  width:240px;
+.chatMessageWrapperPopup,
+.chatMessagePopup{
+  background-color: #EEEEEE;
+  text-align:left;
+  margin-top:3px;
+  padding: 4%;
+  width: 240px;
+  border-radius:15px;
 }
 
 .botButtonPanel{
