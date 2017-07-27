@@ -51,8 +51,8 @@
 }
 
 #popup > .rIcon {
-  height:30px;
-    width:30px;
+  height:35px;
+    width:35px;
   margin-top:16px;
   margin-left: 16px;
   float: left;
@@ -156,6 +156,10 @@
   width: 300px;
   top: 350px;
   right: 39px;
+}
+
+#popup.bottomButtonPanel {
+  margin-top:0px;
 }
 
 .helpButton {
@@ -300,7 +304,7 @@
     width: 1122px;
     height: 441px;
     border: 3px solid white;
-    border-radius: 25px;
+    border-radius: 10px;
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,50);
 }
 
@@ -313,11 +317,20 @@
   text-align:center; /*why is it aligning wierdly? what is this class nested in?*/
   color:#ffffff;
   background-color:#009A65;
-  border-radius: 25px;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.modalTitleHelpText {
+  margin-top:15px;
+  width:389px;
+  margin-left:360px;
+  float:left;
 }
 
 .helpModuleContainer{
   margin: auto;
+  margin-top:55px;
+  margin-left:262px;
   height:270px;
   width: 60%;
 }
@@ -347,7 +360,7 @@
     height: 109px;
     border: 3px solid #EEEEEE;
     border-radius: 10px 10px 0px 0px;
-    box-shadow: 0px 2px 4px 0px rgba(0,0,0,50);
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,.50);
 }
 
 .topModuleWhite {
@@ -357,12 +370,12 @@
     padding-left: 28px;
     padding-right: 28px;
     padding-bottom:35px;
-    padding-top:31px;
-    width: 193px;
-    height: 109px;
+    padding-top:20px;
+    width: 209px;
+    height: 129px;
     border: 3px solid white;
     border-radius: 0px 0px 10px 10px;
-    box-shadow: 0px 2px 4px 0px rgba(0,0,0,50);
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,.50);
 }
 
 /* Modal Content */
@@ -386,6 +399,7 @@
   width: 678px;
   height: 379px;
   border-radius: 10px;
+  box-shadow:2px 2px 4px 0px rgba(0,0,0,0.30);
 }
 
 .modalLeftBoxX {
@@ -531,8 +545,19 @@
 
 
 .exitHelpWindow {
-  color: #FFFFFF;
+  color: #4A4A4A;
   text-transform:uppercase;
+  float:right;
+  padding:8px;
+  font-family:"Roboto",Roboto,sans-serif;
+  font-size:12px;
+  font-weight:200px;
+  background:#ffffff;
+  border: 0.75px solid #4A4A4A;
+  border-radius:3.75px;
+  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.30);
+  margin-top:25px;
+  margin-right:15px;
 }
 
 .exitGoalWindow {
@@ -541,7 +566,6 @@
   right: 21px;
   color:#4A4A4A;
   text-transform:uppercase;
-
   padding:8px;
   font-family:"Roboto",Roboto,sans-serif;
   font-size:12px;
