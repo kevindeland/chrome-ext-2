@@ -6,87 +6,109 @@
 <!-- Modal content -->
 <!--@kevin there should be a progress bar floating above the right hand side of modalContainer. check out the screenshot sent today earlier. i'm going to put the proper image in this directory: "../images/progress_bar/progress_bar_popup.png"-->
 <div class="modalContainer">
-  <div class="modalHeader">
-    <div class="modalTitle">
-      <div class="modalTitleText"></div>
-      <button class="download">
-      <!--@kevin this is a place for js source insertion for "../images/button_icons/download-icon.png". D is a placeholder for the icon currently, but modalTitle buttons will not have text, just icons.-->
-      D
-      </button>
-      <button class="expand">
-      <!--@kevin this is a place for js source insertion for "../images/button_icons/expand-icon.png". D is a placeholder for the icon currently, but modalTitle buttons will not have text, just icons.-->
-      E
-     </div>
-  </div>
-    <button class="exit exitGoalWindow">EXIT</button>
-    <div class="legend">
-      <div class="lineKey">
-        <img id="projectedPerformanceLine"/> <!-- source added in js -->
-        Student's Projected Performance
-      </div>
-      <button class="goalButton" id="moderateGoal">
-        <img/> <!-- source added in js -->
-        Moderate Goal
-        <div class="goalText">testing</div>
-      </button>
-      <button class="goalButton" id="moderatelyAmbitiousGoal">
-        <img/>  <!-- source added in js -->
-        Moderately Ambitious Goal
-        <div class="goalText">testing</div>
-      </button>
-      <button class="goalButton" id="cukuGoal">
-        <img/>  <!-- source added in js -->
-        Catch Up Keep Up Goal
-        <div class="goalText">testing</div>
-      </button>
-    <div class = "customGoalAlign">  
-      <button class="goalButton" id="addCustomGoal">
-      <!--<img src="../images/lines/custom-goal-icon.png"/ @kevin here's an image link for js"-->
-      <!--img src="../images/lines/edit-icon.png"/> @kevin here's an image link for js"-->
 
-      Add Custom Goal <!--@kevin this text should update or be replaced spacially with a metrics dropdown menu. Additionally, if a custom goal has already been added, this should no longer read Add Custom Goal, but it should read Edit Custom Goal. -->
-      <div class="dropdown">
-        <!--@kevin image for js insertion:<img src="../images/lines/dropdown-down-arrow.png" align="left"/>-->
-        <button onclick="myFunction()" class="dropbtn">Scaled Score</button> <!--myFunction is a placeholdere for whatever javascript function we want to use-->
-        <div id="myDropdown" class="dropdownContent">
-          <a href="#">Percentile Rank</a>
+  <div class="modalContent">
+
+
+    <div class="modalHeader modalLeftBox">
+       <div class="modalLeftBoxContent">
+         <div class="modalTitle">
+           <div class="modalTitleText"></div>
+           <button class="download">
+           <!--@kevin this is a place for js source insertion for "../images/button_icons/download-icon.png". D is a placeholder for the icon currently, but modalTitle buttons will not have text, just icons.-->
+           D
+           </button>
+           <button class="expand">
+           <!--@kevin this is a place for js source insertion for "../images/button_icons/expand-icon.png". D is a placeholder for the icon currently, but modalTitle buttons will not have text, just icons.-->
+           E
+          </div>
+          </div>
+
+         <div class="modalGraph"></div>
+
+         <div class="legendWrapper">
+           <div class="legend">
+             <div class="lineKey">
+               <img id="projectedPerformanceLine"/> <!-- source added in js -->
+               Student's Projected Performance
+             </div>
+             <button class="goalButton" id="moderateGoal">
+               <img/> <!-- source added in js -->
+               Moderate Goal
+               <div class="goalText">testing</div>
+             </button>
+             <button class="goalButton" id="moderatelyAmbitiousGoal">
+               <img/>  <!-- source added in js -->
+               Moderately Ambitious Goal
+               <div class="goalText">testing</div>
+             </button>
+             <button class="goalButton" id="cukuGoal">
+               <img/>  <!-- source added in js -->
+               Catch Up Keep Up Goal
+               <div class="goalText">testing</div>
+             </button>
+             <div class = "customGoalAlign">
+               <button class="goalButton" id="addCustomGoal">
+                 <!--<img src="../images/lines/custom-goal-icon.png"/ @kevin here's an image link for js"-->
+                 <!--img src="../images/lines/edit-icon.png"/> @kevin here's an image link for js"-->
+
+               Add Custom Goal <!--@kevin this text should update or be replaced spacially with a metrics dropdown menu. Additionally, if a custom goal has already been added, this should no longer read Add Custom Goal, but it should read Edit Custom Goal. -->
+               <div class="dropdown">
+                 <!--@kevin image for js insertion:<img src="../images/lines/dropdown-down-arrow.png" align="left"/>-->
+                 <img align="left"/>
+                 <button onclick="myFunction()" class="dropbtn">Scaled Score</button> <!--myFunction is a placeholdere for whatever javascript function we want to use-->
+                 <div id="myDropdown" class="dropdownContent">
+                   <a href="#">Percentile Rank</a>
+                 </div>
+               </div>
+               <form id="customGoalInput" align="right">
+                 <input type="text" name="customGoalInput">
+               </form>
+               </button>
+             </div>
+           </div>
+         </div>
+
+       </div>
+
+    </div>
+
+
+    <button class="exit exitGoalWindow">EXIT</button>
+
+
+    <div class="modalRightBox">
+     <!-- no CSS -->
+      <div class="chatBox" id="popup">
+        <div class="rIcon">R</div>
+        <div class="chatMessageAlignVertically">
+          <div class="chatMessageWrapper" align=right>
+            <div class="chatMessage">Jamie's Moderate Goal is 50 SGP and needs 3.8 SS / week growth to reach 530 SS.</div>
+            <div class="chatMessage">This student will have to grow faster than 50% of students at the same percentile rank to meet this goal.</div>
+              <div class="botButtonPanel" id="popup">
+                <input type="button" class="buttonOne buttonWrapper"/>
+                <input type="button" class="buttonTwo buttonWrapper"/>
+                <input type="button" class="buttonThree buttonWrapper"/>
+              </div>
+          </div>
         </div>
       </div>
-      <form id="customGoalInput" align="right">
-        <input type="text" name="customGoalInput">
-      </form>
-      </button>
     </div>
-   </div> 
-  <div class="modalContent"> <!-- no CSS -->
-    <div class="chatBox" id="popup">
-      <div class="rIcon">R</div>
-      <div class="chatMessageAlignVertically">
-        <div class="chatMessageWrapper" align=right>
-          <div class="chatMessage">Jamie's Moderate Goal is 50 SGP and needs 3.8 SS / week growth to reach 530 SS.</div>
-          <div class="chatMessage">This student will have to grow faster than 50% of students at the same percentile rank to meet this goal.</div>
-                <div class="botButtonPanel" id="popup">
-                  <input type="button" class="buttonOne buttonWrapper"/>
-                  <input type="button" class="buttonTwo buttonWrapper"/>
-                  <input type="button" class="buttonThree buttonWrapper"/>
-                </div>
-        </div>
-      </div>
-    </div>
+
   <!--@kevin I'm looking at our Sketch files, and it looks like there should be a white box directly under modalTitle that contains both the graph and the legend buttons. Then, the white box and modal title together as a shape have shadow: 2px 2px 4px 0px rgba(0,0,0,0.30). The picture of the data viz popup Tianxin sent earlier shows this for reference.-->  
   <div class="modalGraph"></div>
 
-  <div class="modalContent"> <!-- no CSS -->
-
   </div>
-</div>
 
-<div class="bottomButtonPanel">
-  <button class="help">
-    <img/> <!--@Kevin this is a javascript insertion place for "../images/button_icons/help-icon.png"-->
-    Help
-  </button>
-  <button class="lastMessage">
-    <img/> <!--@Kevin this is a javascript insertion place for "../images/button_icons/previous-page-icon.png"-->
-  </button>
+  <div class="bottomButtonPanel">
+    <button class="help">
+      <img/> <!--@Kevin this is a javascript insertion place for "../images/button_icons/help-icon.png"-->
+      Help
+    </button>
+    <button class="lastMessage">
+      <img/> <!--@Kevin this is a javascript insertion place for "../images/button_icons/previous-page-icon.png"-->
+      Last Message
+    </button>
+  </div>
+
 </div>
