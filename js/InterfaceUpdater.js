@@ -191,9 +191,13 @@ myApp.updater.showGoalGraph = function() {
 			text: "Confirm",
       affirmative: true,
 			callback: function() {
-        log("ayy");
         myApp.updater.hideBigPopup();
-        myApp.buddy.showConfirmationBuddy();
+
+        if(!myApp.wizardState.hasSeenMotivation) {
+          myApp.buddy.showConfirmationBuddy();
+        } else {
+          myApp.buddy.showFinalConfirmationBuddy();
+        }
       }
 		},
 		buttonTwo: {

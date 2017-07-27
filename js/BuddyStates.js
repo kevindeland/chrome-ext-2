@@ -132,11 +132,7 @@ myApp.buddy = {
         text: "Continue",
         affirmative: true,
         callback: function() {
-          if(!myApp.wizardState.hasSeenMotivation) {
-            myApp.buddy.showMotivationBuddy();
-          } else {
-            myApp.buddy.showFinalConfirmationBuddy();
-          }
+          myApp.buddy.showMotivationBuddy();
         }
       }
     };
@@ -173,6 +169,7 @@ myApp.buddy = {
       buttonTwo: {
         text: "Change Goal",
         callback: function() {
+          myApp.updater.hideBotBuddy();
           myApp.updater.showBigPopup("goalGraph"); // FIXME ITEM 7
         }
       }
