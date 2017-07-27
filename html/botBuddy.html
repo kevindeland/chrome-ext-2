@@ -1,38 +1,39 @@
-<div class="inVivoModal">
+<div class="inVivoModal buddyModal">
 
   <!-- Progress Bar -->
   <div class="progressBar">
     <!-- image added in NewDivInserter.js -->
   </div>
 
-  <div class="chatBox">
+  <div class="chatBox chatBoxStyle" id="inVivo">
     <button class="exitBuddyWindow">exit</button>
     <div class="rIcon">R</div>
     <div class="chatMessageAlignVertically">
       <div class="chatMessageWrapper" align=right>
         <!-- messages of class "chatMessage" are added dynamically in the function updateBotBuddy
         inside BotEventListener.js -->
+      </div>
     </div>
-    <!--<div class="buttonPanel">-->
     <div class="botButtonPanel">
       <!-- buttons get the class "twoButtons" or "threeButtons"
       added dynamically inside updateBotBuddy-->
-      <input type="button" class="buttonOne buttonWrapper" id="sandwichButton" value="" />
-      <input type="button" class="buttonTwo buttonWrapper" value="" />
-      <input type="button" class="buttonThree buttonWrapper" value="" />
-    </div>
+
+
+      <input type="button" class="buttonThree buttonWrapperStyle buttonWrapperPos" value="" />
+      <input type="button" class="buttonTwo buttonWrapperStyle buttonWrapperPos" value="" />
+      <input type="button" class="buttonOne buttonWrapperStyle buttonWrapperPos" value="" />
     </div>
   </div>
 
 
   <div class="bottomButtonPanel">
-    <button class="helpInVivo">
-      <img src=/>
-      Help
-    </button>
-    <button class="lastMessageInVivo">
-      <img src=/>
-      Previous Page
-    </button>
+    <div class="lastMessageButton">
+      <img><div class="lastMessageText">LAST MESSAGE</div>
+
+    </div>
+    <div class="helpButton">
+      <img><div class="helpText">HELP</div>
+    </div>
+
   </div>
 </div>

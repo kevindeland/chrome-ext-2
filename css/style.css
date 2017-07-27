@@ -12,21 +12,22 @@
     padding-top: 50px; /* Location of the box */
     left: 57.5%;
     top: 0;
-    width: 418px; /* Width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgba(238,238,238,.30); /* Fallback color */
     background-color: rgba(238,238,238,.30); /* Black w/ opacity */
 }
 
+.buddyModal {
+  width: 418px;
+}
+
+.babyModal {
+  width: 230px;
+}
+
 /*** Chat box **/
-.chatBox {
-  margin-top: 42px;
-  margin-left:48px;
-  margin-right:66px;
-	padding: 5px;
-	width: 302px;
-  height:287px;
+.chatBoxStyle {
   background-color:#ffffff;
 	border: 5px solid white;
 	border-radius: 30px;
@@ -34,29 +35,41 @@
 }
 
 .chatBox#inVivo{
-  margin: 5px;
-  padding: 5px;
-  margin-top:5%;
-  margin-right:7%;
-  width: 302px;
-  height:200px;
-
-  float:right;
+  position: absolute;
+  right: 21px;
+  top: 100px;
+  width: 352px;
+  height:238px;
 }
 
 .chatBox#popup {
-  margin: 5px;
-  padding: 5px;
-  margin-top:5%;
-  margin-right:7%;
-  width: 302px;
+  position: absolute;
+  right: 21px;
+  top: 80px;
+  width: 352px;
   height:238px;
-
-  float:right;
 }
 
+#popup > .rIcon {
+  height:30px;
+    width:30px;
+  margin-top:16px;
+  margin-left: 16px;
+  float: left;
+}
+
+#inVivo > .rIcon {
+  height:30px;
+    width:30px;
+  margin-top:16px;
+  margin-left: 16px;
+  float: left;
+}
+
+
 .chatMessageAlignVertically {
-  float:right;
+  position: absolute;
+  right: 27px;
   padding-right:27px;
   padding-left:14px;
   padding-top:16px;
@@ -81,23 +94,15 @@
 }
 
 .botButtonPanel{
-  width:210px;
-  float:right;
-  bottom-margin:0px;
-  margin-top:12.25%;
-  margin-left:2%;
+  position: absolute;
+  bottom: 0px;
+  width:inherit;
+  height: 60px;
+  right: 0px;
 }
 
-.botButtonPanel#popupChat {
-  height:37px;
-  width:400px;
-  margin-left:38.5%;
-}
+.buttonWrapperStyle {
 
-.buttonWrapper {
-  float:right;
-  margin-top:32px;
-  margin-bottom:5%;
   border: 0.5px solid #009A65;
   border-radius: 3.75px;
   box-shadow:0px 2px 4px 0px rgba(0,0,0,.50);
@@ -110,17 +115,20 @@
   color: #009A65;
 }
 
-.buttonWrapper#sandwichButton {
-  margin-left:2%;
+.buttonWrapperPos {
+  float: right;
+  margin-top: 0px;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
-.buttonWrapper:hover {
+.buttonWrapperStyle:hover {
   background-color:#009A65;
   color:white;
   cursor:pointer;
 }
 
-.buttonWrapper:active {
+.buttonWrapperStyle:active {
   box-shadow:0px 0px 0px 0px;
 }
 
@@ -130,39 +138,74 @@
 }
 
 .threeButtons {
-	width: 65px;
+
 	white-space: normal;
 }
 
 .buttonOne {}
 .buttonTwo {}
 .buttonThree {
-  margin-right:2%;
 }
 
 /*** bottom button panel ***/
 
 .bottomButtonPanel {
-  margin-top:33px;
+  position: absolute;
+  width: 300px;
+  top: 350px;
+  right: 42px;
+}
+
+.helpButton {
+  float: left;
+  margin-left: 140px;
+  position: relative;
+  cursor: pointer;
+}
+.helpText {
+  position: absolute;
+  left: 40px;
+  top: 12px;
+}
+
+.lastMessageButton {
+  float: left;
+  position: relative;
+  cursor: pointer;
+}
+.lastMessageText {
+  position: absolute;
+  top: 6px;
+  left: 40px;
 }
 
 
-.viewBotMessage,
-.viewGraphs {
-  float:right;
+.babyBotButton {
+
   border: 0.5px solid #009A65;
   border-radius: 28px;
   box-shadow:0px 2px 4px 0px rgba(0,0,0,50);
   padding: 1%;
-  margin-left:0%;
-  margin-right:10%;
-  margin-top:30px;
   background-color: white;
   font-family:"Roboto Slab",Roboto,serif;
   font-weight:bold;
   font-size:14.7px;
   color: #009A65;
   text-align:left;
+}
+.viewBotMessage {
+  position: absolute;
+  left: 40px;
+  top: 240px;
+}
+.viewGraphs {
+  position: absolute;
+  left: 40px;
+  top: 300px;
+}
+
+.botAlert {
+  display: none;
 }
 
 .viewGraphsDisabled {
@@ -308,6 +351,16 @@
 }
 
 .modalLeftBox {
+  position: absolute;
+  left: 21px;
+  top: 21px;
+  background-color: #FFFFFF;
+  width: 678px;
+  height: 379px;
+  border-radius: 10px;
+}
+
+.modalLeftBoxX {
   background-color: #FFFFFF;
   width: 678px;
   height: 379px;
@@ -316,9 +369,16 @@
   border-radius: 10px;
 }
 
+.modalRightBoxX {
+  position:absolute;
+  right: 21px;
+  top: 21px;
+}
+
 /*** Modal Content ***/
 .modalContent {
   width: 100%;
+  position: relative;
 }
 
 .modalLeftBoxContent {
@@ -449,10 +509,11 @@
 
 .exitGoalWindow {
   position: absolute;
+  top: 21px;
+  right: 21px;
   color:#4A4A4A;
   text-transform:uppercase;
-  top: 0px;
-  right: 0px;
+
   padding:8px;
   font-family:"Roboto",Roboto,sans-serif;
   font-size:12px;

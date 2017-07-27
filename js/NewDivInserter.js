@@ -21,11 +21,7 @@ function NewDivInserter (callback) {
       log(progressBar);
       progressBar.html('<img src="' + chrome.runtime.getURL("../images/progress_bar/progress_bar_1_4.png") + '"/>');
 
-      var helpButton = $(".helpButton");
-      log(helpButton);
-      helpButton.html('<input type="image" src="' + chrome.runtime.getURL("../images/Help_Button_Icon.png") + '"/>');
-
-      var helpButtonImage = $(".helpInVivo > img");
+      var helpButtonImage = $(".helpButton > img");
       helpButtonImage.attr("src", chrome.runtime.getURL("../images/button_icons/help-icon.png"));
 
       var lastMessageInVivo = $(".lastMessageInVivo > img");
@@ -55,6 +51,8 @@ function NewDivInserter (callback) {
         $("img#downloadButton").attr("src", chrome.runtime.getURL("../images/button_icons/download-icon.png"));
         $("img#expandButton").attr("src", chrome.runtime.getURL("../images/button_icons/expand-icon.png"));
 
+        $(".lastMessageButton > img").attr("src", chrome.runtime.getURL("../images/button_icons/previous-page-icon.png"));
+        $(".helpButton > img").attr("src", chrome.runtime.getURL("../images/button_icons/help-icon.png"));
 
         if(!USE_D3) {
           $(".modalGraph").html('<img src="' + chrome.runtime.getURL("images/d3_graph.png") + '" width=50%/>');

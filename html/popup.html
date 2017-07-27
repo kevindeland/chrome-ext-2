@@ -65,50 +65,42 @@
           </div>
       </div>
 
-
-
-    </div>
-
-
-
-
-
     </div>
 
     <button class="exit exitGoalWindow">EXIT</button>
 
     <div class="modalRightBox">
      <!-- no CSS -->
-      <div class="chatBox" id="popup">
+      <div class="chatBox chatBoxStyle" id="popup">
         <div class="rIcon">R</div>
         <div class="chatMessageAlignVertically">
           <div class="chatMessageWrapper" align=right>
             <div class="chatMessage">Jamie's Moderate Goal is 50 SGP and needs 3.8 SS / week growth to reach 530 SS.</div>
             <div class="chatMessage">This student will have to grow faster than 50% of students at the same percentile rank to meet this goal.</div>
           </div>
-          <div class="botButtonPanel" id="popupChat">
-            <input type="button" class="buttonOne buttonWrapper"/>
-            <input type="button" class="buttonTwo buttonWrapper"/>
-            <input type="button" class="buttonThree buttonWrapper"/>
-          </div>
+        </div>
+        <div class="botButtonPanel" id="popupChat">
+          <input type="button" class="buttonThree buttonWrapperStyle buttonWrapperPos"/>
+          <input type="button" class="buttonTwo buttonWrapperStyle buttonWrapperPos"/>
+          <input type="button" class="buttonOne buttonWrapperStyle buttonWrapperPos"/>
         </div>
       </div>
+
+      <div class="bottomButtonPanel">
+        <div class="lastMessageButton">
+          <img><div class="lastMessageText">LAST MESSAGE</div>
+
+        </div>
+        <div class="helpButton">
+          <img><div class="helpText">HELP</div>
+        </div>
+
+      </div>
     </div>
+  </div>
 
   <!--@kevin I'm looking at our Sketch files, and it looks like there should be a white box directly under modalTitle that contains both the graph and the legend buttons. Then, the white box and modal title together as a shape have shadow: 2px 2px 4px 0px rgba(0,0,0,0.30). The picture of the data viz popup Tianxin sent earlier shows this for reference.-->
-  <div class="modalGraph"></div>
 
-  </div>
 
-  <div class="bottomButtonPanel">
-    <button class="help">
-      <img/> <!--@Kevin this is a javascript insertion place for "../images/button_icons/help-icon.png"-->
-      Help
-    </button>
-    <button class="lastMessage">
-      <img/> <!--@Kevin this is a javascript insertion place for "../images/button_icons/previous-page-icon.png"-->
-      Last Message
-    </button>
-  </div>
 
 </div>

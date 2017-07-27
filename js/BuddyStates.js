@@ -83,7 +83,6 @@ myApp.buddy = {
         callback: function() {
           var datePickerTrigger = $(".ui-datepicker-trigger");
           datePickerTrigger.trigger("click");
-          addEventToCalendarPopup();
           myApp.updater.hideBotBuddy();
         }
       },

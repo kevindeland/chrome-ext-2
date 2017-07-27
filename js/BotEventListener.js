@@ -56,7 +56,7 @@ function BotEventListener() {
   // FIXME ITEM 3 we don't want it opening the big popup every time...
 
   /*** Panel button behavior ***/
-  var helpButton = $("button.help");
+  var helpButton = $(".helpButton");
   helpButton.on('click', function() {
     log("pressed help button");
     myApp.updater.showHelpScreen();
@@ -64,8 +64,6 @@ function BotEventListener() {
 
   $(".exitHelpWindow").on('click', function() {
     myApp.updater.hideHelpScreen();
-    // FIXME only if you're hiding the goal box
-    myApp.updater.showBabyBuddy({graphDisabled: true});
   });
 
 	$(".exitGoalWindow").on('click', function() {
