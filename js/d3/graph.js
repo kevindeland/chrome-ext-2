@@ -3,8 +3,6 @@ function initializeD3() {
   var containerWidth = $("#graph-body").width();
   var svgWidth = containerWidth,
       svgHeight = 250;
-  log("width=" + svgWidth);
-  log("height=" + svgHeight);
 
   if(d3.select("svg")[0][0] != null) {
     // only add graph once
@@ -140,7 +138,10 @@ function drawHistoricalTests(svg, x, y) {
       d.date = parseDate(d.date);
     });
 
-    data.push(myApp.data.getStartTest());
+    var startTest = myApp.data.getStartTest()
+    var endDate = myApp.data.getEndDate();
+
+    data.push(startTest);
 
     svg.selectAll(".dot")
         .data(data)
@@ -157,6 +158,43 @@ function drawHistoricalTests(svg, x, y) {
         });
 
     // TODO ITEM 24: draw calculated trendline
+    var trendline = calculateTrendLine(data);
+
+    log("" + trendline.m + "x + " + trendline.b);
+    log(trendline.data);
+    trendline.data.forEach(function(d) {
+      log(d);
+      log("score: " + d.score + "; scoreEst: " + d.scoreEst);
+      log("" + x(d.date) + "," + y(d.scoreEst));
+
+    });
+
+    var drawTrendline = d3.svg.line()
+        .x(function(d) {
+          return x(d.date);
+        })
+        .y(function(d) {
+          return y(d.scoreEst)
+        });
+
+    svg.append("path")
+        .datum(trendline.data)
+        .attr("class", "trend line trendBefore")
+        .attr("d", drawTrendline);
+
+    var projected = [{
+      date: startTest.date,
+      scoreEst: trendline.fun(startTest.date)
+    }, {
+      date: endDate,
+      scoreEst: trendline.fun(endDate)
+    }];
+
+    svg.append("path")
+        .datum(projected)
+        .attr("class", "trend line trendProjected")
+        .style("stroke-dasharray", ("4, 4"))
+        .attr("d", drawTrendline);
 
 };
 
@@ -382,3 +420,57 @@ function drawBenchmarks(svg, x, y, startDate, endDate) {
 };
 
 var parseDate = d3.time.format("%d-%b-%y").parse;
+
+/**
+ * uses linear regression to calculate trend line
+ */
+function calculateTrendLine(data) {
+  var x_mean = 0;
+  var y_mean = 0;
+  var term1 = 0;
+  var term2 = 0;
+  var n = data.length;
+
+  data.forEach(function(d) {
+    x_mean += +d.date;
+    y_mean += +d.score;
+  });
+
+  x_mean /= n;
+  y_mean /= n;
+
+  var xr = 0;
+  var yr = 0;
+
+  data.forEach(function(d) {
+    xr = +d.date - x_mean; // normalize
+    yr = +d.score - y_mean; // normalize
+    term1 += xr * yr;
+    term2 += xr * xr;
+  });
+
+  var b1 = term1 / term2; // slope
+  var b0 = y_mean - (b1 * x_mean); // y-intercept
+
+  var yhat = [];
+  for (var i=0; i< n; i++) {
+    yhat.push(b0 + (+data[i].date * b1));
+  }
+
+  var newData = [];
+  for (var i=0; i < n; i++) {
+    newData.push({
+      "scoreEst": yhat[i],
+      "score": data[i].score,
+      "date": +data[i].date
+    });
+  }
+
+  return {
+    data: newData,
+    b: b0,
+    m: b1,
+    fun: function(x) { return b1 * x + b0}
+  };
+
+}

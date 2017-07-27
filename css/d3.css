@@ -29,6 +29,18 @@ svg {
     stroke: #FEBF2D;
 }
 
+.trend{
+  stroke: black;
+}
+
+.trendBefore {
+  stroke-width: 3;
+}
+
+.trendProjected {
+  
+}
+
 /*** bars ***/
 #cukuBar {
     fill: #4E92DF;
@@ -41,6 +53,7 @@ svg {
 #modAmbBar {
     fill: #F8E749;
 }
+
 
 
 /*** axis ***/
