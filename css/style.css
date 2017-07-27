@@ -383,6 +383,7 @@
 
 .goalButton {
   float:right;
+  cursor: pointer;
   border: 0.5px solid transparent;
   border-radius: 5px;
   box-shadow:2px 2px 4px 0px rgba(151,151,151,.30);
@@ -399,8 +400,20 @@
   padding-left:30px;
 }
 
+.goalButton#addCustomGoal {
+  padding-left:60px;
+}
+
 .goalButtonSelected {
   background-color: #DDDDDD;
+}
+
+.customGoalDropdown {
+  display: none;
+}
+
+#customGoalInput {
+  display: none;
 }
 
 .goalButton#lineKey {
@@ -421,40 +434,9 @@
   padding-left:30px;
 }
 
-.goalButton#addCustomGoal {
-  float:right;
-  border: 0.5px solid transparent;
-  border-radius: 28px;
-  box-shadow:2px 2px 4px 0px rgba(151,151,151,20);
-  padding: 1%;
-  margin-top:6px;
-  height:36px;
-  width:264px;
-  background-color: #EEEEEE;
-  font-family:"Roboto",Roboto,sans-serif;
-  font-weight:bold;
-  font-size:12px;
-  color: black;
-  text-align:left;
-  padding-left:60px;
-}
-
 /*** helper ***/
 
-.exit {
-  top: 0px;
-  right: 0px;
-  text-shadow:0px 2px 4px 0px rgba(0,0,0,50);
-  padding: 1%;
-  margin-right:20px;
-  background-color: transparent;
-  border: transparent;
-  font-family:"Roboto",Roboto,serif;
-  font-weight:bold;
-  font-size:14px;
-  text-align:left;
-  text-decoration:underline;
-}
+
 
 
 .exitHelpWindow {
@@ -463,9 +445,11 @@
 }
 
 .exitGoalWindow {
+  position: absolute;
   color:#4A4A4A;
   text-transform:uppercase;
-  margin-left:85%;
+  top: 0px;
+  right: 0px;
   padding:8px;
   font-family:"Roboto",Roboto,sans-serif;
   font-size:12px;
