@@ -14,59 +14,59 @@
       <div class="modalLeftBoxContent">
         <div class="modalTitle">
           <div class="modalTitleText"></div>
-          <button class="download">
+          <img class="download" id="downloadButton">
           <!--@kevin this is a place for js source insertion for "../images/button_icons/download-icon.png". D is a placeholder for the icon currently, but modalTitle buttons will not have text, just icons.-->
-          D
-          </button>
-          <button class="expand">
+
+          <img class="expand" id="expandButton">
            <!--@kevin this is a place for js source insertion for "../images/button_icons/expand-icon.png". D is a placeholder for the icon currently, but modalTitle buttons will not have text, just icons.-->
-           E
-          </button>
+
         </div>
+        <div class="modalGraph"><!-- d3 gets inserted here --></div>
+        <div class="legendWrapper">
+          <div class="legend">
+            <div class="lineKey">
+              <img id="projectedPerformanceLine"/> <!-- source added in js -->
+                   Student's Projected Performance
+            </div>
+            <div class="goalButton" id="moderateGoal">
+              <img> <!-- source added in js -->
+              Moderate Goal
+              <div class="goalText">testing</div>
+            </div>
+            <div class="goalButton" id="moderatelyAmbitiousGoal">
+              <img>  <!-- source added in js -->
+              Moderately Ambitious Goal
+              <div class="goalText">testing</div>
+            </div>
+            <div class="goalButton" id="cukuGoal">
+              <img>  <!-- source added in js -->
+              Catch Up Keep Up Goal
+              <div class="goalText">testing</div>
+            </div>
+            <div class = "customGoalAlign">
+              <div class="goalButton" id="addCustomGoal">
+              <!--<img src="../images/lines/custom-goal-icon.png"/ @kevin here's an image link for js"-->
+              <!--img src="../images/lines/edit-icon.png"/> @kevin here's an image link for js"-->
+                Add Custom Goal <!--@kevin this text should update or be replaced spacially with a metrics dropdown menu. Additionally, if a custom goal has already been added, this should no longer read Add Custom Goal, but it should read Edit Custom Goal. -->
+                <div class="customGoalDropdown">
+                <!--@kevin image for js insertion:<img src="../images/lines/dropdown-down-arrow.png" align="left"/>-->
+                  <img align="left">
+                  <button onclick="myFunction()" class="dropbtn">Scaled Score</button> <!--myFunction is a placeholdere for whatever javascript function we want to use-->
+                  <div id="myDropdown" class="dropdownContent">
+                    <a href="#">Percentile Rank</a>
+                  </div>
+                </div>
+                <form id="customGoalInput" align="right">
+                  <input type="text" name="customGoalInput">
+                </form>
+              </div>
+              </div>
+            </div>
+          </div>
       </div>
 
-      <div class="modalGraph"><!-- d3 gets inserted here --></div>
-      <div class="legendWrapper">
-        <div class="legend">
-          <div class="lineKey">
-            <img id="projectedPerformanceLine"/> <!-- source added in js -->
-                 Student's Projected Performance
-          </div>
-          <div class="goalButton" id="moderateGoal">
-            <img> <!-- source added in js -->
-            Moderate Goal
-            <div class="goalText">testing</div>
-          </div>
-          <div class="goalButton" id="moderatelyAmbitiousGoal">
-            <img>  <!-- source added in js -->
-            Moderately Ambitious Goal
-            <div class="goalText">testing</div>
-          </div>
-          <div class="goalButton" id="cukuGoal">
-            <img>  <!-- source added in js -->
-            Catch Up Keep Up Goal
-            <div class="goalText">testing</div>
-          </div>
-          <div class = "customGoalAlign">
-            <div class="goalButton" id="addCustomGoal">
-            <!--<img src="../images/lines/custom-goal-icon.png"/ @kevin here's an image link for js"-->
-            <!--img src="../images/lines/edit-icon.png"/> @kevin here's an image link for js"-->
-              Add Custom Goal <!--@kevin this text should update or be replaced spacially with a metrics dropdown menu. Additionally, if a custom goal has already been added, this should no longer read Add Custom Goal, but it should read Edit Custom Goal. -->
-              <div class="customGoalDropdown">
-              <!--@kevin image for js insertion:<img src="../images/lines/dropdown-down-arrow.png" align="left"/>-->
-                <img align="left">
-                <button onclick="myFunction()" class="dropbtn">Scaled Score</button> <!--myFunction is a placeholdere for whatever javascript function we want to use-->
-                <div id="myDropdown" class="dropdownContent">
-                  <a href="#">Percentile Rank</a>
-                </div>
-              </div>
-              <form id="customGoalInput" align="right">
-                <input type="text" name="customGoalInput">
-              </form>
-            </div>
-            </div>
-          </div>
-        </div>
+
+
     </div>
 
 

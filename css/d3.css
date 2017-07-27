@@ -1,6 +1,6 @@
 /*** background ***/
 svg {
-  background: #f2f2f2;
+  background: #FFFFFF;
 }
 
 /** lines **/
@@ -53,15 +53,15 @@ svg {
 
 /*** benchmark ***/
 .passing {
-  fill: #CCCCCC
+  fill: #EEEEEE
 }
 
 .onWatch {
-  fill: #BBBBBB
+  fill: #DDDDDD
 }
 
 .urgent {
-  fill: #AAAAAA
+  fill: #CCCCCC
 }
 
 #startTestPopup {

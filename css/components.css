@@ -27,32 +27,16 @@
 
 
 /*** More buttons ***/
-.download {
-  float:right;
-  border: 0.5px solid transparent;
-  border-radius: 28px;
-  padding: 1%;
-  margin-left:45px;
-  margin-right:10%;
-  margin-top:0px;
-  background-color: transparent;
-  font-family:"Roboto",Roboto,sans-serif;
-  font-weight:200;
-  text-transform:uppercase;
-  font-size:8px;
-  font-size:14.7px;
-  color: #4A4A4A;
-  text-align:left;  
+img#downloadButton {
+  float: right;
+  cursor: pointer;
 }
 
-.download:hover,
-.download:focus {
-
+img#expandButton {
+  float: right;
+  cursor: pointer;
 }
 
-.expand {
-  float:right;
-}
 
 .goalText {
   font-family:"Roboto",Roboto,sans-serif;
@@ -115,7 +99,7 @@
   font-size:8px;
   font-size:14.7px;
   color: #4A4A4A;
-  text-align:left; 
+  text-align:left;
 }
 
 .lastMessage:hover,
@@ -160,11 +144,10 @@
   text-align:left;
 }
 
-.lastMessageInVivo:hover, 
+.lastMessageInVivo:hover,
 .helpInVivo:hover,
 .download:hover
 {
   text-decoration:underline;
   font-weight:bold;
 }
-

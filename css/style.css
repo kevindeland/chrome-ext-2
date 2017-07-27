@@ -191,9 +191,6 @@
     background-color: rgba(0,0,0,0.65); /* Black w/ opacity */
 }
 
-.modalLeftBox {
-  width: 60%;
-}
 .modalTitle {
   float: left;
   font-size: 24px;
@@ -203,8 +200,6 @@
   padding-left:31px;
   padding-top:7px;
   padding-bottom:7px;
-  margin-top:21px;
-  margin-left:21px;
   font-family: "Roboto Slab",Roboto,serif;
   color:white;
   background-color:#009A65;
@@ -213,7 +208,7 @@
 }
 
 .modalGraph {
-  width: 60%;
+  width: 369px;
   float: left;
 }
 #graph-body {
@@ -222,6 +217,7 @@
 
 .modalTitleText {
   width:488px;
+  float: left;
 }
 
 /*** Help Pop-Up ***/
@@ -231,7 +227,7 @@
     margin: auto;
     padding: 0px;
     width: 1122px;
-    height: 448px;
+    height: 441px;
     border: 3px solid white;
     border-radius: 25px;
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,50);
@@ -301,14 +297,23 @@
 /* Modal Content */
 .modalContainer {
   position: relative;
-    background-color: #FFFFFF;
+    background-color: #EEEEEE;
     margin: auto;
     padding: 0px;
     width: 1122px;
-    height: 420px;
+    height: 441px;
     border: 3px solid #EEEEEE;
     border-radius: 10px;
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,.50);
+}
+
+.modalLeftBox {
+  background-color: #FFFFFF;
+  width: 678px;
+  height: 379px;
+  margin-top:21px;
+  margin-left:21px;
+  border-radius: 10px;
 }
 
 /*** Modal Content ***/
@@ -332,6 +337,8 @@
 .legendWrapper {
   float: left;
   width: 40%;
+  margin-top: 40px;
+  margin-left: 10px;
 }
 
 .lineKey {
@@ -427,6 +434,8 @@
   text-align:left;
   padding-left:30px;
 }
+
+
 
 /*** helper ***/
 
