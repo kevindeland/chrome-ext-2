@@ -303,6 +303,7 @@ function drawHistoricalTests(svg, x, y) {
        $("#moderatelyAmbitiousGoal").removeClass("goalButtonSelected");
        $("#cukuGoal").removeClass("goalButtonSelected");
 
+       log("FIXME update buddy scores");
        myApp.updater.updateBuddyScores({
          name: "Moderate",
          rate: calculatedGoals.moderate.rate,

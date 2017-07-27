@@ -38,10 +38,11 @@ myApp.updater.updateBotBuddy = function (parent, botBuddy) {
     }
   }
 
-  $(parent + ' .chatMessageWrapper').html('');
+  var updateMe = $(parent + ' .chatMessageWrapper' + (parent == "#modal" ? "Popup" : ""));
+  updateMe.html('');
   if(botBuddy.messages) {
     botBuddy.messages.forEach(function(m) {
-      $(parent + ' .chatMessageWrapper').append('<div class="chatMessage">' + m + '</div>');
+      updateMe.append('<div class="chatMessage">' + m + '</div>');
     });
   }
 
@@ -111,7 +112,7 @@ myApp.updater.updateBotBuddy = function (parent, botBuddy) {
 myApp.updater.updateBuddyScores = function (goal) {
 
   var name = myApp.data.getStudentName().first;
-
+  log("FIXME update buddy scores")
   var messages = [
     MESSAGES.goalMessage1.formatUnicorn({
       name: name, goalName: goal.name, rate: goal.rate, ss: goal.ss, sgp: goal.sgp}),
@@ -123,9 +124,10 @@ myApp.updater.updateBuddyScores = function (goal) {
 
 /** like myApp.updater.updateBotBuddy, but only updates messages) **/
 myApp.updater.updateBuddyMessages = function (parent, messages) {
-  $(parent + ' .chatMessageWrapper').html('');
+  var updateMe = $(parent + ' .chatMessageWrapper' + (parent == "#modal" ? "Popup" : ""));
+  updateMe.html('');
   messages.forEach(function(m) {
-    $(parent + ' .chatMessageWrapper').append('<div class="chatMessage">' + m + '</div>');
+    updateMe.append('<div class="chatMessage">' + m + '</div>');
   });
 }
 
