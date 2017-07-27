@@ -179,7 +179,7 @@ function drawHistoricalTests(svg, x, y) {
 
     svg.append("path")
         .datum(trendline.data)
-        .attr("class", "trend line trendBefore")
+        .attr("class", "trendline trendBefore")
         .attr("d", drawTrendline);
 
     var projected = [{
@@ -192,7 +192,7 @@ function drawHistoricalTests(svg, x, y) {
 
     svg.append("path")
         .datum(projected)
-        .attr("class", "trend line trendProjected")
+        .attr("class", "trendline trendProjected")
         .style("stroke-dasharray", ("4, 4"))
         .attr("d", drawTrendline);
 
