@@ -27,6 +27,15 @@ myApp.updater.updateBotBuddy = function (parent, botBuddy) {
   if(parent == "#botBuddy") {
     myApp.updater.showBotBuddy();
     myApp.updater.hideBabyBuddy();
+
+    /** HACK big message **/
+    if(botBuddy.big) {
+      $("#botBuddy .chatBox").addClass("longMessage");
+      $("#botBuddy .bottomButtonPanel").addClass("longMessage");
+    } else {
+      $("#botBuddy .chatBox").removeClass("longMessage");
+      $("#botBuddy .bottomButtonPanel").addClass("longMessage");
+    }
   }
 
   $(parent + ' .chatMessageWrapper').html('');

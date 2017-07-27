@@ -142,6 +142,7 @@ myApp.buddy = {
   showMotivationBuddy: function () {
     myApp.wizardState.hasSeenMotivation = true;
     botBuddy = {
+      big: true, /** HACK big message **/
       messages: [
         MESSAGES.motivation.formatUnicorn({name: myApp.data.getStudentName().first}),
         MESSAGES.interventionEffectiveness],

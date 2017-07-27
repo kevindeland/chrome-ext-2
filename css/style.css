@@ -43,6 +43,10 @@
   height:315px;
 }
 
+.chatBox#inVivo.longMessage {
+  height: 350px; /** HACK big message **/
+}
+
 .chatBox#popup {
   position: absolute;
   right: 21px;
@@ -213,6 +217,9 @@
   width: 300px;
   top: 350px;
   right: 39px;
+}
+.bottomButtonPanel.longMessage {
+  top: 385px; /** HACK big message **/
 }
 
 #popup.bottomButtonPanel {
