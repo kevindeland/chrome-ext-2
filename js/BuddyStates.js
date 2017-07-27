@@ -132,7 +132,11 @@ myApp.buddy = {
         text: "Continue",
         affirmative: true,
         callback: function() {
-          myApp.buddy.showMotivationBuddy();
+          if(!myApp.wizardState.hasSeenMotivation) {
+            myApp.buddy.showMotivationBuddy();
+          } else {
+            myApp.buddy.showFinalConfirmationBuddy();
+          }
         }
       }
     };
@@ -140,6 +144,7 @@ myApp.buddy = {
   },
 
   showMotivationBuddy: function () {
+    myApp.wizardState.hasSeenMotivation = true;
     botBuddy = {
       messages: [
         MESSAGES.motivation.formatUnicorn({name: myApp.data.getStudentName().first}),

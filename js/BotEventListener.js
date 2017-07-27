@@ -6,7 +6,8 @@ myApp.eventListener = {};
 myApp.wizardState = {
   hasBeenCalculated: false,
   hasSeenInterventionName: false,
-  goalGraphOpen: false
+  goalGraphOpen: false,
+  hasSeenMotivation: false
 };
 
 function BotEventListener() {
