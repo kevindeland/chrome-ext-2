@@ -29,6 +29,11 @@ myApp.data.getStartTest = function() {
 
   var startScoreText = $("#ctl00_cp_Content_ddl_AnchorScore " + "option:selected").text();
 
+  if(!startScoreText) {
+    log("failed to get startScoreText because this is an already saved goal");
+    startScoreText = $("#ctl00_cp_Content_sp_StartingScore").text();
+  }
+
   regex = /^(\d{1,2}\/\d{1,2}\/\d{4}) \- (\d{1,3}) SS \/ (\d{1,3}) PR/
   parsedScoreText = startScoreText.match(regex);
 
