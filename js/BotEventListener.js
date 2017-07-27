@@ -203,7 +203,11 @@ function BotEventListener() {
   // FIXME ITEM 4... make sure the big goalGraph shows up when it should
   var goalTypeBox = $(".optionsTable tbody tr:nth-child(4) .dataColumn div");
   log(goalTypeBox);
+
+// This behavior canceled out... now we use the view
+/*
   goalTypeBox.on('click', function() {
+
     log("clicked inside the magic box");
 
     if(!myApp.wizardState.hasBeenCalculated) {
@@ -214,6 +218,7 @@ function BotEventListener() {
     }
 
   });
+  */
   /***************************************/
 
   /*** Goal Buttons inside goal popup ***/
@@ -257,8 +262,10 @@ function BotEventListener() {
   });
 
   $(".viewGraphs").on('click', function() {
-    myApp.updater.hideBabyBuddy();
-    myApp.updater.showGoalGraph();
+    if(!$(".viewGraphs").hasClass("viewGraphsDisabled")) {
+      myApp.updater.hideBabyBuddy();
+      myApp.updater.showGoalGraph();
+    }
   });
 
 };
