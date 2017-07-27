@@ -72,9 +72,10 @@ myApp.buddy = {
       buttonOne : {
         text: "Yes",
         callback: function() {
-          myApp.updater.hideBotBuddy(); // TODO ITEM 8 Trigger Calculate Goal
-          var calculateGoal = $("#ctl00_cp_Content_btn_CalcGoal");
-          calculateGoal.trigger("click");
+          myApp.updater.hideBotBuddy();
+
+          // TODO ITEM 1 do a logic check IF (goalEndDate && interventionName && hasBeenConfirmed)
+          showReadyToCalculateGoal();
         }
       },
       buttonTwo: {
@@ -98,6 +99,25 @@ myApp.buddy = {
       //Highlight orange
     }
     myApp.updater.updateBotBuddy('#botBuddy', botBuddy);
+  },
+
+  showReadyToCalculateGoal: function() {
+    myApp.updater.updateProgressBar(3);
+
+    botBuddy = {
+        messages: [MESSAGES.readyToCalculateGoal],
+        buttonOne: {
+          text: "View Graphs",
+          callback: function() {
+              // FIXME ITEM 1 update cookie
+              myApp.updater.hideBotBuddy(); // TODO ITEM 8 Trigger Calculate Goal
+              var calculateGoal = $("#ctl00_cp_Content_btn_CalcGoal");
+              calculateGoal.trigger("click");
+          }
+        }
+    };
+    myApp.updater.updateBotBuddy("#botBuddy", botBuddy)
+
   },
 
   showConfirmationBuddy: function () {

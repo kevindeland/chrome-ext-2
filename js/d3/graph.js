@@ -1,6 +1,6 @@
 function initializeD3() {
 
-  var containerWidth = $(".modalTitle").width();
+  var containerWidth = $("#graph-body").width();
   var svgWidth = containerWidth,
       svgHeight = 250;
   log("width=" + svgWidth);
@@ -25,7 +25,8 @@ function redrawAxes() {
       bottom: 20,
       left: 60
     };
-    var containerWidth = $(".modalTitle").width()  - margin.top - margin.bottom;//$(".modalTitle").width() - margin.left - margin.right;
+    var containerWidth = $("#graph-body").width() - margin.left - margin.right;
+    //.width() - $(".legend").width() - margin.top - margin.bottom;//$(".modalTitle").width() - margin.left - margin.right;
     var svgWidth = containerWidth,
         svgHeight = 300 - margin.top - margin.bottom;
 
@@ -81,7 +82,8 @@ function redrawAxes() {
     var endDate = myApp.data.getEndDate();
 
     x.domain([startDate, endDate]);
-    y.domain([400, 600]) // TODO dynamic
+    y.domain([400, 600]) // TODO min = lowest historical - margin
+                          // max = highest graph  + margin
 
     // draw x axis
     svg.append("g")
@@ -116,6 +118,9 @@ function redrawAxes() {
     /************************************************/
     /*** here is where we start with student data ***/
     /************************************************/
+
+    drawBenchmarks(svg, x, y, startDate, endDate);
+
 
     drawHistoricalTests(svg, x, y);
     drawGoalLines(svg, x, y);
@@ -200,6 +205,34 @@ function drawHistoricalTests(svg, x, y) {
          selectGoalLine("amb");
        });
 
+    var labelOffset = {
+      x: 10,
+      y: 10
+    }
+
+    svg.append("rect")
+        .attr("x", x(startingPoint.date) + labelOffset.x)
+        .attr("y", y(startingPoint.score) + labelOffset.y)
+        .attr("width", 120)
+        .attr("height", 25)
+        .attr("id", "startTestPopup");
+
+    // TODO add little arrow... harder than it looks?
+    // var speechBubble = [
+    //   {x: startingPoint.date, y: startingPoint.score},
+    //   {x: startingPoint.date}
+    // ]
+
+    svg.append("text")
+        .attr("x", x(startingPoint.date) + labelOffset.x + 10)
+        .attr("y", y(startingPoint.score) + labelOffset.y + 10)
+        .text("Starting Test");
+
+    var formatDate = d3.time.format("%b %d");
+    svg.append("text")
+        .attr("x", x(startingPoint.date) + labelOffset.x + 10)
+        .attr("y", y(startingPoint.score) + labelOffset.y + 10 + 12)
+        .text(formatDate(new Date(startingPoint.date)));
 
  }
 
@@ -275,13 +308,42 @@ function drawHistoricalTests(svg, x, y) {
    }
  }
 
-
-
 /**
- * TODO draw gray benchmark backgrounds
+ * TODO ITEM 47 draw gray benchmark backgrounds
  */
-function drawBenchmarks(svg, x, y) {
+function drawBenchmarks(svg, x, y, startDate, endDate) {
 
+  var xyLine = d3.svg.line()
+     .x(function(d) {
+       return x(d.date);
+     })
+     .y(function(d) {
+       return y(d.score);
+     });
+
+
+  var benchmark = [{date: startDate, score: 400}, {date: startDate, score: 520}, {date: endDate, score: 560}, {date: endDate, score: 400}];
+  svg.append("path")
+      .datum(benchmark)
+      .attr("class", "passing benchmark")
+      .attr("d", xyLine);
+
+  var onWatch = [{date: startDate, score: 400}, {date: startDate, score: 480}, {date: endDate, score: 520}, {date: endDate, score: 400}];
+  svg.append("path")
+      .datum(onWatch)
+      .attr("class", "onWatch benchmark")
+      .attr("d", xyLine);
+
+  // TODO what is angle of line?
+  // tan(angle) = (520 - 480) / (endDate - startDate)... too complicated for time given?
+  var urgent = [{date: startDate, score: 400}, {date: startDate, score: 440}, {date: endDate, score: 480}, {date: endDate, score: 400}];
+
+  svg.append("path")
+      .datum(urgent)
+      .attr("class", "urgent benchmark")
+      .attr("d", xyLine);
+
+      // TODO add text rotated?
 };
 
 var parseDate = d3.time.format("%d-%b-%y").parse;

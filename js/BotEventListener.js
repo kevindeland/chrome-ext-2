@@ -67,7 +67,7 @@ function BotEventListener() {
     // FIXME only if you're hiding the goal box
     myApp.updater.showBabyBuddy({graphDisabled: true});
   });
-	
+
 	$(".exitGoalWindow").on('click', function() {
 		myApp.updater.hideBigPopup();
     // FIXME only if you're hiding the goal box
@@ -103,7 +103,7 @@ function BotEventListener() {
       myApp.updater.hideBotBuddy();
     }
 
-  });
+  }); // FIXME ITEM 1 if conditions --> showCalculateGoalPrompt
 
   /*** Setting the goal end date *()*/
   var goalEndDate = $("#ctl00_cp_Content_tb_Target");
@@ -127,7 +127,7 @@ function BotEventListener() {
 
 			myApp.buddy.showInterventionLengthBuddy(diff);
 		}
-	});
+	}); // FIXME ITEM 1 if conditions --> showCalculateGoalPrompt
 
   // some divs do not appear until this button is clicked, so we
   // have to find them on click
@@ -200,6 +200,9 @@ function BotEventListener() {
 
 
   /*** Choosing goal types in the box ***/
+  // FIXME ITEM 4 remove this listeners
+  // FIXME ITEM 4... when you click a bullet point, do "selectGoalLine"
+  // FIXME ITEM 4... make sure the big goalGraph shows up when it should
   var goalTypeBox = $(".optionsTable tbody tr:nth-child(4) .dataColumn div");
   log(goalTypeBox);
   goalTypeBox.on('click', function() {
@@ -228,6 +231,15 @@ function BotEventListener() {
     selectGoalLine("cuku");
   });
 
+  // TODO ITEM 51 add behavior for listening to customGoal button click
+  $(".goalButton#customGoal").on('click', function() {
+    // XXX unhighlight other lines
+    selectGoalLine("custom");
+  });
+
+  $(".goalButton#customGoal > select").on('change', function() {
+    // XXX recalculate other goals
+  });
 
   $(".exitBuddyWindow").on('click', function() {
     myApp.updater.hideBotBuddy();
