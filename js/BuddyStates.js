@@ -75,7 +75,7 @@ myApp.buddy = {
           myApp.updater.hideBotBuddy();
 
           // TODO ITEM 1 do a logic check IF (goalEndDate && interventionName && hasBeenConfirmed)
-          showReadyToCalculateGoal();
+          myApp.buddy.showReadyToCalculateGoal();
         }
       },
       buttonTwo: {
