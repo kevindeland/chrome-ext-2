@@ -96,8 +96,9 @@ function NewDivInserter (callback) {
 
     $baby.load(babyURL, function() {
 
-      var graphImg = chrome.runtime.getURL("../images/Graphs_Icon.png");
-      $(".viewGraphs").html('<img src="' + graphImg + '"/>See Graphs')
+      // TEMP remove graph icon
+      // var graphImg = chrome.runtime.getURL("../images/Graphs_Icon.png");
+      // $(".viewGraphs").html('<img src="' + graphImg + '"/>See Graphs')
 
       callback();
     });
