@@ -181,7 +181,7 @@
 
 
 .babyBotButton {
-
+  cursor: pointer;
   border: 0.5px solid #009A65;
   border-radius: 28px;
   box-shadow:0px 2px 4px 0px rgba(0,0,0,50);
@@ -193,6 +193,13 @@
   color: #009A65;
   text-align:left;
 }
+
+.babyBotButton:hover {
+  background-color:#009A65;
+  color:white;
+  cursor:pointer;
+}
+
 .viewBotMessage {
   position: absolute;
   left: 40px;
@@ -209,7 +216,12 @@
 }
 
 .viewGraphsDisabled {
-
+  cursor: default;
+}
+.viewGraphsDisabled:hover {
+  cursor: default;
+  background-color: white;
+  color: #009A65;
 }
 
 #arrow-left {
