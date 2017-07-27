@@ -36,10 +36,10 @@
 
 .chatBox#inVivo{
   position: absolute;
-  right: 21px;
-  top: 100px;
-  width: 352px;
-  height:238px;
+  right: 58px;
+  top: 125px;
+  width: 302px;
+  height:315px;
 }
 
 .chatBox#popup {
@@ -59,8 +59,8 @@
 }
 
 #inVivo > .rIcon {
-  height:30px;
-    width:30px;
+  height:35px;
+    width:35px;
   margin-top:16px;
   margin-left: 16px;
   float: left;
@@ -99,6 +99,7 @@
   width:inherit;
   height: 60px;
   right: 0px;
+  margin-right:17px;
 }
 
 .buttonWrapperStyle {
@@ -110,7 +111,7 @@
   background-color: white;
   font-family:"Roboto",Roboto,serif;
   font-weight:bold;
-  font-size:74%%;
+  font-size:10px;
   text-transform: uppercase;
   color: #009A65;
 }
@@ -151,9 +152,10 @@
 
 .bottomButtonPanel {
   position: absolute;
+  margin-top:120px;
   width: 300px;
   top: 350px;
-  right: 42px;
+  right: 39px;
 }
 
 .helpButton {
@@ -166,6 +168,13 @@
   position: absolute;
   left: 40px;
   top: 12px;
+  font-family:"Roboto",Roboto,sans-serif;
+  color:#4A4A4A;
+  text-transform:uppercase;
+}
+
+.helpText:hover {
+  text-decoration: underline;
 }
 
 .lastMessageButton {
@@ -177,6 +186,13 @@
   position: absolute;
   top: 6px;
   left: 40px;
+  font-family:"Roboto",Roboto,sans-serif;
+  color:#4A4A4A;
+  text-transform:uppercase;
+}
+
+.lastMessageText:hover {
+  text-decoration: underline;
 }
 
 
@@ -537,9 +553,10 @@
 }
 
 .exitBuddyWindow{
-  color:#009A65;
+  color:#4A4A4A;
   text-transform:uppercase;
-  margin-left:85%;
+  margin-top:10px;
+  margin-left:240px;
   padding:2%;
   font-family:"Roboto",Roboto,sans-serif;
 
