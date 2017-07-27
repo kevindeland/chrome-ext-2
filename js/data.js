@@ -184,6 +184,16 @@ myApp.data.getStudentHistoricalData = function() {
 
   switch(firstName) {
 
+    case "Amanda":
+
+    return [
+      {date: "30-Aug-16", score: 480},
+      {date: "14-Oct-16", score: 501},
+      {date: "16-Nov-16", score: 479},
+      {date: "26-Dec-16", score: 495}
+    ]
+    break;
+
     case "Amber":
     default:
     return [
