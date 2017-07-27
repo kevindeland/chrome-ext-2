@@ -76,10 +76,6 @@
   width:220px;
 }
 
-#popup.chatMessageAlignVertically {
-  width:242px;
-}
-
 .chatMessage {
 	float:left;
   margin-top: 5px;
@@ -95,10 +91,6 @@
   margin-top:3px;
 	padding: 4%;
   width: 218px;
-}
-
-#popup.chatMessageWrapper {
-  width:260px;
 }
 
 .botButtonPanel{
@@ -139,6 +131,12 @@
   font-size:10px;
   text-transform: uppercase;
   color: #009A65;
+}
+
+.buttonWrapperStylePopup:hover {
+  color:#ffffff;
+  background-color:#009A65;
+  cursor:pointer;
 }
 
 .buttonWrapperPos {
