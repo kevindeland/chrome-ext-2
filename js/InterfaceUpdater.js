@@ -265,7 +265,7 @@ myApp.updater.updateGoalButtons = function() {
   if(customGoal) {
 
     $("#addCustomGoal > .goalText").html(buttonText.formatUnicorn({
-      sgp: "XX",
+      sgp: myApp.data.getSgpFromSs(customGoal.ss),
       rate: customGoal.rate,
       ss: customGoal.ss
     }));

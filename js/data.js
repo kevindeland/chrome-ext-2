@@ -143,7 +143,7 @@ myApp.data.getCalculatedGoals = function() {
     modAmbitious.sgp = 66;
 
     var catchup = parseGoalData(catchupData.html());
-    catchup.sgp = "XX"; // FIXME
+    catchup.sgp = myApp.data.getSgpFromSs(0); // HACK
 
     return {
       moderate: moderate,
@@ -173,6 +173,21 @@ myApp.data.getBenchmarkData = function() {
     ]
 
   };
+}
+
+myApp.data.getSgpFromSs = function(ss) {
+  // HACK
+  var firstName = myApp.data.getStudentName().first;
+  switch(firstName) {
+    case "Amanda":
+    return 63;
+    break;
+
+    case "Amber":
+    return 65;
+    break;
+  }
+
 }
 
 /**

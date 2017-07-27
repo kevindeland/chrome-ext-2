@@ -348,13 +348,15 @@ function drawHistoricalTests(svg, x, y) {
       $("#moderatelyAmbitiousGoal").removeClass("goalButtonSelected");
       $("#cukuGoal").addClass("goalButtonSelected");
 
+
+      var cukuSgp = myApp.data.getSgpFromSs(calculatedGoals.catchup.ss);
       // update text
       myApp.updater.updateBuddyScores({
         name: "Catch Up",
         rate: calculatedGoals.catchup.rate,
         ss: calculatedGoals.catchup.ss,
-        pct: "XX", // XXX Tianxin how to calculate this???
-        sgp: "XX" // XXX Tianxin
+        pct: cukuSgp, // XXX Tianxin how to calculate this???
+        sgp: cukuSgp // XXX Tianxin
       });
 
       // trigger a click on the radio button
