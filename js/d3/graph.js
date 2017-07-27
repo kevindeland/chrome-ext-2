@@ -115,6 +115,8 @@ function redrawAxes() {
     //     .call(yAxis)
     //
 
+    // TODO ITEM 23
+
     /************************************************/
     /*** here is where we start with student data ***/
     /************************************************/
@@ -152,6 +154,8 @@ function drawHistoricalTests(svg, x, y) {
         .attr("cy", function(d) {
           return y(d.score);
         });
+
+    // TODO ITEM 24: draw calculated trendline
 
 };
 
@@ -256,7 +260,8 @@ function drawHistoricalTests(svg, x, y) {
          name: "Moderate",
          rate: calculatedGoals.moderate.rate,
          ss: calculatedGoals.moderate.ss,
-         pct: 50
+         pct: 50,
+         sgp: 50
        });
 
        $("#ctl00_cp_Content_rb_Moderate").trigger("click");
@@ -277,7 +282,8 @@ function drawHistoricalTests(svg, x, y) {
          name: "Ambitious",
          rate: calculatedGoals.modAmbitious.rate,
          ss: calculatedGoals.modAmbitious.ss,
-         pct: 66
+         pct: 66,
+         sgp: 66
        });
 
        $("#ctl00_cp_Content_rb_ModAmbitious").trigger("click");
@@ -299,7 +305,8 @@ function drawHistoricalTests(svg, x, y) {
         name: "Catch Up",
         rate: calculatedGoals.catchup.rate,
         ss: calculatedGoals.catchup.ss,
-        pct: undefined // TODO how to calculate this???
+        pct: "XX", // XXX Tianxin how to calculate this???
+        sgp: "XX" // XXX Tianxin
       });
 
       // trigger a click on the radio button
@@ -309,7 +316,7 @@ function drawHistoricalTests(svg, x, y) {
  }
 
 /**
- * TODO ITEM 47 draw gray benchmark backgrounds
+ * ITEM 47 draw gray benchmark backgrounds
  */
 function drawBenchmarks(svg, x, y, startDate, endDate) {
 
@@ -321,6 +328,8 @@ function drawBenchmarks(svg, x, y, startDate, endDate) {
        return y(d.score);
      });
 
+
+  // REVIEW base these on real data
 
   var benchmark = [{date: startDate, score: 400}, {date: startDate, score: 520}, {date: endDate, score: 560}, {date: endDate, score: 400}];
   svg.append("path")
@@ -334,7 +343,8 @@ function drawBenchmarks(svg, x, y, startDate, endDate) {
       .attr("class", "onWatch benchmark")
       .attr("d", xyLine);
 
-  // TODO what is angle of line?
+  // REVIEW ITEM 21.b rotate text
+  //  what is angle of line?
   // tan(angle) = (520 - 480) / (endDate - startDate)... too complicated for time given?
   var urgent = [{date: startDate, score: 400}, {date: startDate, score: 440}, {date: endDate, score: 480}, {date: endDate, score: 400}];
 
@@ -343,7 +353,7 @@ function drawBenchmarks(svg, x, y, startDate, endDate) {
       .attr("class", "urgent benchmark")
       .attr("d", xyLine);
 
-      // TODO add text rotated?
+      // TODO ITEM 21 add text labels?
 };
 
 var parseDate = d3.time.format("%d-%b-%y").parse;
