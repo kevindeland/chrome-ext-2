@@ -68,8 +68,7 @@ function BotEventListener() {
 
 	$(".exitGoalWindow").on('click', function() {
 		myApp.updater.hideBigPopup();
-    // FIXME only if you're hiding the goal box
-    myApp.updater.showBabyBuddy({graphDisabled: true});
+    myApp.updater.showBabyBuddy();
   });
 
   var leftHelpButton = $(".helpModuleLeft");
@@ -234,31 +233,37 @@ function BotEventListener() {
     selectGoalLine("cuku");
   });
 
+    /*** all things custom goal ***/
+
   // TODO ITEM 51 add behavior for listening to customGoal button click
   $(".goalButton#customGoal").on('click', function() {
+    //
     // XXX unhighlight other lines
     selectGoalLine("custom");
   });
+
 
   $(".goalButton#customGoal > select").on('change', function() {
     // XXX recalculate other goals
   });
 
+  $("#ctl00_cp_Content_tb_Custom").on('change', function() {
+    log("custom goal changed");
+    log(myApp.data.getCustomGoal());
+  });
+
+
   $(".exitBuddyWindow").on('click', function() {
     myApp.updater.hideBotBuddy();
-
-    // if goals have not yet been calculated, then view graph button is disabled
-    if(myApp.data.getCalculatedGoals() == null) {
-      myApp.updater.showBabyBuddy({graphDisabled: true});
-    } else {
-      myApp.updater.showBabyBuddy({graphDisabled: false});
-    }
+    myApp.updater.showBabyBuddy();
 
   });
   /*** ITEM 5 add listeners for baby bot ***/
   $(".viewBotMessage").on('click', function() {
-    myApp.updater.hideBabyBuddy();
-    myApp.updater.showBotBuddy();
+    if(!$(".viewBotMessage").hasClass("viewGraphsDisabled")) {
+      myApp.updater.hideBabyBuddy();
+      myApp.updater.showBotBuddy();
+    }
   });
 
   $(".viewGraphs").on('click', function() {

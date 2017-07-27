@@ -26,6 +26,7 @@ myApp.updater.hideBotBuddy = function (id) {
 myApp.updater.updateBotBuddy = function (parent, botBuddy) {
   if(parent == "#botBuddy") {
     myApp.updater.showBotBuddy();
+    myApp.updater.hideBabyBuddy();
   }
 
   $(parent + ' .chatMessageWrapper').html('');
@@ -214,16 +215,25 @@ myApp.updater.updateGoalButtons = function() {
 }
 
 /*** ITEM 5 add updater (show, hide) for baby bot ***/
-myApp.updater.showBabyBuddy = function(config) {
+myApp.updater.showBabyBuddy = function() {
   $("#babyBot").show();
 
   // if goals have not yet been calculated, then view graph button is disabled
-  if(config.graphDisabled) {
-    log("disabled");
+  if(myApp.data.getCalculatedGoals() == null) {
+    log("viewGraph disabled");
     $(".viewGraphs").addClass("viewGraphsDisabled");
   } else {
-    log("enabled");
+    log("viewGraphs enabled");
     $(".viewGraphs").removeClass("viewGraphsDisabled");
+  }
+
+  // only enable View Message if there is a message to view
+  if($("#inVivo .chatMessageWrapper").children().length > 0 ) {
+    log("viewBotMessage enabled");
+    $(".viewBotMessage").removeClass("viewGraphsDisabled");
+  } else {
+    log("viewBotMessage enabled");
+    $(".viewBotMessage").addClass("viewGraphsDisabled");
   }
 };
 

@@ -58,6 +58,60 @@ myApp.data.getEndDate = function() {
 
 }
 
+myApp.data.getCustomGoal = function() {
+
+  var goal = {
+    ss: undefined,
+    pr: undefined,
+    rate: undefined
+  }
+
+  function parseCalculatedPR(text) {
+    regex = /^(\d{1,3}) PR \((-?\d{1,3}.\d{1}) SS\/week\)/
+    parsedText = text.match(regex);
+
+    return {
+      pr: parsedText[1],
+      rate: parsedText[2]
+    };
+  }
+
+  function parseCalculatedSS(text) {
+    regex = /^(\d{2,3}) SS \((-?\d{1,3}.\d{1}) SS\/week\)/
+    parsedText = text.match(regex);
+
+    return {
+      ss: parsedText[1],
+      rate: parsedText[2]
+    }
+  }
+
+  var selectedOption = $("#ctl00_cp_Content_ddl_Custom option:selected").attr("value");
+  var inputText = $("#ctl00_cp_Content_tb_Custom").val();
+
+  var calculated = $("#ctl00_cp_Content_sp_CustomGoal").html();
+
+  if(selectedOption == "CustomPR") {
+    goal.pr = inputText;
+    if(calculated) {
+      var parsed = parseCalculatedSS(calculated);
+      goal.ss = parsed.ss;
+      goal.rate = parsed.rate;
+    }
+  } else if(selectedOption == "CustomSS") {
+    goal.ss = inputText;
+    if(calculated) {
+      var parsed = parseCalculatedPR(calculated);
+      goal.pr = parsed.pr;
+      goal.rate = goal.rate;
+    }
+  }
+
+  // XXX
+
+  return goal;
+};
+
 /**
  * gets calculated goals from the interface
  */
