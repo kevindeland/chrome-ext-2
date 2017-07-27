@@ -82,6 +82,8 @@ function redrawAxes() {
     x.domain([startDate, endDate]);
     y.domain([400, 600]) // TODO min = lowest historical - margin
                           // max = highest graph  + margin
+                          // also depends on projections... what is the highest projection?
+                          // get historical data, then calculate trend, then estimate goals
 
     // draw x axis
     svg.append("g")
@@ -115,6 +117,12 @@ function redrawAxes() {
     //
 
     // TODO ITEM 23
+    svg.append("text")
+        .attr("class", "graphTitle")
+        .attr("y", 0)
+        .attr("x", 20)
+        .text("Goal Setting with Performance Projection");
+
 
     /************************************************/
     /*** here is where we start with student data ***/

@@ -3,6 +3,12 @@ svg {
   background: #FFFFFF;
 }
 
+.graphTitle {
+  font-size:14px;
+  font-family:"Roboto",Roboto,sans-serif;
+  color: #CCCCCC;
+}
+
 /** lines **/
 .line {
    stroke-width: 3;
