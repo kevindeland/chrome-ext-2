@@ -9,6 +9,7 @@ myApp.buddy = {
       messages: [MESSAGES.welcome1, MESSAGES.welcome2],
       buttonOne: {
         text: "Yes",
+        affirmative: true,
         callback: function() {
           window.open(LINKS.workedExample, "_blank");
         }
@@ -33,6 +34,7 @@ myApp.buddy = {
       messages: ["Would you like some tips on how to name your intervention?"],
       buttonOne: {
         text: "Sure",
+        affirmative: true,
         callback: function() {
           myApp.buddy.showInterventionNameHelp();
         }
@@ -71,6 +73,7 @@ myApp.buddy = {
         MESSAGES.interventionLength2],
       buttonOne : {
         text: "Yes",
+        affirmative: true,
         callback: function() {
           myApp.updater.hideBotBuddy();
 
@@ -87,7 +90,7 @@ myApp.buddy = {
         }
       },
       buttonThree : {
-        text: "Teach me More",
+        text: "Teach me More", // FIXME possible display on two lines
         callback: function() {
           window.open(LINKS.rtiResource, '_blank');
         }
@@ -107,6 +110,7 @@ myApp.buddy = {
         messages: [MESSAGES.readyToCalculateGoal],
         buttonOne: {
           text: "View Graphs",
+          affirmative: true,
           callback: function() {
               // FIXME ITEM 1 update cookie
               myApp.updater.hideBotBuddy(); // TODO ITEM 8 Trigger Calculate Goal
@@ -126,6 +130,7 @@ myApp.buddy = {
       messages: [MESSAGES.confirmation.formatUnicorn({name: myApp.data.getStudentName().first})],
       buttonOne: {
         text: "Continue",
+        affirmative: true,
         callback: function() {
           myApp.buddy.showMotivationBuddy();
         }
@@ -141,6 +146,7 @@ myApp.buddy = {
         MESSAGES.interventionEffectiveness],
       buttonOne: {
         text: "Continue",
+        affirmative: true,
         callback: function() {
           myApp.buddy.showFinalConfirmationBuddy();
         }
@@ -154,6 +160,7 @@ myApp.buddy = {
       messages: [MESSAGES.finalConfirmation.formatUnicorn({name: myApp.data.getStudentName().first})],
       buttonOne: {
         text: "Yes",
+        affirmative: true,
         callback: function() {
           myApp.buddy.readyToSave();
         }
@@ -173,6 +180,7 @@ myApp.buddy = {
       messages: [MESSAGES.readyToSave],
       buttonOne: {
         text: "Save",
+        affirmative: true,
         callback: function() {
           var saveButton = $("#ctl00_cp_Content_btn_Save");
           saveButton.trigger("click");

@@ -50,6 +50,7 @@ myApp.updater.updateBotBuddy = function (parent, botBuddy) {
     buttonTwo.on('click', botBuddy.buttonTwo.callback);
     buttonThree.prop('onclick',null).off('click');
     buttonThree.on('click', botBuddy.buttonThree.callback);
+
   }
   else if (botBuddy.buttonTwo){
     buttonOne.show().removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
@@ -59,13 +60,40 @@ myApp.updater.updateBotBuddy = function (parent, botBuddy) {
     buttonTwo.prop('onclick',null).off('click');
     buttonTwo.on('click', botBuddy.buttonTwo.callback);
     buttonThree.hide();
+
   } else {
     buttonOne.show().removeClass('threeButtons').addClass('twoButtons').prop('value', botBuddy.buttonOne.text);
     buttonOne.prop('onclick',null).off('click');
-   buttonOne.on('click', botBuddy.buttonOne.callback);
-  buttonTwo.hide();
-   buttonThree.hide();
+    buttonOne.on('click', botBuddy.buttonOne.callback);
+    buttonTwo.hide();
+    buttonThree.hide();
+
   }
+
+  // highlighting for affirmative button
+  if(botBuddy.buttonThree && botBuddy.buttonThree.affirmative) {
+    log("affirmatve button three!");
+    buttonThree.addClass('buttonAffirmative');
+    buttonTwo.removeClass('buttonAffirmative');
+    buttonOne.removeClass('buttonAffirmative');
+  }
+
+  // highlighting for affirmative button
+  if(botBuddy.buttonTwo && botBuddy.buttonTwo.affirmative) {
+    log("affirmatve button two!");
+    buttonThree.removeClass('buttonAffirmative');
+    buttonTwo.addClass('buttonAffirmative');
+    buttonOne.removeClass('buttonAffirmative');
+  }
+
+  // highlighting for affirmative button
+   if(botBuddy.buttonOne && botBuddy.buttonOne.affirmative) {
+     log("affirmatve button one!");
+     buttonThree.removeClass('buttonAffirmative');
+     buttonTwo.removeClass('buttonAffirmative');
+     buttonOne.addClass('buttonAffirmative');
+   }
+
 }
 
 /**
@@ -161,6 +189,7 @@ myApp.updater.showGoalGraph = function() {
     ],
 		buttonOne: {
 			text: "Confirm",
+      affirmative: true,
 			callback: function() {
         log("ayy");
         myApp.updater.hideBigPopup();
