@@ -105,7 +105,8 @@ function redrawAxes() {
         .append("text")
         .attr("class", "label")
         .attr("transform", "rotate(-90)")
-        .attr("y", 6)
+        .attr("y", -50)
+        .attr("x", -80)
         .attr("dy", ".71em")
         .style("text-anchor", "end")
         .text("Scaled Score (SS)");
@@ -329,7 +330,7 @@ function drawBenchmarks(svg, x, y, startDate, endDate) {
      });
 
 
-  // REVIEW base these on real data
+  // HACK base these on real data
 
   var benchmark = [{date: startDate, score: 400}, {date: startDate, score: 520}, {date: endDate, score: 560}, {date: endDate, score: 400}];
   svg.append("path")
@@ -337,11 +338,27 @@ function drawBenchmarks(svg, x, y, startDate, endDate) {
       .attr("class", "passing benchmark")
       .attr("d", xyLine);
 
+  svg.append("g")
+      .attr("transform", "translate(0," + y(520) + ")")
+    .append("text")
+      .text("Benchmark")
+      .attr("x", 5)
+      .attr("y", 12)
+      .attr("transform", "rotate(-10)");
+
   var onWatch = [{date: startDate, score: 400}, {date: startDate, score: 480}, {date: endDate, score: 520}, {date: endDate, score: 400}];
   svg.append("path")
       .datum(onWatch)
       .attr("class", "onWatch benchmark")
       .attr("d", xyLine);
+
+  svg.append("g")
+      .attr("transform", "translate(0," + y(480) + ")")
+    .append("text")
+      .text("On Watch")
+      .attr("x", 5)
+      .attr("y", 12)
+      .attr("transform", "rotate(-10)");
 
   // REVIEW ITEM 21.b rotate text
   //  what is angle of line?
@@ -352,6 +369,14 @@ function drawBenchmarks(svg, x, y, startDate, endDate) {
       .datum(urgent)
       .attr("class", "urgent benchmark")
       .attr("d", xyLine);
+
+  svg.append("g")
+      .attr("transform", "translate(0," + y(440) + ")")
+    .append("text")
+      .text("Urgent")
+      .attr("x", 5)
+      .attr("y", 12)
+      .attr("transform", "rotate(-10)");
 
       // TODO ITEM 21 add text labels?
 };
