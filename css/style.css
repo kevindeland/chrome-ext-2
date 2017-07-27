@@ -23,6 +23,7 @@
 }
 
 .babyModal {
+  background-color:transparent;
   width: 230px;
 }
 
@@ -249,21 +250,26 @@
 .babyBotButton {
   cursor: pointer;
   border: 0.5px solid #009A65;
-  border-radius: 28px;
-  box-shadow:0px 2px 4px 0px rgba(0,0,0,50);
-  padding: 1%;
+  border-radius: 10px;
+  box-shadow:0px 2px 4px 0px rgba(0,0,0,.50);
+  padding: 5%;
   background-color: white;
-  font-family:"Roboto Slab",Roboto,serif;
-  font-weight:bold;
-  font-size:14.7px;
+  font-family:"Roboto",Roboto,serif;
+  font-weight:200px;
+  font-size:13.5px;
   color: #009A65;
   text-align:left;
+  text-transform: uppercase;
 }
 
 .babyBotButton:hover {
   background-color:#009A65;
   color:white;
   cursor:pointer;
+}
+
+.babyBotText {
+  float:right;
 }
 
 .viewBotMessage {
@@ -284,6 +290,14 @@
 .viewGraphsDisabled {
   cursor: default;
 }
+
+.viewBotMessage .babyBotButton .viewGraphsDisabled,
+.viewBotMessage .babyBotButton {
+  cursor: default;
+  background-color: white;
+  color: #009A65;
+}
+
 .viewGraphsDisabled:hover {
   cursor: default;
   background-color: white;
