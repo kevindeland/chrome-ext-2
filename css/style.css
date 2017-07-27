@@ -299,19 +299,27 @@
 
 .viewGraphsDisabled {
   cursor: default;
+  background-color: white;
+  color: rgba(0,154,101,0.50);
+  border:0.5px solid rgba(0,154,101,0.50);
+  box-shadow:transparent 0px 0px 0px 0px;
 }
 
 .viewBotMessage .babyBotButton .viewGraphsDisabled,
 .viewBotMessage .babyBotButton {
   cursor: default;
   background-color: white;
-  color: #009A65;
+  color: rgba(0,154,101,0.50);
+  border:0.5px solid rgba(0,154,101,0.50);
+  box-shadow:transparent 0px 0px 0px 0px;
 }
 
 .viewGraphsDisabled:hover {
   cursor: default;
   background-color: white;
-  color: #009A65;
+  color: rgba(0,154,101,0.50);
+  border:0.5px solid rgba(0,154,101,0.50);
+  box-shadow:transparent 0px 0px 0px 0px;
 }
 
 #arrow-left {
