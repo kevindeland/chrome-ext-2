@@ -212,6 +212,18 @@ myApp.updater.updateGoalButtons = function() {
     rate: goalData.modAmbitious.rate,
     ss: goalData.modAmbitious.ss
   }));
+
+  // XXX if custom goal.. add that button
+  var customGoal = myApp.data.getCustomGoal();
+
+  if(customGoal) {
+
+    $("#addCustomGoal > .goalText").html(buttonText.formatUnicorn({
+      sgp: "XX",
+      rate: customGoal.rate,
+      ss: customGoal.ss
+    }));
+  }
 }
 
 /*** ITEM 5 add updater (show, hide) for baby bot ***/

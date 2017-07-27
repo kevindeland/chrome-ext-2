@@ -88,6 +88,7 @@ myApp.data.getCustomGoal = function() {
 
   var selectedOption = $("#ctl00_cp_Content_ddl_Custom option:selected").attr("value");
   var inputText = $("#ctl00_cp_Content_tb_Custom").val();
+  if(inputText.length ==0) return undefined;
 
   var calculated = $("#ctl00_cp_Content_sp_CustomGoal").html();
 
@@ -103,7 +104,7 @@ myApp.data.getCustomGoal = function() {
     if(calculated) {
       var parsed = parseCalculatedPR(calculated);
       goal.pr = parsed.pr;
-      goal.rate = goal.rate;
+      goal.rate = parsed.rate;
     }
   }
 
