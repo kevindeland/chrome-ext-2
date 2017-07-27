@@ -77,8 +77,8 @@ myApp.updater.updateBuddyScores = function (goal) {
 
   var messages = [
     MESSAGES.goalMessage1.formatUnicorn({
-      name: name, goalName: goal.name, rate: goal.rate, ss: goal.ss}),
-    MESSAGES.goalMessage2.formatUnicorn({pct: goal.pct})
+      name: name, goalName: goal.name, rate: goal.rate, ss: goal.ss, sgp: goal.sgp}),
+    MESSAGES.goalMessage2.formatUnicorn({sgp: goal.sgp})
   ];
 
   myApp.updater.updateBuddyMessages('#modal', messages);
@@ -146,15 +146,17 @@ myApp.updater.showGoalGraph = function() {
 
   var goalData = myApp.data.getCalculatedGoals();
 
+  // BUG make this dependent on selected button
   botBuddy = {
     messages: [
       MESSAGES.goalMessage1.formatUnicorn({
         name: studentName.first,
         goalName: "Moderate",
         rate: goalData.moderate.rate,
-        ss: goalData.moderate.ss}),
+        ss: goalData.moderate.ss,
+        sgp: 50}),
       MESSAGES.goalMessage2.formatUnicorn({
-        pct: 50
+        sgp: 50
       })
     ],
 		buttonOne: {
