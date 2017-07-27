@@ -40,10 +40,7 @@
   margin-right:7%;
   width: 302px;
   height:200px;
-  background-color:#ffffff;
-  border: 5px solid white;
-  border-radius: 30px;
-  box-shadow: 0px 2px 4px 0px #888888;
+
   float:right;
 }
 
@@ -54,10 +51,7 @@
   margin-right:7%;
   width: 302px;
   height:238px;
-  background-color:#ffffff;
-  border: 5px solid white;
-  border-radius: 30px;
-  box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50);
+
   float:right;
 }
 
@@ -311,7 +305,7 @@
     margin: auto;
     padding: 0px;
     width: 1122px;
-    height: 401px;
+    height: 420px;
     border: 3px solid #EEEEEE;
     border-radius: 10px;
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,.50);
