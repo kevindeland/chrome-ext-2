@@ -189,15 +189,20 @@
 .modalTitle {
   float: left;
   font-size: 24px;
-  width:100%;
+
+  width:678px;
+
   padding-left:31px;
   padding-top:7px;
   padding-bottom:7px;
+  margin-top:21px;
+  margin-left:21px;
   font-family: "Roboto Slab",Roboto,serif;
   font-weight:300;
   color:white;
   background-color:#009A65;
-  border-radius: 25px 25px 0px 0px;
+  border: 3px solid #009A65;
+  border-radius: 10px 10px 0px 0px;
 }
 
 .modalGraph {
@@ -295,7 +300,7 @@
     width: 1122px;
     height: 401px;
     border: 3px solid #EEEEEE;
-    border-radius: 25px;
+    border-radius: 10px;
     box-shadow: 0px 2px 4px 0px rgba(0,0,0,50);
 }
 
@@ -366,8 +371,8 @@
 .goalButton {
   float:right;
   border: 0.5px solid transparent;
-  border-radius: 28px;
-  box-shadow:2px 2px 4px 0px rgba(151,151,151,20);
+  border-radius: 5px;
+  box-shadow:2px 2px 4px 0px rgba(151,151,151,.30);
   padding: 1%;
   margin-top:6px;
   height:36px;
@@ -438,14 +443,24 @@
   text-decoration:underline;
 }
 
+
 .exitHelpWindow {
   color: #FFFFFF;
   text-transform:uppercase;
 }
 
 .exitGoalWindow {
-  color: #009A65;
+  color:#4A4A4A;
   text-transform:uppercase;
+  margin-left:85%;
+  padding:8px;
+  font-family:"Roboto",Roboto,sans-serif;
+  font-size:12px;
+  font-weight:200px;
+  background:#ffffff;
+  border: 0.75px solid #4A4A4A;
+  border-radius:3.75px;
+  box-shadow: 0px 2px 3px 0px rgba(0,0,0,0.25);
 }
 
 .exitBuddyWindow{
