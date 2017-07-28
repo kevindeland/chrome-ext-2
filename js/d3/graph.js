@@ -130,9 +130,9 @@ function redrawAxes() {
 
     drawBenchmarks(svg, x, y, startDate, endDate);
 
-
-    drawHistoricalTests(svg, x, y);
     drawGoalLines(svg, x, y);
+    drawHistoricalTests(svg, x, y);
+
 
 }
 

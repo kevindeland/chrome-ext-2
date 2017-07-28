@@ -25,8 +25,11 @@ myApp.updater.hideBotBuddy = function (id) {
  */
 myApp.updater.updateBotBuddy = function (parent, botBuddy) {
   if(parent == "#botBuddy") {
-    myApp.updater.showBotBuddy();
-    myApp.updater.hideBabyBuddy();
+
+    if(myApp.wizardState.showBotBuddy) {
+      myApp.updater.showBotBuddy();
+      myApp.updater.hideBabyBuddy();
+    }
 
     /** HACK big message **/
     if(botBuddy.big) {
@@ -114,6 +117,7 @@ myApp.updater.updateBuddyScores = function (goal) {
   var name = myApp.data.getStudentName().first;
   log("FIXME update buddy scores")
   var messages = [
+    //MESSAGES.goalMessage0,
     MESSAGES.goalMessage1.formatUnicorn({
       name: name, goalName: goal.name, rate: goal.rate, ss: goal.ss, sgp: goal.sgp}),
     MESSAGES.goalMessage2.formatUnicorn({sgp: goal.sgp})
@@ -188,6 +192,7 @@ myApp.updater.showGoalGraph = function() {
   // BUG make this dependent on selected button
   botBuddy = {
     messages: [
+      //MESSAGES.goalMessage0,
       MESSAGES.goalMessage1.formatUnicorn({
         name: studentName.first,
         goalName: "Moderate",
@@ -199,7 +204,7 @@ myApp.updater.showGoalGraph = function() {
       })
     ],
 		buttonOne: {
-			text: "Confirm",
+			text: "Confirm Goal",
       affirmative: true,
 			callback: function() {
         myApp.updater.hideBigPopup();

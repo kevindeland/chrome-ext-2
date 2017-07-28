@@ -7,7 +7,8 @@ myApp.wizardState = {
   hasBeenCalculated: false,
   hasSeenInterventionName: false,
   goalGraphOpen: false,
-  hasSeenMotivation: false
+  hasSeenMotivation: false,
+  showBotBuddy: true
 };
 
 function BotEventListener() {
@@ -23,6 +24,13 @@ function BotEventListener() {
   /*** COOKIES ***/
   var hasClickedNever = readCookie("NeverDoWorkedExample");
   var lastAction = readCookie("lastAction");
+
+  // FIXME could be refreshed with no option to View Message again
+  // var showBotBuddyCookie = readCookie("ShowBotBuddy");
+  // if(showBotBuddyCookie == "false") {
+  //   myApp.wizardState.showBotBuddy = false;
+  //   myApp.updater.showBabyBuddy();
+  // }
 
   if(lastAction == "startTestDropdown") {
 
@@ -255,13 +263,17 @@ function BotEventListener() {
 
 
   $(".exitBuddyWindow").on('click', function() {
+    myApp.wizardState.showBotBuddy = false;
+    //createCookie("ShowBotBuddy", "false", 7);
     myApp.updater.hideBotBuddy();
     myApp.updater.showBabyBuddy();
 
   });
-  /*** ITEM 5 add listeners for baby bot ***/
+
   $(".viewBotMessage").on('click', function() {
     if(!$(".viewBotMessage").hasClass("viewGraphsDisabled")) {
+      myApp.wizardState.showBotBuddy = true;
+      //createCookie("ShowBotBuddy", "true", 7);
       myApp.updater.hideBabyBuddy();
       myApp.updater.showBotBuddy();
     }

@@ -11,6 +11,8 @@ LINKS = {
 
 MESSAGES =  {
 
+  // REVIEW prune these
+
   welcome1: 'Welcome to the Goal Setting Wizard!',
   welcome2: "Would you like me to show you an example of how to best use this tool to set personalized goals for students?",
 
@@ -45,8 +47,10 @@ MESSAGES =  {
   maybeLater: 'maybe later',
 
   modalTitle: "Goal Options for {first} {last}",
-  goalMessage1: "{name}'s {goalName} goal is {sgp} SGP and needs {rate} SS / week growth to reach {ss} SS",
-  goalMessage2: "This student will have to grow faster than {sgp}% of students at the same percentile rank to reach this goal",
+
+  goalMessage0: "Hover over the different goal lines or click the goal buttons to select a goal.",
+  goalMessage1: "{name}'s {goalName} goal is {sgp} SGP and needs {rate} SS / week growth to reach {ss} SS.",
+  goalMessage2: "This student will have to grow faster than {sgp}% of students at the same percentile rank to reach this goal.",
 
   /*** final confirmation sequence ***/
   confirmation: "Great job comparing {name}'s goal setting options! There are still a few things to consider while you choose a goal for a student:",
