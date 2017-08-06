@@ -1,3 +1,6 @@
+/**
+ * Runs on window load.
+ */
 window.onload = function () {
   log("page loaded, adding script to page");
 
