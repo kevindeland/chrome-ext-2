@@ -1,9 +1,9 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
 
-  "name": "Vittore Prototyping V2",
-  "description": "This extension is for Vittore's midfi prototyping",
-  "version": "1.0",
+  "name": "Vittore GSW Extension V3",
+  "description": "This extension is for assisting in the Renaissance GSW",
+  "version": "3.0",
 
   "browser_action": {
     "default_icon": "images/vittore.png",
@@ -19,7 +19,7 @@
     "activeTab",
     "https://ajax.googleapis.com/"
   ],
-  
+
   "content_scripts": [
     {
       "matches": ["https://rppres9.renlearn.com/*/STAR/ProgressMonitor/Intervention.aspx"],
