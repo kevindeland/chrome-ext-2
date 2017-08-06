@@ -82,12 +82,12 @@ function BotEventListener() {
 
   var leftHelpButton = $(".helpModuleLeft");
   leftHelpButton.on('click', function() {
-    window.open(LINKS.workedExample, "_blank_");
+    window.open(myApp.config.LINKS.workedExample, "_blank_");
   });
 
   var rightHelpButton = $(".helpModuleRight");
   rightHelpButton.on('click', function() {
-    window.open(LINKS.starMathResources, "_blank_");
+    window.open(myApp.config.LINKS.starMathResources, "_blank_");
   });
 
   /*** End Help Window ***/

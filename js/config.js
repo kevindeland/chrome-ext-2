@@ -1,50 +1,35 @@
-// TODO improved namespacing
+/**
+ * config.js holds links and messages
+ */
+var myApp = myApp || {};
 
-USE_D3 = true;
+myApp.config = {};
 
-LINKS = {
+/**
+ * links to various learning resources
+ */
+myApp.config.LINKS = {
   workedExample: "https://projects.invisionapp.com/share/T9CP8GASE#/screens",
   rtiResource: "http://doc.renlearn.com/KMNet/R004336320GJBD8A.pdf",
   sgpResource: "http://doc.renlearn.com/KMNet/R00571375CF86BBF.pdf",
   starMathResources: "http://help.renaissance.com/sm/Resources"
 }
 
-MESSAGES =  {
-
-  // REVIEW prune these
+/**
+ * messages which are displayed in dialogs and buttons
+ */
+myApp.config.MESSAGES =  {
 
   welcome1: 'Welcome to the Goal Setting Wizard!',
   welcome2: "Would you like me to show you an example of how to best use this tool to set personalized goals for students?",
 
-  intro: 'I see you\'re setting a goal for {name}. Can I explain what the goal setting terms SGP and PR are?',
-  introButton1: 'yes please',
-  introButton2: 'maybe later',
-
   interventionNameHelp1: 'Try naming an intervention something that includes meaningful details about what you are doing to help the student',
   interventionNameHelp2: 'Consider including the instructional resource name, frequency of the intervention, and group side of the intervention.',
-
-
-  interventionLengthLong: 'You set a Goal End Date of {weeks} weeks from now. This should be enough time to measure growth',
-  interventionLenghtShort: 'You set a Goal End Date {weeks} week{weekPlural} after the benchmark. Experts recommend a minimum of eight weeks for effective interventions. Are you sure that\'s enough time?',
 
   interventionLength1: 'You set a{n} {weeks}-week intervention. Experts recommend at least eight weeks for a {grade} Grade student.',
   interventionLength2: 'Would you like to confirm this duration?',
 
   readyToCalculateGoal: "Click on the Goal section or the View Graphs button below to see graphs explaining each different goal type option.",
-
-  greatButton: 'great!',
-  learnMoreButton: 'learn more',
-
-  understandSgp : 'Understanding SGP can help you set ambitious yet attainable goals. Would you like me to help you understand?',
-  understandSgpYes: 'yes',
-  understandSgpNo: 'maybe later',
-
-  understandScoreNumbers: 'As of the test on {testDate}, {name} was in the {percentile}{percentileSuffix} percentile (PR)'
-              + ' with a scaled score (SS) of {scaledScore}. Would you like me to help you understand what this means?',
-  helpWithPRButton: 'please help me with PR',
-  helpWithSSButton: 'please help me with SS',
-
-  maybeLater: 'maybe later',
 
   modalTitle: "Goal Options for {first} {last}",
 
@@ -61,24 +46,10 @@ MESSAGES =  {
 
 }
 
-DIVS = {
-    interventionNameTxt: "interventionNameTxt",
-    endDtTxt:"endDtTxt",
-    endDtCal:"endDtCal",
-    startDtDropdown:"startDtDropdown",
-    rbModerate:"rbModerate",
-    rbModAmbitious:"rbModAmbitious",
-    rbCatchUp:"rbCatchUp",
-    rbStayUp:"rbStayUp",
-    rbCustom:"rbCustom",
-    ddCustom:"ddCustom",
-    txtCustom:"txtCustom",
-    btnCancel:"btnCancel",
-    btnCalcGoal:"btnCalcGoal",
-    btnSave:"btnSave"
-}
-
-
+/**
+ * This function is for formatting the above MESSAGES.
+ * Read about it here https://meta.stackexchange.com/questions/207128/what-is-formatunicorn-for-strings
+ */
 String.prototype.formatUnicorn = String.prototype.formatUnicorn ||
 function () {
     "use strict";

@@ -6,12 +6,12 @@ var myApp = myApp || {};
 myApp.buddy = {
   showWorkedExampleOption:  function () {
     botBuddy = {
-      messages: [MESSAGES.welcome1, MESSAGES.welcome2],
+      messages: [myApp.config.MESSAGES.welcome1, myApp.config.MESSAGES.welcome2],
       buttonOne: {
         text: "Yes",
         affirmative: true,
         callback: function() {
-          window.open(LINKS.workedExample, "_blank");
+          window.open(myApp.config.LINKS.workedExample, "_blank");
         }
       },
       buttonTwo: {
@@ -51,7 +51,7 @@ myApp.buddy = {
     log("showInterventionNameHelp");
 
     botBuddy = {
-      messages: [MESSAGES.interventionNameHelp1, MESSAGES.interventionNameHelp2],
+      messages: [myApp.config.MESSAGES.interventionNameHelp1, myApp.config.MESSAGES.interventionNameHelp2],
       buttonOne: {
         text: "Got it",
         callback: myApp.updater.hideBotBuddy
@@ -66,11 +66,11 @@ myApp.buddy = {
 
     botBuddy = {
       messages: [
-        MESSAGES.interventionLength1.formatUnicorn({
+        myApp.config.MESSAGES.interventionLength1.formatUnicorn({
           weeks: diff.weeks, n: decideAorAn(diff.weeks),
           grade: myApp.data.getStudentGrade()
         }),
-        MESSAGES.interventionLength2],
+        myApp.config.MESSAGES.interventionLength2],
       buttonOne : {
         text: "Yes",
         affirmative: true,
@@ -92,7 +92,7 @@ myApp.buddy = {
       buttonThree : {
         text: "Teach me More", // FIXME possible display on two lines
         callback: function() {
-          window.open(LINKS.rtiResource, '_blank');
+          window.open(myApp.config.LINKS.rtiResource, '_blank');
         }
       }
     };
@@ -107,7 +107,7 @@ myApp.buddy = {
     myApp.updater.updateProgressBar(3);
 
     botBuddy = {
-        messages: [MESSAGES.readyToCalculateGoal],
+        messages: [myApp.config.MESSAGES.readyToCalculateGoal],
         buttonOne: {
           text: "View Graphs",
           affirmative: true,
@@ -127,7 +127,7 @@ myApp.buddy = {
     myApp.updater.updateProgressBar(4);
 
     botBuddy = {
-      messages: [MESSAGES.confirmation.formatUnicorn({name: myApp.data.getStudentName().first})],
+      messages: [myApp.config.MESSAGES.confirmation.formatUnicorn({name: myApp.data.getStudentName().first})],
       buttonOne: {
         text: "Continue",
         affirmative: true,
@@ -144,8 +144,8 @@ myApp.buddy = {
     botBuddy = {
       big: true, /** HACK big message **/
       messages: [
-        MESSAGES.motivation.formatUnicorn({name: myApp.data.getStudentName().first}),
-        MESSAGES.interventionEffectiveness],
+        myApp.config.MESSAGES.motivation.formatUnicorn({name: myApp.data.getStudentName().first}),
+        myApp.config.MESSAGES.interventionEffectiveness],
       buttonOne: {
         text: "Continue",
         affirmative: true,
@@ -159,7 +159,7 @@ myApp.buddy = {
 
   showFinalConfirmationBuddy: function () {
     botBuddy = {
-      messages: [MESSAGES.finalConfirmation.formatUnicorn({name: myApp.data.getStudentName().first})],
+      messages: [myApp.config.MESSAGES.finalConfirmation.formatUnicorn({name: myApp.data.getStudentName().first})],
       buttonOne: {
         text: "Yes",
         affirmative: true,
@@ -180,7 +180,7 @@ myApp.buddy = {
 
   readyToSave: function() {
     botBuddy = {
-      messages: [MESSAGES.readyToSave],
+      messages: [myApp.config.MESSAGES.readyToSave],
       buttonOne: {
         text: "Save",
         affirmative: true,

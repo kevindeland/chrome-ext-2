@@ -54,14 +54,9 @@ function NewDivInserter (callback) {
         $(".lastMessageButton > img").attr("src", chrome.runtime.getURL("../images/button_icons/previous-page-icon.png"));
         $(".helpButton > img").attr("src", chrome.runtime.getURL("../images/button_icons/help-icon.png"));
 
-        if(!USE_D3) {
-          $(".modalGraph").html('<img src="' + chrome.runtime.getURL("images/d3_graph.png") + '" width=50%/>');
-          addHelpModal();
-        } else {
-          $(".modalGraph").html('<div id="graph-body"></div>');
-          //executeD3();
-          addHelpModal();
-        }
+        $(".modalGraph").html('<div id="graph-body"></div>');
+        //executeD3();
+        addHelpModal();
 
       });
   }

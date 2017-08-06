@@ -117,10 +117,10 @@ myApp.updater.updateBuddyScores = function (goal) {
   var name = myApp.data.getStudentName().first;
   log("FIXME update buddy scores")
   var messages = [
-    //MESSAGES.goalMessage0,
-    MESSAGES.goalMessage1.formatUnicorn({
+    //myApp.config.MESSAGES.goalMessage0,
+    myApp.config.MESSAGES.goalMessage1.formatUnicorn({
       name: name, goalName: goal.name, rate: goal.rate, ss: goal.ss, sgp: goal.sgp}),
-    MESSAGES.goalMessage2.formatUnicorn({sgp: goal.sgp})
+    myApp.config.MESSAGES.goalMessage2.formatUnicorn({sgp: goal.sgp})
   ];
 
   myApp.updater.updateBuddyMessages('#modal', messages);
@@ -192,14 +192,14 @@ myApp.updater.showGoalGraph = function() {
   // BUG make this dependent on selected button
   botBuddy = {
     messages: [
-      //MESSAGES.goalMessage0,
-      MESSAGES.goalMessage1.formatUnicorn({
+      //myApp.config.MESSAGES.goalMessage0,
+      myApp.config.MESSAGES.goalMessage1.formatUnicorn({
         name: studentName.first,
         goalName: "Moderate",
         rate: goalData.moderate.rate,
         ss: goalData.moderate.ss,
         sgp: 50}),
-      MESSAGES.goalMessage2.formatUnicorn({
+      myApp.config.MESSAGES.goalMessage2.formatUnicorn({
         sgp: 50
       })
     ],
@@ -234,7 +234,7 @@ myApp.updater.showGoalGraph = function() {
   myApp.updater.updateGoalButtons();
 
   var modal = $("#modal");
-  $(".modalTitleText").html(MESSAGES.modalTitle.formatUnicorn({first: studentName.first, last: studentName.last}));
+  $(".modalTitleText").html(myApp.config.MESSAGES.modalTitle.formatUnicorn({first: studentName.first, last: studentName.last}));
   modal.show();
   myApp.wizardState.goalGraphOpen = true;
   initializeD3();
