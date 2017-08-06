@@ -14,3 +14,6 @@ This is a chrome extension designed by the Vittore METALS Capstone Team of CMU, 
 
 ### [manifest.json](./manifest.json)
 Every Google Chrome extension has a [manifest file](https://developer.chrome.com/extensions/manifest). The most important thing to know is the ```content_scripts``` field. The ```matches``` array defines which URLs the extension can work for. It is currently configured to run on Intervention page for the demo site. The ```css``` and ```js``` arrays define which files are loaded.
+
+### [Main.js](./js/Main.js)
+```Main.js``` defines the ```window.onload``` function, which runs when the window loads. It calls two functions, the constructors for ```NewDivInserter()``` and for ```BotEventListener()```. ```NewDivInserter``` inserts the HTML for the Pedagogical Agent, and the ```BotEventListener``` adds listeners to both existing and recently added HTML elements. The 
