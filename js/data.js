@@ -158,6 +158,81 @@ myApp.data.getCalculatedGoals = function() {
  */
 myApp.data.getBenchmarkData = function() {
 
+  var data;
+  switch(myApp.data.getStudentGrade()) {
+
+    // HACK need dynamic dates
+    case "3rd":
+      data =  {
+        "10": {
+          "scores": [
+            {date: "1-Sep-16", score: 390},
+            {date: "1-Jan-17", score: 430},
+            {date: "1-May-17", score: 469},
+            {date: "1-Sep-17", score: 462}
+          ],
+          "rate": 3.9
+        },
+
+        "20": {
+          "scores": [
+            {date: "1-Sep-16", score: 429},
+            {date: "1-Jan-17", score: 473},
+            {date: "1-May-17", score: 518},
+            {date: "1-Sep-17", score: 511}
+          ],
+          "rate": 3.6
+        },
+
+        "25": {
+          "scores": [
+            {date: "1-Sep-16", score: 443},
+            {date: "1-Jan-17", score: 488},
+            {date: "1-May-17", score: 534},
+            {date: "1-Sep-17", score: 527}
+          ],
+          "rate": 3.3
+        },
+
+        "40": {
+          "scores": [
+            {date: "1-Sep-16", score: 479},
+            {date: "1-Jan-17", score: 525},
+            {date: "1-May-17", score: 571},
+            {date: "1-Sep-17", score: 563}
+          ],
+          "rate": 3.2
+        },
+
+        "50": {
+          "scores": [
+            {date: "1-Sep-16", score: 500},
+            {date: "1-Jan-17", score: 547},
+            {date: "1-May-17", score: 593},
+            {date: "1-Sep-17", score: 585}
+          ],
+          "rate": 3.1
+        }
+
+
+
+      };
+      break;
+  }
+
+  Object.keys(data).forEach(function(k) {
+    log(k);
+    data[k].scores.forEach(function(s) {
+      s.date = +parseDate(s.date);
+    });
+
+  });
+
+  log("DATA");
+  log(data);
+
+  return data;
+  /*
   return {
     urgent: [
       {date: "1-Aug-16", score: 310},
@@ -173,6 +248,7 @@ myApp.data.getBenchmarkData = function() {
     ]
 
   };
+  */
 }
 
 myApp.data.getSgpFromSs = function(ss) {
@@ -181,11 +257,15 @@ myApp.data.getSgpFromSs = function(ss) {
   switch(firstName) {
     case "Amanda":
     return 63;
-    break;
 
     case "Amber":
     return 65;
-    break;
+
+    case "Weston":
+    return 67;
+
+    case "Jennifer":
+    return 59;
   }
 
 }
@@ -199,24 +279,32 @@ myApp.data.getStudentHistoricalData = function() {
 
   switch(firstName) {
 
-    case "Amanda":
+    case "Amanda": // Baillie
 
     return [
-      {date: "30-Aug-16", score: 480},
+      {date: "2-Sep-16", score: 480},
       {date: "14-Oct-16", score: 501},
       {date: "16-Nov-16", score: 479},
       {date: "26-Dec-16", score: 495}
     ]
     break;
 
-    case "Amber":
-    default:
+    case "Amber": // Cheama
     return [
-      {date: "30-Aug-16", score: 395},
+      {date: "2-Sep-16", score: 395},
       {date: "14-Oct-16", score: 415},
       {date: "16-Nov-16", score: 400},
       {date: "26-Dec-16", score: 440}
     ];
+
+    case "Sean": // Begay
+    return [];
+
+    case "Jennifer": // Bingham
+    return [];
+
+    case "Weston": // Chavez
+    return [];
 
   }
 }
