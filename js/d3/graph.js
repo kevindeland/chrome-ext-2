@@ -51,7 +51,7 @@ function redrawAxes() {
     var xAxis = d3.svg.axis()
         .scale(x)
         .orient("bottom")
-        .ticks(5)
+        .ticks(2)
         .tickFormat(function(d) {
           // FIXME stack date and year
           // https://stackoverflow.com/questions/13241475/how-do-i-include-newlines-in-labels-in-d3-charts
@@ -80,7 +80,33 @@ function redrawAxes() {
     var endDate = myApp.data.getEndDate();
 
     x.domain([startDate, endDate]);
-    y.domain([400, 600]) // TODO min = lowest historical - margin
+
+    var bottomMargin = 10,
+        topMargin = 10;
+
+    // calculate the y domain, min and max
+    var yMin = 9000, yMax = 0;
+
+    // check previous scores for min and max
+    history.forEach(function(d) {
+      yMin = d.score < yMin ? d.score : yMin;
+      yMax = d.score > yMax ? d.score : yMax;
+    });
+
+    // check projected goals for min and max
+    var calculatedGoals = myApp.data.getCalculatedGoals();
+    log(calculatedGoals);
+
+    for (var key in calculatedGoals) {
+      var ss = +calculatedGoals[key].ss
+      yMax = ss > yMax ? ss : yMax;
+    }
+
+    var minScore = +yMin - bottomMargin;
+
+    log("yMax: " + yMax);
+    y.domain([minScore, +yMax + topMargin]);
+    //y.domain([400, 600]) // TODO min = lowest historical - margin
                           // max = highest graph  + margin
                           // also depends on projections... what is the highest projection?
                           // get historical data, then calculate trend, then estimate goals
@@ -128,11 +154,9 @@ function redrawAxes() {
     /*** here is where we start with student data ***/
     /************************************************/
 
-    drawBenchmarks(svg, x, y, startDate, endDate);
-
-    drawGoalLines(svg, x, y);
+    drawBenchmarks(svg, x, y, startDate, endDate, minScore);
     drawHistoricalTests(svg, x, y);
-
+    drawGoalLines(svg, x, y);
 
 }
 
@@ -184,6 +208,7 @@ function drawHistoricalTests(svg, x, y) {
         .y(function(d) {
           return y(d.scoreEst)
         });
+
 
     svg.append("path")
         .datum(trendline.data)
@@ -368,24 +393,32 @@ function drawHistoricalTests(svg, x, y) {
 /**
  * ITEM 47 draw gray benchmark backgrounds
  */
-function drawBenchmarks(svg, x, y, startDate, endDate) {
+function drawBenchmarks(svg, x, y, startDate, endDate, minScore) {
 
-  var xyLine = d3.svg.line()
-     .x(function(d) {
-       return x(d.date);
-     })
-     .y(function(d) {
-       return y(d.score);
-     });
+  var benchmarkLine = d3.svg.line()
+      .x(function(d) {
+          return x(d.date);
+      })
+      .y(function(d) {
+        return y(d.score);
+      });
 
 
   // HACK base these on real data
 
-  var benchmark = [{date: startDate, score: 400}, {date: startDate, score: 520}, {date: endDate, score: 560}, {date: endDate, score: 400}];
+  var allData = myApp.data.getBenchmarkData();
+
+  var bottomCorners = [{date: endDate, score: minScore}, {date: startDate, score: minScore}]
+
+  var benchmarkData = allData["50"].scores;
+
+  var benchmarkShape = getBenchmarkShape(benchmarkData, startDate, endDate, minScore);
+
+  //var benchmark = [{date: startDate, score: 400}, {date: startDate, score: 520}, {date: endDate, score: 560}, {date: endDate, score: 400}];
   svg.append("path")
-      .datum(benchmark)
+      .datum(benchmarkShape)
       .attr("class", "passing benchmark")
-      .attr("d", xyLine);
+      .attr("d", benchmarkLine);
 
   svg.append("g")
       .attr("transform", "translate(0," + y(520) + ")")
@@ -395,11 +428,15 @@ function drawBenchmarks(svg, x, y, startDate, endDate) {
       .attr("y", 12)
       .attr("transform", "rotate(-10)");
 
-  var onWatch = [{date: startDate, score: 400}, {date: startDate, score: 480}, {date: endDate, score: 520}, {date: endDate, score: 400}];
+
+  var onWatchData = allData["40"].scores;
+  var onWatchShape = getBenchmarkShape(onWatchData, startDate, endDate, minScore);
+
+//  var onWatch = [{date: startDate, score: 400}, {date: startDate, score: 480}, {date: endDate, score: 520}, {date: endDate, score: 400}];
   svg.append("path")
-      .datum(onWatch)
+      .datum(onWatchShape)
       .attr("class", "onWatch benchmark")
-      .attr("d", xyLine);
+      .attr("d", benchmarkLine);
 
   svg.append("g")
       .attr("transform", "translate(0," + y(480) + ")")
@@ -409,15 +446,18 @@ function drawBenchmarks(svg, x, y, startDate, endDate) {
       .attr("y", 12)
       .attr("transform", "rotate(-10)");
 
+
+  var urgentData = allData["10"].scores;
+  var urgentShape = getBenchmarkShape(urgentData, startDate, endDate, minScore);
   // REVIEW ITEM 21.b rotate text
   //  what is angle of line?
   // tan(angle) = (520 - 480) / (endDate - startDate)... too complicated for time given?
-  var urgent = [{date: startDate, score: 400}, {date: startDate, score: 440}, {date: endDate, score: 480}, {date: endDate, score: 400}];
+  //var urgent = [{date: startDate, score: 400}, {date: startDate, score: 440}, {date: endDate, score: 480}, {date: endDate, score: 400}];
 
   svg.append("path")
-      .datum(urgent)
+      .datum(urgentShape)
       .attr("class", "urgent benchmark")
-      .attr("d", xyLine);
+      .attr("d", benchmarkLine);
 
   svg.append("g")
       .attr("transform", "translate(0," + y(440) + ")")
@@ -429,6 +469,81 @@ function drawBenchmarks(svg, x, y, startDate, endDate) {
 
       // TODO ITEM 21 add text labels?
 };
+
+function getBenchmarkShape(data, startDate, endDate, minScore) {
+
+  var bottomCorners = [{date: endDate, score: minScore}, {date: startDate, score: minScore}]
+  // if data[i].date < startDate, drop data[i].date
+  // and if data[i+1].date > startDate
+  // and s(d) is the line between data[i].date and data[i+1].date
+  // then append s(startDate)
+
+  var leftIndex;
+  var leftBoundarySet = false;
+  var rightIndex;
+
+  var leftTopCorner = null,
+      rightTopCorner = null;
+
+  startDate = +startDate;
+
+  log("BENCHMARK");
+  log(data);
+  for (var i=0; i<data.length; i++) {
+    log("comparing " + data[i].date +" and " + startDate);
+
+    if(data[i].date < startDate) {
+      log(data[i].date + ' less than ' + startDate);
+      leftIndex = i;
+    } else if(!leftBoundarySet){
+
+      var sL = null;
+      log("leftBoundary not yet set");
+      log("leftIndex: " + leftIndex);
+      log("data: " + data[leftIndex]);
+
+      s1 = data[leftIndex].score;
+      s2 = data[i].score;
+      d1 = data[leftIndex].date;
+      d2 = data[i].date;
+      dL = startDate;
+
+      sL = s1 + (s2 - s1) * (dL - d1) / (d2 - d1);
+      leftTopCorner = {date: startDate, score: sL};
+
+      leftBoundarySet = true;
+    }
+
+    if(data[i].date > endDate) {
+
+      rightIndex = i;
+
+      var sR = null;
+      s1 = data[i-1].score;
+      s2 = data[i].score;
+      d1 = data[i-1].date;
+      d2 = data[i].date;
+      dR = endDate;
+
+      sR = s1 + (s2 - s1) * (dR - d1) / (d2 - d1);
+      rightTopCorner = {date: endDate, score: sR};
+    }
+
+
+
+    // if (data[i].date > endDate) {
+    //   log(date[i].date + ' greater than ' + endDate);
+    //   rightIndex = i;
+    // }
+  }
+
+  // replace old benchmarks with points along the edge
+  data = data.slice(leftIndex+1, rightIndex);
+  data.unshift(leftTopCorner);
+  data.push(rightTopCorner);
+
+  return data.concat(bottomCorners);
+}
 
 var parseDate = d3.time.format("%d-%b-%y").parse;
 
