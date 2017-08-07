@@ -8,7 +8,7 @@ This is a chrome extension designed by the Vittore METALS Capstone Team of CMU, 
 4. Navigate to your location of this project and press "Select".
 5. Make sure that the "Vittore GSW Extension V3" extension is Enabled. You should see the Vittore icon has been added to your Chrome toolbar.
 6. Navigate to the Renaissance demo site, and then to the Goal Setting Wizard page.
-7. Test out the extension with one of the following students: Amber Cheama, Amanda Baillie, Weston Chavez.
+7. Test out the extension with one of the following students: Amber Cheama, Jennifer Bingham, Weston Chavez.
 
 ## Instructions for Understanding the code
 Review the code in this order for best understanding.
