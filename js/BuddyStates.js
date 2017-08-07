@@ -71,6 +71,7 @@ myApp.buddy = {
           grade: myApp.data.getStudentGrade()
         }),
         myApp.config.MESSAGES.interventionLength2],
+      slimButtons: true,
       buttonOne : {
         text: "Yes",
         affirmative: true,

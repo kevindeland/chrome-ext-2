@@ -107,6 +107,17 @@ myApp.updater.updateBotBuddy = function (parent, botBuddy) {
      buttonOne.addClass('buttonAffirmative');
    }
 
+   /** HACK slimm buttons **/
+   if(botBuddy.slimButtons) {
+     buttonOne.addClass('slimButtons');
+     buttonTwo.addClass('slimButtons');
+     buttonThree.addClass('slimButtons');
+   } else {
+     buttonOne.removeClass('slimButtons');
+     buttonTwo.removeClass('slimButtons');
+     buttonThree.removeClass('slimButtons');
+   }
+
 }
 
 /**
@@ -219,15 +230,9 @@ myApp.updater.showGoalGraph = function() {
 		buttonTwo: {
 			text: "Learn More",
 			callback: function() {
-        window.open(LINKS.sgpResource, "_blank");
+        window.open(myApp.config.LINKS.sgpResource, "_blank");
       }
-		},
-    buttonThree: {
-      text: "Exit window",
-      callback: function() {
-        myApp.updater.hideBigPopup();
-      }
-    }
+		}
   };
   myApp.updater.updateBotBuddy('#modal', botBuddy);
 
