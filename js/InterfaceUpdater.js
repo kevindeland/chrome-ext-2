@@ -107,6 +107,17 @@ myApp.updater.updateBotBuddy = function (parent, botBuddy) {
      buttonOne.addClass('buttonAffirmative');
    }
 
+   /** HACK slimm buttons **/
+   if(botBuddy.slimButtons) {
+     buttonOne.addClass('slimButtons');
+     buttonTwo.addClass('slimButtons');
+     buttonThree.addClass('slimButtons');
+   } else {
+     buttonOne.removeClass('slimButtons');
+     buttonTwo.removeClass('slimButtons');
+     buttonThree.removeClass('slimButtons');
+   }
+
 }
 
 /**

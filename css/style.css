@@ -204,6 +204,11 @@
 	white-space: normal;
 }
 
+.slimButtons {
+  padding-left: 3%;
+  padding-right: 3%;
+}
+
 .buttonOne {}
 .buttonTwo {}
 .buttonThree {
@@ -436,7 +441,7 @@
   font-size:14px;
 }
 
-.helpModuleLeft:hover, 
+.helpModuleLeft:hover,
 .helpModuleRight:hover {
   cursor:pointer;
 }
