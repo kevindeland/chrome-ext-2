@@ -232,13 +232,7 @@ myApp.updater.showGoalGraph = function() {
 			callback: function() {
         window.open(LINKS.sgpResource, "_blank");
       }
-		},
-    buttonThree: {
-      text: "Exit window",
-      callback: function() {
-        myApp.updater.hideBigPopup();
-      }
-    }
+		}
   };
   myApp.updater.updateBotBuddy('#modal', botBuddy);
 
