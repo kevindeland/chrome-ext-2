@@ -291,20 +291,29 @@ myApp.data.getStudentHistoricalData = function() {
 
     case "Amber": // Cheama
     return [
-      {date: "2-Sep-16", score: 395},
-      {date: "14-Oct-16", score: 415},
-      {date: "16-Nov-16", score: 400},
-      {date: "26-Dec-16", score: 440}
+      {date: "2-Sep-16", score: 410},
+      {date: "14-Oct-16", score: 450},
+      {date: "16-Nov-16", score: 500},
+      {date: "26-Dec-16", score: 550}
     ];
 
     case "Sean": // Begay
     return [];
 
     case "Jennifer": // Bingham
-    return [];
+    return [
+      {date: "14-Oct-16", score: 600},
+      {date: "16-Nov-16", score: 615},
+      {date: "26-Dec-16", score: 620}
+    ];
 
     case "Weston": // Chavez
-    return [];
+    return [
+      //{date: "2-Sep-16", score: 501},
+      {date: "14-Oct-16", score: 495},
+      {date: "16-Nov-16", score: 500},
+      {date: "26-Dec-16", score: 520}
+    ];
 
   }
 }

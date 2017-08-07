@@ -89,4 +89,6 @@ svg {
   fill: #FFFFFF;
   rx: 6;
   ry: 6;
+  stroke-width: 1;
+  stroke: #888888;
 }

@@ -411,64 +411,78 @@ function drawBenchmarks(svg, x, y, startDate, endDate, minScore) {
   var bottomCorners = [{date: endDate, score: minScore}, {date: startDate, score: minScore}]
 
   var benchmarkData = allData["50"].scores;
-
   var benchmarkShape = getBenchmarkShape(benchmarkData, startDate, endDate, minScore);
 
   //var benchmark = [{date: startDate, score: 400}, {date: startDate, score: 520}, {date: endDate, score: 560}, {date: endDate, score: 400}];
-  svg.append("path")
-      .datum(benchmarkShape)
-      .attr("class", "passing benchmark")
-      .attr("d", benchmarkLine);
+  if(benchmarkShape != null) {
+    svg.append("path")
+        .datum(benchmarkShape)
+        .attr("class", "passing benchmark")
+        .attr("d", benchmarkLine);
 
-  svg.append("g")
-      .attr("transform", "translate(0," + y(520) + ")")
-    .append("text")
-      .text("Benchmark")
-      .attr("x", 5)
-      .attr("y", 12)
-      .attr("transform", "rotate(-10)");
 
+    var benchmarkLabel = getBenchmarkLabelPosition(benchmarkShape, x, y);
+    svg.append("g")
+        .attr("transform", "translate(0," + y(benchmarkLabel.y) + ")")
+      .append("text")
+        .text("Benchmark")
+        .attr("x", 5)
+        .attr("y", 12)
+        .attr("transform", "rotate("+ benchmarkLabel.angle + ")");
+  }
 
   var onWatchData = allData["40"].scores;
   var onWatchShape = getBenchmarkShape(onWatchData, startDate, endDate, minScore);
 
-//  var onWatch = [{date: startDate, score: 400}, {date: startDate, score: 480}, {date: endDate, score: 520}, {date: endDate, score: 400}];
-  svg.append("path")
-      .datum(onWatchShape)
-      .attr("class", "onWatch benchmark")
-      .attr("d", benchmarkLine);
 
-  svg.append("g")
-      .attr("transform", "translate(0," + y(480) + ")")
-    .append("text")
-      .text("On Watch")
-      .attr("x", 5)
-      .attr("y", 12)
-      .attr("transform", "rotate(-10)");
+  if(onWatchShape != null) {
+    svg.append("path")
+        .datum(onWatchShape)
+        .attr("class", "onWatch benchmark")
+        .attr("d", benchmarkLine);
+
+    var onWatchLabel = getBenchmarkLabelPosition(onWatchShape, x, y);
+    svg.append("g")
+        .attr("transform", "translate(0," + y(onWatchLabel.y) + ")")
+      .append("text")
+        .text("On Watch")
+        .attr("x", 5)
+        .attr("y", 12)
+        .attr("transform", "rotate(" + onWatchLabel.angle + ")");
+  }
 
 
   var urgentData = allData["10"].scores;
   var urgentShape = getBenchmarkShape(urgentData, startDate, endDate, minScore);
-  // REVIEW ITEM 21.b rotate text
-  //  what is angle of line?
-  // tan(angle) = (520 - 480) / (endDate - startDate)... too complicated for time given?
-  //var urgent = [{date: startDate, score: 400}, {date: startDate, score: 440}, {date: endDate, score: 480}, {date: endDate, score: 400}];
 
-  svg.append("path")
-      .datum(urgentShape)
-      .attr("class", "urgent benchmark")
-      .attr("d", benchmarkLine);
+  if(urgentShape != null) {
+    svg.append("path")
+        .datum(urgentShape)
+        .attr("class", "urgent benchmark")
+        .attr("d", benchmarkLine);
 
-  svg.append("g")
-      .attr("transform", "translate(0," + y(440) + ")")
-    .append("text")
-      .text("Urgent")
-      .attr("x", 5)
-      .attr("y", 12)
-      .attr("transform", "rotate(-10)");
-
-      // TODO ITEM 21 add text labels?
+    var urgentLabel = getBenchmarkLabelPosition(urgentShape, x, y);
+    svg.append("g")
+        .attr("transform", "translate(0," + y(urgentLabel.y) + ")")
+      .append("text")
+        .text("Urgent")
+        .attr("x", 5)
+        .attr("y", 12)
+        .attr("transform", "rotate(" + urgentLabel.angle + ")");
+  }
 };
+
+
+function getBenchmarkLabelPosition(shape, x, y) {
+  var yPos = shape[0].score;
+  var tangent = ( (y(shape[1].score) - y(shape[0].score)) / (x(shape[1].date) - x(shape[0].date)));
+  var angle = 180 * Math.atan(tangent) / Math.PI;
+
+  return {
+    y: yPos,
+    angle: angle
+  };
+}
 
 function getBenchmarkShape(data, startDate, endDate, minScore) {
 
@@ -515,7 +529,7 @@ function getBenchmarkShape(data, startDate, endDate, minScore) {
     }
 
     if(data[i].date > endDate) {
-
+      log("RIGHT DATE!");
       rightIndex = i;
 
       var sR = null;
@@ -527,21 +541,23 @@ function getBenchmarkShape(data, startDate, endDate, minScore) {
 
       sR = s1 + (s2 - s1) * (dR - d1) / (d2 - d1);
       rightTopCorner = {date: endDate, score: sR};
+      log("RIGHT TOP: " + JSON.stringify(rightTopCorner));
     }
 
-
-
-    // if (data[i].date > endDate) {
-    //   log(date[i].date + ' greater than ' + endDate);
-    //   rightIndex = i;
-    // }
   }
 
   // replace old benchmarks with points along the edge
-  data = data.slice(leftIndex+1, rightIndex);
+  data = data.slice(leftIndex+1, rightIndex-1);
   data.unshift(leftTopCorner);
   data.push(rightTopCorner);
 
+  // check that benchmark even shows up
+  // HACK should have different behavior for AND versus OR
+  if(leftTopCorner.score < minScore || rightTopCorner.score < minScore) {
+    return null;
+  }
+
+  // append bottom corners to the shape of the graph
   return data.concat(bottomCorners);
 }
 
