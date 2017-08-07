@@ -53,8 +53,8 @@ myApp.updater.updateBotBuddy = function (parent, botBuddy) {
   var buttonThree = $(parent + ' .buttonThree');
 
   if(botBuddy.buttonThree) {
-    buttonOne.removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonOne.text);
-    buttonTwo.removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonTwo.text);
+    buttonOne.show().removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonOne.text);
+    buttonTwo.show().removeClass('twoButtons').addClass('threeButtons').prop('value', botBuddy.buttonTwo.text);
     buttonThree.show().prop('value', botBuddy.buttonThree.text);
     buttonOne.prop('onclick',null).off('click');
     buttonOne.on('click', botBuddy.buttonOne.callback);
