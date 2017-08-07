@@ -18,12 +18,10 @@ function NewDivInserter (callback) {
     $botBuddy.hide();
 
     var botBuddyURL = chrome.runtime.getURL("../html/botBuddy.html");
-    //log(botBuddyURL);
     $botBuddy.load(botBuddyURL, function() {
       // automagically insert images
 
       var progressBar = $(".progressBar");
-      log(progressBar);
       progressBar.html('<img src="' + chrome.runtime.getURL("../images/progress_bar/progress_bar_1_4.png") + '"/>');
 
       var helpButtonImage = $(".helpButton > img");
@@ -48,7 +46,6 @@ function NewDivInserter (callback) {
       var popupURL = chrome.runtime.getURL("../html/popup.html");
 
       $modal.load(popupURL, function() {
-        log("modal loaded");
 
         $("#projectedPerformanceLine").attr("src", chrome.runtime.getURL("../images/lines/projected-performance-line.png"));
         $("#moderateGoal > img").attr("src", chrome.runtime.getURL("../images/lines/moderate-goal-line.png"));
@@ -72,7 +69,6 @@ function NewDivInserter (callback) {
 
   /*** inserts the help modal ***/
   function addHelpModal() {
-    log("adding help modal");
     var $help = $("<div>", {id: "helpModal", "class": "modal"});
     $("body").append($help);
 
@@ -81,7 +77,6 @@ function NewDivInserter (callback) {
     var helpURL = chrome.runtime.getURL("../html/help_popup_box.html");
 
     $help.load(helpURL, function() {
-      log("help loaded");
 
       $(".helpModuleLeft .topModuleBlue").html('<img src="' + chrome.runtime.getURL("../images/worked_example_thumbnail.png") + '" width=100%/>');
       $(".helpModuleRight .topModuleBlue").html('<img src="' + chrome.runtime.getURL("../images/resources_thumbnail.png") + '" width=100%/>');
@@ -93,7 +88,6 @@ function NewDivInserter (callback) {
 
   /*** inserts the small, minimized bot ***/
   function addBabyBot() {
-    log("adding baby bot");
     var $baby = $("<div>", {id: "babyBot"});
     $("body").append($baby);
 

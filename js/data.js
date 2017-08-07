@@ -303,7 +303,7 @@ myApp.data.getStudentHistoricalData = function() {
     case "Jennifer": // Bingham
     return [];
 
-    case "Weston": // Chavez
+    case "Weston": // TODO add Chavez
     return [];
 
   }
