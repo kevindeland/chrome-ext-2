@@ -1,4 +1,11 @@
-function initializeD3() {
+/**
+ * defines and draws d3 graph and its interactions
+ */
+var myApp = myApp || {};
+
+myApp.graph = {};
+
+myApp.graph.initializeD3 = function() {
 
   var containerWidth = $("#graph-body").width();
   var svgWidth = containerWidth,
@@ -15,7 +22,7 @@ function initializeD3() {
 
 }
 
-function redrawAxes() {
+myApp.graph.drawGraph = function() {
 
     var margin = {
       top: 20,
@@ -154,16 +161,16 @@ function redrawAxes() {
     /*** here is where we start with student data ***/
     /************************************************/
 
-    drawBenchmarks(svg, x, y, startDate, endDate, minScore);
-    drawHistoricalTests(svg, x, y);
-    drawGoalLines(svg, x, y);
+    myApp.graph.drawBenchmarks(svg, x, y, startDate, endDate, minScore);
+    myApp.graph.drawHistoricalTests(svg, x, y);
+    myApp.graph.drawGoalLines(svg, x, y);
 
 }
 
 /**
- * draws the starting test and the historical data
- */
-function drawHistoricalTests(svg, x, y) {
+* draws the starting test and the historical data
+*/
+myApp.graph.drawHistoricalTests = function(svg, x, y) {
     var data = myApp.data.getStudentHistoricalData();
 
     data.forEach(function(d) {
@@ -190,7 +197,7 @@ function drawHistoricalTests(svg, x, y) {
         });
 
     // TODO ITEM 24: draw calculated trendline
-    var trendline = calculateTrendLine(data);
+    var trendline = myApp.graph.calculateTrendLine(data);
 
     log("" + trendline.m + "x + " + trendline.b);
     log(trendline.data);
@@ -232,9 +239,9 @@ function drawHistoricalTests(svg, x, y) {
 };
 
 /**
- * draw goal lines for all types
- */
- function drawGoalLines(svg, x, y) {
+* draw goal lines for all goal types
+*/
+myApp.graph.drawGoalLines = function(svg, x, y) {
 
    var calculatedGoals = myApp.data.getCalculatedGoals();
 
@@ -391,9 +398,9 @@ function drawHistoricalTests(svg, x, y) {
  }
 
 /**
- * ITEM 47 draw gray benchmark backgrounds
+ * draw gray benchmark backgrounds
  */
-function drawBenchmarks(svg, x, y, startDate, endDate, minScore) {
+myApp.graph.drawBenchmarks = function(svg, x, y, startDate, endDate, minScore) {
 
   var benchmarkLine = d3.svg.line()
       .x(function(d) {
@@ -411,7 +418,7 @@ function drawBenchmarks(svg, x, y, startDate, endDate, minScore) {
   var bottomCorners = [{date: endDate, score: minScore}, {date: startDate, score: minScore}]
 
   var benchmarkData = allData["50"].scores;
-  var benchmarkShape = getBenchmarkShape(benchmarkData, startDate, endDate, minScore);
+  var benchmarkShape = myApp.graph.getBenchmarkShape(benchmarkData, startDate, endDate, minScore);
 
   //var benchmark = [{date: startDate, score: 400}, {date: startDate, score: 520}, {date: endDate, score: 560}, {date: endDate, score: 400}];
   if(benchmarkShape != null) {
@@ -421,7 +428,7 @@ function drawBenchmarks(svg, x, y, startDate, endDate, minScore) {
         .attr("d", benchmarkLine);
 
 
-    var benchmarkLabel = getBenchmarkLabelPosition(benchmarkShape, x, y);
+    var benchmarkLabel = myApp.graph.getBenchmarkLabelPosition(benchmarkShape, x, y);
     svg.append("g")
         .attr("transform", "translate(0," + y(benchmarkLabel.y) + ")")
       .append("text")
@@ -432,7 +439,7 @@ function drawBenchmarks(svg, x, y, startDate, endDate, minScore) {
   }
 
   var onWatchData = allData["40"].scores;
-  var onWatchShape = getBenchmarkShape(onWatchData, startDate, endDate, minScore);
+  var onWatchShape = myApp.graph.getBenchmarkShape(onWatchData, startDate, endDate, minScore);
 
 
   if(onWatchShape != null) {
@@ -441,7 +448,7 @@ function drawBenchmarks(svg, x, y, startDate, endDate, minScore) {
         .attr("class", "onWatch benchmark")
         .attr("d", benchmarkLine);
 
-    var onWatchLabel = getBenchmarkLabelPosition(onWatchShape, x, y);
+    var onWatchLabel = myApp.graph.getBenchmarkLabelPosition(onWatchShape, x, y);
     svg.append("g")
         .attr("transform", "translate(0," + y(onWatchLabel.y) + ")")
       .append("text")
@@ -453,7 +460,7 @@ function drawBenchmarks(svg, x, y, startDate, endDate, minScore) {
 
 
   var urgentData = allData["10"].scores;
-  var urgentShape = getBenchmarkShape(urgentData, startDate, endDate, minScore);
+  var urgentShape = myApp.graph.getBenchmarkShape(urgentData, startDate, endDate, minScore);
 
   if(urgentShape != null) {
     svg.append("path")
@@ -461,7 +468,7 @@ function drawBenchmarks(svg, x, y, startDate, endDate, minScore) {
         .attr("class", "urgent benchmark")
         .attr("d", benchmarkLine);
 
-    var urgentLabel = getBenchmarkLabelPosition(urgentShape, x, y);
+    var urgentLabel = myApp.graph.getBenchmarkLabelPosition(urgentShape, x, y);
     svg.append("g")
         .attr("transform", "translate(0," + y(urgentLabel.y) + ")")
       .append("text")
@@ -472,8 +479,10 @@ function drawBenchmarks(svg, x, y, startDate, endDate, minScore) {
   }
 };
 
-
-function getBenchmarkLabelPosition(shape, x, y) {
+/**
+ * helper which gets the position of the benchmark labels
+ */
+myApp.graph.getBenchmarkLabelPosition = function(shape, x, y) {
   var yPos = shape[0].score;
   var tangent = ( (y(shape[1].score) - y(shape[0].score)) / (x(shape[1].date) - x(shape[0].date)));
   var angle = 180 * Math.atan(tangent) / Math.PI;
@@ -484,7 +493,10 @@ function getBenchmarkLabelPosition(shape, x, y) {
   };
 }
 
-function getBenchmarkShape(data, startDate, endDate, minScore) {
+/**
+ * helper which generates the shape of the benchmark to be drawn
+ */
+myApp.graph.getBenchmarkShape = function(data, startDate, endDate, minScore) {
 
   var bottomCorners = [{date: endDate, score: minScore}, {date: startDate, score: minScore}]
   // if data[i].date < startDate, drop data[i].date
@@ -566,7 +578,7 @@ var parseDate = d3.time.format("%d-%b-%y").parse;
 /**
  * uses linear regression to calculate trend line
  */
-function calculateTrendLine(data) {
+myApp.graph.calculateTrendLine = function(data) {
   var x_mean = 0;
   var y_mean = 0;
   var term1 = 0;

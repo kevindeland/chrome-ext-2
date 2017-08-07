@@ -1,12 +1,18 @@
-/*** a bunch of helper functions ***/
-// TODO what to do with all these guys?
+/**
+* a bunch of helper functions
+*/
+var myApp = myApp || {};
+
+myApp.helpers = {};
+
+myApp.cookies = {};
 
 function log(string) {
   LOG_LEVEL = "debug";
   if(LOG_LEVEL == 'debug') {console.log(string)}
 }
 
-function createCookie(name,value,days) {
+myApp.cookies.create = function(name,value,days) {
     var expires = "";
     if (days) {
         var date = new Date();
@@ -16,7 +22,7 @@ function createCookie(name,value,days) {
     document.cookie = name + "=" + value + expires + "; path=/";
 }
 
-function readCookie(name) {
+myApp.cookies.read = function(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
     for(var i=0;i < ca.length;i++) {
@@ -27,8 +33,8 @@ function readCookie(name) {
     return null;
 }
 
-function eraseCookie(name) {
-    createCookie(name,"",-1);
+myApp.cookies.erase = function(name) {
+    myApp.cookies.create(name,"",-1);
 }
 
 function parseGoalData(text) {

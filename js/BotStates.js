@@ -22,7 +22,7 @@ myApp.buddy = {
         text: "Never",
         callback: function() {
           myApp.updater.hideBotBuddy();
-          createCookie("NeverDoWorkedExample", "true", 7);
+          myApp.cookies.create("NeverDoWorkedExample", "true", 7);
         }
       }
     };

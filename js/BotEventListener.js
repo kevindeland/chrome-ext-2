@@ -1,6 +1,9 @@
+/**
+ * runs when window loads.
+ * addes event listeners to interface
+ * HTML files loaded from the html folder
+ */
 var myApp = myApp || {};
-
-myApp.eventListener = {};
 
 // holds the state of the GSW
 myApp.wizardState = {
@@ -22,11 +25,11 @@ function BotEventListener() {
 
 
   /*** COOKIES ***/
-  var hasClickedNever = readCookie("NeverDoWorkedExample");
-  var lastAction = readCookie("lastAction");
+  var hasClickedNever = myApp.cookies.read("NeverDoWorkedExample");
+  var lastAction = myApp.cookies.read("lastAction");
 
   // FIXME could be refreshed with no option to View Message again
-  // var showBotBuddyCookie = readCookie("ShowBotBuddy");
+  // var showBotBuddyCookie = myApp.cookies.read("ShowBotBuddy");
   // if(showBotBuddyCookie == "false") {
   //   myApp.wizardState.showBotBuddy = false;
   //   myApp.updater.showBabyBuddy();
@@ -34,7 +37,7 @@ function BotEventListener() {
 
   if(lastAction == "startTestDropdown") {
 
-    eraseCookie("lastAction");
+    myApp.cookies.erase("lastAction");
     log("we just changed the startTest...");
     var endDate = myApp.data.getEndDate();
     if(isNaN(endDate)) return;
@@ -192,41 +195,13 @@ function BotEventListener() {
 
   }
 
-
   /*** Starting Test Dropdown Selection ***/
   var startTestDropdown = $("#ctl00_cp_Content_ddl_AnchorScore");
   startTestDropdown.on("change", function() {
     log("changed start test!");
-    createCookie("lastAction", "startTestDropdown", 7);
+    myApp.cookie.create("lastAction", "startTestDropdown", 7);
   });
 
-  /*** Calculate Goal button ***/
-  var calculateGoal = $("#ctl00_cp_Content_btn_CalcGoal");
-  log(calculateGoal);
-
-
-  /*** Choosing goal types in the box ***/
-  // FIXME ITEM 4 remove this listeners
-  // FIXME ITEM 4... when you click a bullet point, do "selectGoalLine"
-  // FIXME ITEM 4... make sure the big goalGraph shows up when it should
-  var goalTypeBox = $(".optionsTable tbody tr:nth-child(4) .dataColumn div");
-  log(goalTypeBox);
-
-// This behavior canceled out... now we use the view
-/*
-  goalTypeBox.on('click', function() {
-
-    log("clicked inside the magic box");
-
-    if(!myApp.wizardState.hasBeenCalculated) {
-      calculateGoal.trigger("click");
-    } else if (!myApp.wizardState.goalGraphOpen){ // if goal graph is open, we want to click radio buttons without response
-      // FIXME ITEM 4... be able to click on different boxes without opening box
-      myApp.updater.showBigPopup("goalGraph");
-    }
-
-  });
-  */
   /***************************************/
 
   /*** Goal Buttons inside goal popup ***/
@@ -264,7 +239,6 @@ function BotEventListener() {
 
   $(".exitBuddyWindow").on('click', function() {
     myApp.wizardState.showBotBuddy = false;
-    //createCookie("ShowBotBuddy", "false", 7);
     myApp.updater.hideBotBuddy();
     myApp.updater.showBabyBuddy();
 
@@ -273,7 +247,6 @@ function BotEventListener() {
   $(".viewBotMessage").on('click', function() {
     if(!$(".viewBotMessage").hasClass("viewGraphsDisabled")) {
       myApp.wizardState.showBotBuddy = true;
-      //createCookie("ShowBotBuddy", "true", 7);
       myApp.updater.hideBabyBuddy();
       myApp.updater.showBotBuddy();
     }

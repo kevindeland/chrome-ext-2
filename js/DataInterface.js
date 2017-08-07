@@ -1,3 +1,8 @@
+/**
+ * contains functions which get data about the student, tests, etc.
+ *
+ * currently gets data directly from the interface, but can be redesigned to get from databases or other sources
+ */
 var myApp = myApp || {};
 
 myApp.data = {};
@@ -45,6 +50,9 @@ myApp.data.getStartTest = function() {
   };
 }
 
+/**
+ * gets goal end date from the interface
+ */
 myApp.data.getEndDate = function() {
 
   var goalEndDate = $("#ctl00_cp_Content_tb_Target");
@@ -58,6 +66,9 @@ myApp.data.getEndDate = function() {
 
 }
 
+/**
+ * gets the custom goal information from interface
+ */
 myApp.data.getCustomGoal = function() {
 
   var goal = {
@@ -154,14 +165,17 @@ myApp.data.getCalculatedGoals = function() {
 }
 
 /**
- * TODO implement this function
+ * gets benchmark data. based on this resource
+ * http://elementary.conceptschools.org/wp-content/uploads/2017/03/Math-Cut-Scores.pdf
  */
 myApp.data.getBenchmarkData = function() {
 
   var data;
   switch(myApp.data.getStudentGrade()) {
 
-    // HACK need dynamic dates
+    // HACK need dynamic dates which change with the year.
+    // also, Fourth grade benchmark is added onto the end of each array
+    // to plot dates which continue after the May benchmark
     case "3rd":
       data =  {
         "10": {
@@ -214,8 +228,6 @@ myApp.data.getBenchmarkData = function() {
           "rate": 3.1
         }
 
-
-
       };
       break;
   }
@@ -232,27 +244,15 @@ myApp.data.getBenchmarkData = function() {
   log(data);
 
   return data;
-  /*
-  return {
-    urgent: [
-      {date: "1-Aug-16", score: 310},
-      {date: "1-May-17", score: 400}
-    ],
-    onWatch: [
-      {date: "1-Aug-16", score: 370},
-      {date: "1-May-17", score: 460}
-    ],
-    benchmark: [
-      {date: "1-Aug-16", score: 430},
-      {date: "1-May-17", score: 520}
-    ]
 
-  };
-  */
 }
 
+/**
+ * gets SGP for the CatchupKeepup goal
+ * HACK currently uses a lookup based on student name
+ */
 myApp.data.getSgpFromSs = function(ss) {
-  // HACK
+
   var firstName = myApp.data.getStudentName().first;
   switch(firstName) {
     case "Amanda":
@@ -271,7 +271,7 @@ myApp.data.getSgpFromSs = function(ss) {
 }
 
 /**
- * TODO use mock data
+ * HACK uses mock data
  */
 myApp.data.getStudentHistoricalData = function() {
 

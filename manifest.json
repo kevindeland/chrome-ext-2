@@ -28,13 +28,13 @@
         "js/d3/d3.v3.min.js",
         "js/helpers.js",
         "js/config.js",
-        "js/data.js",
+        "js/DataInterface.js",
         "js/NewDivInserter.js",
         "js/InterfaceUpdater.js",
-        "js/BuddyStates.js",
+        "js/BotStates.js",
         "js/BotEventListener.js",
         "js/Main.js",
-        "js/d3/graph.js"
+        "js/Graph.js"
 
       ],
       "run_at": "document_end"

@@ -1,15 +1,14 @@
-var myApp = myApp || {};
-
 /**
- * Updater holds all functions which update or change the interface in some way
+ * InterfaceUpdater holds many functions which update or change the interface in some way.
  */
+
+var myApp = myApp || {};
 
 myApp.updater = {};
 
 /**************************/
 /*** Bot Buddy updaters ***/
 /**************************/
-
 
 /*** for showing and hiding bot buddy ***/
 myApp.updater.showBotBuddy = function() {
@@ -195,6 +194,9 @@ myApp.updater.hideBigPopup = function () {
   myApp.wizardState.goalGraphOpen = false;
 }
 
+/**
+ * shows the goal graph and updates accordingly
+ */
 myApp.updater.showGoalGraph = function() {
   var studentName = myApp.data.getStudentName();
 
@@ -242,9 +244,8 @@ myApp.updater.showGoalGraph = function() {
   $(".modalTitleText").html(myApp.config.MESSAGES.modalTitle.formatUnicorn({first: studentName.first, last: studentName.last}));
   modal.show();
   myApp.wizardState.goalGraphOpen = true;
-  initializeD3();
-  //redrawBars();
-  redrawAxes();
+  myApp.graph.initializeD3();
+  myApp.graph.drawGraph();
 
 }
 
@@ -282,7 +283,9 @@ myApp.updater.updateGoalButtons = function() {
   }
 }
 
-/*** ITEM 5 add updater (show, hide) for baby bot ***/
+/**
+ * shows the baby buddy
+ **/
 myApp.updater.showBabyBuddy = function() {
   $("#babyBot").show();
 
