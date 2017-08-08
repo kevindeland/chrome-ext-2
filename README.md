@@ -34,6 +34,17 @@ The ```DateInterface``` defines how data is collected from the interface, in ord
 ### [Graph.js]('./js/Graph.js')
 The ```Graph``` file defines all the D3 behavior for drawing and updating the graph.
 
+## Other JavaScript files
+
+#### [BotStates.js]('./js/BotStates.js')
+The ```BotStates``` file defines an object of many functions, each which defines a different state for the bot. Each state contains the messages shown by the bot, the button text, and the behavior of each button. Each function calls ```updateBotBuddy``` (defined in ```InterfaceUpdater```), which updates the HTML and click behavior appropriately.
+
+#### [helpers.js]('./js/helpers.js')
+The ```helpers``` defines various helpers that were used in multiple places.
+
+#### [config.js]('./js/config.js')
+The ```config``` file defines messages and links.
+
 ## HTML files
 These are added via ```NewDivInserter``` and are shown and hidden via ```InterfaceUpdater```.
 
@@ -46,19 +57,19 @@ The popup window/modal that contains the graph.
 #### [helpPopupBox.html]('./html/helpPopupBox.html')
 The popup window/modal that contains the help menu.
 
-## Other files
-
-#### [BotStates.js]('./js/BotStates.js')
-The ```BotStates``` file defines an object of many functions, each which defines a different state for the bot. Each state contains the messages shown by the bot, the button text, and the behavior of each button. Each function calls ```updateBotBuddy``` (defined in ```InterfaceUpdater```), which updates the HTML and click behavior appropriately.
-
-#### [helpers.js]('./js/helpers.js')
-The ```helpers``` defines various helpers that were used in multiple places.
-
-#### [config.js]('./js/config.js')
-The ```config``` file defines messages and links.
-
-
 ## Architecture / Flow Diagram
 ![architecture][arch]
 
 [arch]: ./images/readme/software_architecture.png "Software Architecture"
+
+
+## Current Bugs and Improvements
+- add functionality to the "Add Custom Goal"
+- how to react when there is no real data available?
+- "Error mode" when user selects an intervention that is less than 8 weeks
+- when screen refreshes, the goal graph should not pop up every time
+
+
+
+
+## 🐙 Stay humble 🐙
