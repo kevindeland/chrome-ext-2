@@ -291,9 +291,9 @@ myApp.data.getStudentHistoricalData = function() {
 
     case "Amber": // Cheama
     return [
-      {date: "2-Sep-16", score: 410},
-      {date: "14-Oct-16", score: 450},
-      {date: "16-Nov-16", score: 500},
+      {date: "2-Sep-16", score: 490},
+      {date: "14-Oct-16", score: 500},
+      {date: "16-Nov-16", score: 540},
       {date: "26-Dec-16", score: 550}
     ];
 
