@@ -44,3 +44,9 @@ The ```helpers``` defines various helpers that were used in multiple places.
 
 #### [config]('./js/config.js')
 The ```config``` file defines messages and links.
+
+
+## Architecture / Flow Diagram
+![architecture][arch]
+
+[arch]: ./images/readme/software_architecture.png "Software Architecture"
