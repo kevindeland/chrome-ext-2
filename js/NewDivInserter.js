@@ -43,7 +43,7 @@ function NewDivInserter (callback) {
 
       $modal.hide();
 
-      var popupURL = chrome.runtime.getURL("../html/popup.html");
+      var popupURL = chrome.runtime.getURL("../html/graphPopupBox.html");
 
       $modal.load(popupURL, function() {
 
@@ -74,7 +74,7 @@ function NewDivInserter (callback) {
 
     $help.hide();
 
-    var helpURL = chrome.runtime.getURL("../html/help_popup_box.html");
+    var helpURL = chrome.runtime.getURL("../html/helpPopupBox.html");
 
     $help.load(helpURL, function() {
 
@@ -93,7 +93,7 @@ function NewDivInserter (callback) {
 
     $baby.hide();
 
-    var babyURL = chrome.runtime.getURL("../html/baby_bot.html");
+    var babyURL = chrome.runtime.getURL("../html/babyBot.html");
 
     $baby.load(babyURL, function() {
       // functions performed in series
