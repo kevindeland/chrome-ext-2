@@ -259,7 +259,7 @@ myApp.data.getSgpFromSs = function(ss) {
     return 63;
 
     case "Amber":
-    return 65;
+    return 50;
 
     case "Weston":
     return 67;

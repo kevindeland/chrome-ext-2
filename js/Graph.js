@@ -162,8 +162,8 @@ myApp.graph.drawGraph = function() {
     /************************************************/
 
     myApp.graph.drawBenchmarks(svg, x, y, startDate, endDate, minScore);
-    myApp.graph.drawHistoricalTests(svg, x, y);
     myApp.graph.drawGoalLines(svg, x, y);
+    myApp.graph.drawHistoricalTests(svg, x, y);
 
 }
 
